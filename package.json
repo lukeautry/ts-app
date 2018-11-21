@@ -1,0 +1,27 @@
+{
+  "name": "ts-app",
+  "version": "1.0.0",
+  "description": "Boilerplate project for a TypeScript API (Express, tsoa) + UI (React/TSX)",
+  "repository": "https://github.com/lukeautry/ts-app",
+  "author": "Luke Autry <lukeautry@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build:api": "yarn tsc -p ./api/tsconfig.json",
+    "start:api": "yarn build:api && node ./api/dist/server.js",
+    "tsoa:gen": "yarn tsoa swagger -c ./api/tsoa.json && yarn tsoa routes -c ./api/tsoa.json"
+  },
+  "dependencies": {
+    "@types/body-parser": "^1.17.0",
+    "@types/chalk": "^2.2.0",
+    "@types/express": "^4.16.0",
+    "@types/method-override": "^0.0.31",
+    "@types/node": "^10.12.9",
+    "body-parser": "^1.18.3",
+    "chalk": "^2.4.1",
+    "express": "^4.16.4",
+    "method-override": "^3.0.0",
+    "tslint": "^5.11.0",
+    "tsoa": "^2.2.5",
+    "typescript": "^3.1.6"
+  }
+}
