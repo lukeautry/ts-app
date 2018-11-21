@@ -1,7 +1,7 @@
-import * as bodyParser from "body-parser";
+import bodyParser from "body-parser";
 import chalk from "chalk";
-import * as express from "express";
-import * as methodOverride from "method-override";
+import express from "express";
+import methodOverride from "method-override";
 import "./controllers/widgets-controller";
 import { RegisterRoutes } from "./routes";
 import { log } from "./utils/log";
