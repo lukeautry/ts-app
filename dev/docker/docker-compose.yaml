@@ -1,0 +1,26 @@
+version: '3'
+services:
+  redis:
+    # comment this out if you want logging
+    logging:
+      driver: none
+    image: redis
+    ports:
+      - 6379:6379
+    restart: always
+  postgres:
+    # comment this out if you want logging
+    logging:
+      driver: none
+    build:
+      context: ./
+      dockerfile: Dockerfile.postgres
+    ports:
+      - 5432:5432
+    environment:
+      - PGDATA=/var/lib/postgresql/data
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
+    driver: local
