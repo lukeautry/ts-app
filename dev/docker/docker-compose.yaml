@@ -10,7 +10,7 @@ services:
     restart: always
   postgres:
     build:
-      context: ./
+      context: ./postgres
       dockerfile: Dockerfile.postgres
     ports:
       - 5432:5432
