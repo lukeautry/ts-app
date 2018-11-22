@@ -13,7 +13,7 @@ const models: TsoaRoute.Models = {
 };
 
 export function RegisterRoutes(app: any) {
-  app.get('/widgets',
+  app.get('/api/widgets',
     function(request: any, response: any, next: any) {
       const args = {
       };
@@ -31,10 +31,10 @@ export function RegisterRoutes(app: any) {
       const promise = controller.GetWidgets.apply(controller, validatedArgs);
       promiseHandler(controller, promise, response, next);
     });
-  app.get('/widgets/:id',
+  app.get('/api/widgets/:widgetId',
     function(request: any, response: any, next: any) {
       const args = {
-        id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+        widgetId: { "in": "path", "name": "widgetId", "required": true, "dataType": "double" },
       };
 
       let validatedArgs: any[] = [];

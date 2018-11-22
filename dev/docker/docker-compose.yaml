@@ -9,9 +9,6 @@ services:
       - 6379:6379
     restart: always
   postgres:
-    # comment this out if you want logging
-    logging:
-      driver: none
     build:
       context: ./
       dockerfile: Dockerfile.postgres

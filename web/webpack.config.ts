@@ -1,5 +1,5 @@
-import ExtractTextPlugin from "extract-text-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import path from "path";
 import webpack from "webpack";
 
@@ -7,6 +7,9 @@ const srcPath = __dirname;
 const distPath = path.join(srcPath, "dist");
 
 const config: webpack.Configuration = {
+  devServer: {
+    stats: "minimal",
+  },
   entry: {
     index: path.join(srcPath, "index.tsx"),
   },
@@ -18,17 +21,12 @@ const config: webpack.Configuration = {
         test: /\.tsx?$/,
       },
       {
-        loader: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: "css-loader",
-            },
-            {
-              loader: "sass-loader",
-            },
-          ],
-        }),
         test: /\.scss|sass|css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader",
+        ],
       },
     ],
   },
@@ -43,13 +41,16 @@ const config: webpack.Configuration = {
       template: path.join(srcPath, "index.ejs"),
       title: "<PAGE TITLE>",
     }),
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
       filename: "[name].[hash].css",
     }),
   ],
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
   },
+  stats: "minimal",
 };
 
 export default config;

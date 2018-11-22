@@ -23,12 +23,12 @@ export class WidgetsController {
     return widgets;
   }
 
-  @Get("{id}")
+  @Get("{widgetId}")
   @Tags("Widgets")
-  public async GetWidget(id: number): Promise<IWidget> {
-    const widget = widgets.find((w) => w.id === id);
+  public async GetWidget(widgetId: number): Promise<IWidget> {
+    const widget = widgets.find((w) => w.id === widgetId);
     if (!widget) {
-      throw new ServerError(`no widget found with id ${id}`);
+      throw new ServerError(`no widget found with id ${widgetId}`);
     }
 
     return widget;

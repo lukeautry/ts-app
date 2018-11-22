@@ -9,7 +9,12 @@ import { log } from "./utils/log";
 const app = express()
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
-  .use(methodOverride());
+  .use(methodOverride())
+  .use((_req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", `Origin, X-Requested-With, Content-Type, Accept, Authorization`);
+    next();
+  });
 
 RegisterRoutes(app);
 
@@ -20,20 +25,27 @@ interface IError {
   name?: string;
 }
 
-app.use((err: IError, _req: express.Request, res: express.Response, next: express.NextFunction) => {
-  const status = err.status || 500;
-  const body = {
-    fields: err.fields || undefined,
-    message: err.message || "An error occurred during the request.",
-    name: err.name,
-    status,
-  };
-  res.status(status).json(body);
-  next();
-});
+app.use(
+  (
+    err: IError,
+    _req: express.Request,
+    res: express.Response,
+    next: express.NextFunction,
+  ) => {
+    const status = err.status || 500;
+    const body = {
+      fields: err.fields || undefined,
+      message: err.message || "An error occurred during the request.",
+      name: err.name,
+      status,
+    };
+    res.status(status).json(body);
+    next();
+  },
+);
 
 const port = 3000;
 
 app.listen(port, () => {
-  log(chalk.greenBright(`Started server on port ${port}`));
+  log(chalk.greenBright(`Started API server at http://localhost:${port}`));
 });
