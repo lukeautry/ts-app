@@ -43,7 +43,7 @@ const c = console;
     } else {
       await startApi();
     }
-  }, 500);
+  }, 100);
 
   chokidar.watch("./api/**/*.ts").on("change", regenerateRoutes);
 
