@@ -6,12 +6,15 @@
   "author": "Luke Autry <lukeautry@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "start": "ts-node -P tsconfig-base.json ./dev/start.ts",
     "build:api": "yarn tsc -p ./api/tsconfig.json",
     "start:api": "yarn build:api && node ./api/dist/server.js",
     "tsoa:gen": "yarn tsoa swagger -c ./api/tsoa.json && yarn tsoa routes -c ./api/tsoa.json",
     "start:web": "cross-env TS_NODE_PROJECT=./web/tsconfig.json webpack-dev-server --config web/webpack.config.ts",
     "build:web": "cross-env TS_NODE_PROJECT=./web/tsconfig.json webpack --config web/webpack.config.ts",
-    "start": "ts-node -P tsconfig-base.json ./dev/start.ts"
+    "typeorm": "ts-node -P ./api/tsconfig.json ./node_modules/.bin/typeorm",
+    "db:generate": "yarn typeorm migration:generate",
+    "db:update": "yarn typeorm migration:run"
   },
   "dependencies": {
     "@types/body-parser": "^1.17.0",

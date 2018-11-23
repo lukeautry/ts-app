@@ -7,19 +7,5 @@ export const initializeDbConnection = async (name = "default") => {
     return connection;
   }
 
-  connection = await createConnection({
-    cli: {
-      migrationsDir: `src/database/migrations`,
-    },
-    database: "postgres",
-    entities: [`${__dirname}/api/database/entities/*.ts`],
-    host: "localhost",
-    logging: false,
-    migrations: [`${__dirname}/api/database/migrations/*.ts`],
-    name: "default",
-    password: "admin",
-    port: 5432,
-    type: "postgres",
-    username: "postgres",
-  });
+  connection = await createConnection();
 };
