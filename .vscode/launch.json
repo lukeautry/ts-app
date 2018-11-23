@@ -5,12 +5,24 @@
       "type": "node",
       "request": "launch",
       "name": "Debug API Server",
-      "args": ["${workspaceFolder}/api/server.ts"],
+      "args": ["${workspaceFolder}/api/start-server.ts"],
       "cwd": "${workspaceFolder}",
       "protocol": "inspector",
       "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
       "env": {
         "TS_NODE_PROJECT": "${workspaceFolder}/api/tsconfig.json"
+      }
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Start Script",
+      "args": ["${workspaceFolder}/dev/start.ts"],
+      "cwd": "${workspaceFolder}",
+      "protocol": "inspector",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+      "env": {
+        "TS_NODE_PROJECT": "${workspaceFolder}/tsconfig-base.json"
       }
     },
     {
