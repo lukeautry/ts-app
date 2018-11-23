@@ -2,8 +2,10 @@
 
 This project is a starting point for developing an API-first application using TypeScript, Node.js, and React.
 
-Unlike tools like create-react-app, this project aims to use a "domain-driven" approach. The developer designs the API (and database, if applicable). A client library
-is automatically generated from the API, providing a statically typed interface with which to interact with said API from the React UI.
+Unlike tools such as [create-react-app](https://github.com/facebook/create-react-app), this project aims to use a "domain-driven" approach. The developer designs the API (and database, if applicable). A client library
+is automatically generated from the API, providing a statically typed interface with which to interact with the API from the React UI.
+
+The overall goal is to provide a type-safe and productive developer experience for rapid web application development.
 
 ## Technologies Used
 - [TypeScript](http://www.typescriptlang.org/)
