@@ -177,6 +177,11 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/readline-sync@^1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@types/readline-sync/-/readline-sync-1.4.3.tgz#eac55a39d5a349912062c9e5216cd550c07fd9c8"
+  integrity sha512-YP9NVli96E+qQLAF2db+VjnAUEeZcFVg4YnMgr8kpDUFwQBnj31rPLOVHmazbKQhaIkJ9cMHsZhpKdzUeL0KTg==
+
 "@types/relateurl@*":
   version "0.2.28"
   resolved "https://registry.yarnpkg.com/@types/relateurl/-/relateurl-0.2.28.tgz#6bda7db8653fa62643f5ee69e9f69c11a392e3a6"
@@ -2855,13 +2860,6 @@ hmac-drbg@^1.0.0:
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
 
-hoist-non-react-statics@^3.0.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.1.0.tgz#42414ccdfff019cd2168168be998c7b3bd5245c0"
-  integrity sha512-MYcYuROh7SBM69xHGqXEwQqDux34s9tz+sCnxJmN18kgWh6JFdTw/5YdZtqsOdZJXddE/wUpCzfEdDrJj8p0Iw==
-  dependencies:
-    react-is "^16.3.2"
-
 hosted-git-info@^2.1.4:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.7.1.tgz#97f236977bd6e125408930ff6de3eec6281ec047"
@@ -3971,19 +3969,6 @@ mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdi
   dependencies:
     minimist "0.0.8"
 
-mobx-react@^5.4.2:
-  version "5.4.2"
-  resolved "https://registry.yarnpkg.com/mobx-react/-/mobx-react-5.4.2.tgz#53db594dbb44752c15b53c355babaa94a6af5934"
-  integrity sha512-alSN0KDAAOb1OkYujfoJjjk0JWxWRKO4sLGB4hN2CuvaJMrlj7bhGQe7CBMJvEFNjtJRbhJcquYVjQ3rrH2zQQ==
-  dependencies:
-    hoist-non-react-statics "^3.0.0"
-    react-lifecycles-compat "^3.0.2"
-
-mobx@^5.6.0:
-  version "5.6.0"
-  resolved "https://registry.yarnpkg.com/mobx/-/mobx-5.6.0.tgz#e381c357e0ed7685a99a896455ecc66ff5ab84ee"
-  integrity sha512-xrA0tBnSMANXCDjS2W/6YTasesA8mkg9o+v/Bw/OcbXaRVE6/soVwDMWIh7A6TwMDY4tYQprQJZ5WQN1TRSb3A==
-
 mocha@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/mocha/-/mocha-5.2.0.tgz#6d8ae508f59167f940f2b5b3c4a612ae50c90ae6"
@@ -4953,16 +4938,6 @@ react-dom@^16.6.3:
     prop-types "^15.6.2"
     scheduler "^0.11.2"
 
-react-is@^16.3.2:
-  version "16.6.3"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.3.tgz#d2d7462fcfcbe6ec0da56ad69047e47e56e7eac0"
-  integrity sha512-u7FDWtthB4rWibG/+mFbVd5FvdI20yde86qKGx4lVUTWmPlSWQ4QxbBIrrs+HnXGbxOUlUzTAP/VDmvCwaP2yA==
-
-react-lifecycles-compat@^3.0.2:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
-  integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
-
 react@^16.6.3:
   version "16.6.3"
   resolved "https://registry.yarnpkg.com/react/-/react-16.6.3.tgz#25d77c91911d6bbdd23db41e70fb094cc1e0871c"
@@ -5047,6 +5022,11 @@ readdirp@^2.0.0:
     graceful-fs "^4.1.11"
     micromatch "^3.1.10"
     readable-stream "^2.0.2"
+
+readline-sync@^1.4.9:
+  version "1.4.9"
+  resolved "https://registry.yarnpkg.com/readline-sync/-/readline-sync-1.4.9.tgz#3eda8e65f23cd2a17e61301b1f0003396af5ecda"
+  integrity sha1-PtqOZfI80qF+YTAbHwADOWr17No=
 
 redent@^1.0.0:
   version "1.0.0"
