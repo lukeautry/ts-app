@@ -7,5 +7,5 @@ export const initializeDbConnection = async (name = "default") => {
     return connection;
   }
 
-  connection = await createConnection();
+  connection = await createConnection(name);
 };

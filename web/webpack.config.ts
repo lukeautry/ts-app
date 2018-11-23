@@ -21,6 +21,10 @@ const config: webpack.Configuration = {
         test: /\.tsx?$/,
       },
       {
+        loader: "tslint-loader",
+        test: /\.tsx?$/,
+      },
+      {
         test: /\.scss|sass|css$/,
         use: [
           MiniCssExtractPlugin.loader,
