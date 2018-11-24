@@ -62,7 +62,7 @@
     "minimatch": "^3.0.4",
     "mocha": "^5.2.0",
     "node-sass": "^4.10.0",
-    "openapi-ts-client-gen": "^1.0.2",
+    "openapi-ts-client-gen": "^1.0.3",
     "readline-sync": "^1.4.9",
     "sass-loader": "^7.1.0",
     "ts-loader": "^5.3.0",
