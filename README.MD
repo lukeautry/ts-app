@@ -28,6 +28,9 @@ The overall goal is to provide a type-safe and productive developer experience f
 - Developer environment
     - [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose) for non-Node.js project dependencies
     - Single `start` script that live reloads the API, UI, and related services
+    - VSCode [launch.json](./.vscode/launch.json) settings have been included to allow debugging
+- Testing
+    - Mocha/Chai tests for API
 
 ## Getting Started
 
