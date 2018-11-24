@@ -14,10 +14,10 @@ The overall goal is to provide a type-safe and productive developer experience f
     - [Express](https://expressjs.com/)
     - [tsoa](https://github.com/lukeautry/tsoa)
         - Generates Express Routes from TypeScript controllers
-        - Generates OpenAPI ("Swagger") specification, enabling automatic documentation and client library generation
+        - Generates [OpenAPI ("Swagger")](https://swagger.io/docs/specification/about) specification, enabling automatic documentation and client library generation
     - [PostgreSQL](https://www.postgresql.org/) as RDBMS
         - [TypeORM](http://typeorm.io) for code-first database migrations
-            - Optional: ORM interface for queries
+            - Optional: ORM-like queries
     - [Redis](https://redis.io/) for caching/messaging
 - Frontend
     - [React.js](https://reactjs.org/)
