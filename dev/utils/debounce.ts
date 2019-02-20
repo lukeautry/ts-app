@@ -3,21 +3,22 @@
  */
 type Procedure = (...args: any[]) => void;
 
-type Options = {
-  isImmediate: boolean,
-};
+interface IOptions {
+  isImmediate: boolean;
+}
 
 // tslint:disable:only-arrow-functions
 export function debounce<F extends Procedure>(
   func: F,
   waitMilliseconds = 50,
-  options: Options = {
-    isImmediate: false
+  options: IOptions = {
+    isImmediate: false,
   },
 ): F {
   let timeoutId: any;
 
   return function(this: any, ...args: any[]) {
+    // tslint:disable-next-line:no-this-assignment
     const context = this;
 
     const doLater = function() {

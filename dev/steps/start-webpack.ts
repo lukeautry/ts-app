@@ -3,9 +3,8 @@ import webpack from "webpack";
 import WebpackDevServer from "webpack-dev-server";
 import config from "../../web/webpack.config";
 import { log } from "../utils/log";
+import { sleep } from "../utils/sleep";
 import { genClient } from "./gen-client";
-
-const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /**
  * Starts the Webpack Dev Server for UI

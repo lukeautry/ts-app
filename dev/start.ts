@@ -27,7 +27,7 @@ import { debounce } from "./utils/debounce";
     webpackDevServer(),
   ]);
 
-  const regenerateRoutes = debounce(async (args) => {
+  const regenerateApiRoutes = debounce(async (args) => {
     const routesChanged =
       args.indexOf("server.ts") !== -1 ||
       args.indexOf("api/controllers") !== -1;
@@ -39,7 +39,7 @@ import { debounce } from "./utils/debounce";
     }
   }, 100);
 
-  chokidar.watch("./api/**/*.ts").on("change", regenerateRoutes);
+  chokidar.watch("./api/**/*.ts").on("change", regenerateApiRoutes);
 
   registerQuitKey();
 })();
