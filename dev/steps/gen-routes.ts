@@ -13,7 +13,7 @@ export const generateExpressRoutes = async () => {
       basePath: "/api",
       entryFile: "./api/server.ts",
       routesDir: "./api",
-      noImplicitAdditionalProperties: 'ignore'
+      noImplicitAdditionalProperties: "ignore",
     },
     {}
   );

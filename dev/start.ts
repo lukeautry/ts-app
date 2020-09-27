@@ -22,10 +22,7 @@ import { debounce } from "./utils/debounce";
   }
 
   const metadata = await generateExpressRoutes();
-  await Promise.all([
-    startApi(),
-    webpackDevServer(metadata),
-  ]);
+  await Promise.all([startApi(), webpackDevServer(metadata)]);
 
   const regenerateApiRoutes = debounce(async (args) => {
     const routesChanged =

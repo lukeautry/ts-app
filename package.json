@@ -11,7 +11,7 @@
     "db:migrate": "ts-node ./dev/db/migrate.ts",
     "db:update": "yarn typeorm migration:run",
     "test": "mocha -t 15000 -r ts-node/register \"./api/**/*.spec.ts\"",
-    "prettier": "prettier '*/**/*.{ts,tsx}' --write",
+    "lint": "eslint '*/**/*.{ts,tsx}' --fix",
     "ts:build": "tsc --incremental"
   },
   "dependencies": {

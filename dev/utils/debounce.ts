@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * A function that emits a side effect and does not return anything.
  */
@@ -7,7 +8,6 @@ interface IOptions {
   isImmediate: boolean;
 }
 
-// tslint:disable:only-arrow-functions
 export function debounce<F extends Procedure>(
   func: F,
   waitMilliseconds = 50,
@@ -18,7 +18,7 @@ export function debounce<F extends Procedure>(
   let timeoutId: any;
 
   return function (this: any, ...args: any[]) {
-    // tslint:disable-next-line:no-this-assignment
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const context = this;
 
     const doLater = function () {

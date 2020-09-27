@@ -1,5 +1,5 @@
-import chalk from "chalk";
 import http from "http";
+import chalk from "chalk";
 import minimatch from "minimatch";
 import { log } from "../utils/log";
 
@@ -22,5 +22,6 @@ export const startApi = async () => {
     }
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   server = await require("../../api/server").server();
 };

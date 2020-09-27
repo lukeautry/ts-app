@@ -7,7 +7,7 @@ import { log } from "../utils/log";
 export const registerQuitKey = () => {
   log(chalk.whiteBright("** Press Q to quit **"));
 
-  // tslint:disable-next-line:no-var-requires
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   require("keypress")(process.stdin);
   process.stdin.on("keypress", (_ch, key) => {
     if (

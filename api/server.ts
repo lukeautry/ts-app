@@ -1,7 +1,7 @@
+import http from "http";
 import bodyParser from "body-parser";
 import chalk from "chalk";
 import express from "express";
-import http from "http";
 import methodOverride from "method-override";
 import "./controllers/widgets-controller";
 import { RegisterRoutes } from "./routes";
