@@ -8,15 +8,12 @@ import { Timer } from "../utils/timer";
  */
 export const generateExpressRoutes = async () => {
   const timer = new Timer();
-  const metadata = await generateRoutes(
-    {
-      basePath: "/api",
-      entryFile: "./api/server.ts",
-      routesDir: "./api",
-      noImplicitAdditionalProperties: "ignore",
-    },
-    {}
-  );
+  const metadata = await generateRoutes({
+    basePath: "/api",
+    entryFile: "./api/server.ts",
+    routesDir: "./api",
+    noImplicitAdditionalProperties: "ignore",
+  });
 
   log(chalk.greenBright(`✓ Generated Express routes (${timer.elapsed()}ms)`));
 
