@@ -23,5 +23,5 @@ export const startApi = async () => {
   });
 
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  server = await require("../../api/server").server();
+  server = await require("../../server/index").server();
 };

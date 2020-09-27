@@ -10,8 +10,8 @@ export const generateExpressRoutes = async () => {
   const timer = new Timer();
   const metadata = await generateRoutes({
     basePath: "/api",
-    entryFile: "./api/server.ts",
-    routesDir: "./api",
+    entryFile: "./server/index.ts",
+    routesDir: "./server",
     noImplicitAdditionalProperties: "ignore",
   });
 

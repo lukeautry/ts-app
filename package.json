@@ -10,7 +10,7 @@
     "typeorm": "ts-node ./node_modules/.bin/typeorm",
     "db:migrate": "ts-node ./dev/db/migrate.ts",
     "db:update": "yarn typeorm migration:run",
-    "test": "mocha -t 15000 -r ts-node/register \"./api/**/*.spec.ts\"",
+    "test": "mocha -t 15000 -r ts-node/register \"./server/**/*.spec.ts\"",
     "lint": "eslint '*/**/*.{ts,tsx}' --fix",
     "ts:build": "tsc --incremental"
   },

@@ -14,9 +14,9 @@ export const genClient = async (metadata: Tsoa.Metadata) => {
   const timer = new Timer();
 
   await generate({
-    destPath: "./web/api/api.ts",
+    destPath: "./client/api/api.ts",
     namespace: "Api",
-    srcPath: "./api/dist/swagger.json",
+    srcPath: "./tmp/swagger.json",
     type: "file",
   });
 

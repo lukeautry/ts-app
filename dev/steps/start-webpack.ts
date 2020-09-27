@@ -1,7 +1,7 @@
 import chalk from "chalk";
 import { Tsoa } from "tsoa";
 import webpack from "webpack";
-import config from "../../web/webpack.config";
+import config from "../../client/webpack.config";
 import { log } from "../utils/log";
 import { sleep } from "../utils/sleep";
 import { genClient } from "./gen-client";

@@ -13,7 +13,7 @@ export const generateOpenAPISpec = async (metadata?: Tsoa.Metadata) => {
     {
       basePath: "/api",
       entryFile: "./api/server.ts",
-      outputDirectory: "./api/dist",
+      outputDirectory: "./tmp",
       noImplicitAdditionalProperties: "ignore",
     },
     undefined,

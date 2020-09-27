@@ -5,12 +5,12 @@
       "type": "node",
       "request": "launch",
       "name": "Debug API Server",
-      "args": ["${workspaceFolder}/api/start-server.ts"],
+      "args": ["${workspaceFolder}/server/start-server.ts"],
       "cwd": "${workspaceFolder}",
       "protocol": "inspector",
       "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
       "env": {
-        "TS_NODE_PROJECT": "${workspaceFolder}/api/tsconfig.json"
+        "TS_NODE_PROJECT": "${workspaceFolder}/server/tsconfig.json"
       }
     },
     {
@@ -35,13 +35,13 @@
         "999999999",
         "-r",
         "ts-node/register",
-        "./api/**/*.spec.ts"
+        "./server/**/*.spec.ts"
       ],
       "cwd": "${workspaceRoot}",
       "protocol": "inspector",
       "internalConsoleOptions": "openOnSessionStart",
       "env": {
-        "TS_NODE_PROJECT": "${workspaceFolder}/api/tsconfig.json"
+        "TS_NODE_PROJECT": "${workspaceFolder}/server/tsconfig.json"
       }
     }
   ]

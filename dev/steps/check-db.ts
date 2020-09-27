@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { initializeDbConnection } from "../../api/config/postgres";
+import { initializeDbConnection } from "../../server/config/postgres";
 import { log } from "../utils/log";
 import { sleep } from "../utils/sleep";
 
