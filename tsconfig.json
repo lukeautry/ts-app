@@ -6,9 +6,11 @@
     "esModuleInterop": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "lib": [
-      "esnext",
-      "dom"
-    ]
+    "lib": ["esnext", "dom"],
+    "jsx": "react",
+    "sourceMap": true,
+    "target": "es5",
+    "removeComments": true,
+    "outDir": "./dist"
   }
 }

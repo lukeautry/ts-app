@@ -7,20 +7,20 @@ import { log } from "../utils/log";
 export const registerQuitKey = () => {
   log(chalk.whiteBright("** Press Q to quit **"));
 
-// tslint:disable-next-line:no-var-requires
+  // tslint:disable-next-line:no-var-requires
   require("keypress")(process.stdin);
   process.stdin.on("keypress", (_ch, key) => {
-  if (
-    key &&
-    (key.name.toLowerCase() === "q" || (key.ctrl && key.name === "c"))
-  ) {
-    log(chalk.redBright("Quitting..."));
-    process.kill(0);
-  }
-});
+    if (
+      key &&
+      (key.name.toLowerCase() === "q" || (key.ctrl && key.name === "c"))
+    ) {
+      log(chalk.redBright("Quitting..."));
+      process.kill(0);
+    }
+  });
 
   if (process.stdin.setRawMode) {
-  process.stdin.setRawMode(true);
-}
+    process.stdin.setRawMode(true);
+  }
   process.stdin.resume();
 };

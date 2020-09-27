@@ -10,9 +10,8 @@ import { webpackDevServer } from "./steps/start-webpack";
 import { debounce } from "./utils/debounce";
 
 /**
- * Single to run API server, webpack dev server, and regenerate route-related content
+ * Single function to run API server, webpack dev server, and regenerate route-related content
  */
-
 (async () => {
   await startDocker();
 
@@ -22,9 +21,10 @@ import { debounce } from "./utils/debounce";
     process.exit(1);
   }
 
+  const metadata = await generateExpressRoutes();
   await Promise.all([
-    generateExpressRoutes().then(() => startApi()),
-    webpackDevServer(),
+    startApi(),
+    webpackDevServer(metadata),
   ]);
 
   const regenerateApiRoutes = debounce(async (args) => {
@@ -33,7 +33,8 @@ import { debounce } from "./utils/debounce";
       args.indexOf("api/controllers") !== -1;
 
     if (routesChanged) {
-      await Promise.all([genClient(), generateExpressRoutes()]);
+      const metadata = await generateExpressRoutes();
+      await genClient(metadata);
     } else {
       await startApi();
     }

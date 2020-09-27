@@ -13,15 +13,15 @@ export function debounce<F extends Procedure>(
   waitMilliseconds = 50,
   options: IOptions = {
     isImmediate: false,
-  },
+  }
 ): F {
   let timeoutId: any;
 
-  return function(this: any, ...args: any[]) {
+  return function (this: any, ...args: any[]) {
     // tslint:disable-next-line:no-this-assignment
     const context = this;
 
-    const doLater = function() {
+    const doLater = function () {
       timeoutId = undefined;
       if (!options.isImmediate) {
         func.apply(context, args);

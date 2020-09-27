@@ -1,17 +1,16 @@
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import path from "path";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import AssetsWebpackPlugin from "assets-webpack-plugin";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import webpack from "webpack";
 
 const srcPath = __dirname;
-const distPath = path.join(srcPath, "dist");
+const publicPath = path.join(srcPath, "../public");
+const tmpPath = path.join(srcPath, "../tmp");
 
 const config: webpack.Configuration = {
-  devServer: {
-    stats: "minimal",
-  },
   entry: {
-    index: path.join(srcPath, "index.tsx"),
+    web: path.join(srcPath, "index.tsx"),
   },
   mode: "development",
   module: {
@@ -21,35 +20,26 @@ const config: webpack.Configuration = {
         test: /\.tsx?$/,
       },
       {
-        loader: "tslint-loader",
-        test: /\.tsx?$/,
-      },
-      {
         test: /\.scss|sass|css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "sass-loader",
-        ],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
     ],
   },
   output: {
     filename: "[name].[hash].js",
-    path: distPath,
+    path: publicPath,
     sourceMapFilename: "[file].map.json",
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      chunks: ["index"],
-      template: path.join(srcPath, "index.ejs"),
-      title: "<PAGE TITLE>",
-    }),
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
       filename: "[name].[hash].css",
     }),
+    new AssetsWebpackPlugin({
+      path: tmpPath,
+    }),
+    new CleanWebpackPlugin(),
   ],
   resolve: {
     extensions: [".ts", ".tsx", ".js"],

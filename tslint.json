@@ -1,9 +1,0 @@
-{
-  "extends": "tslint:latest",
-  "rules": {
-    "variable-name": {
-      "options": "allow-leading-underscore"
-    },
-    "no-implicit-dependencies": false
-  }
-}

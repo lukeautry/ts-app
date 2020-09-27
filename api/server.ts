@@ -16,7 +16,7 @@ export const server = () => {
       res.header("Access-Control-Allow-Origin", "*");
       res.header(
         "Access-Control-Allow-Headers",
-        `Origin, X-Requested-With, Content-Type, Accept, Authorization`,
+        `Origin, X-Requested-With, Content-Type, Accept, Authorization`
       );
       next();
     });
@@ -35,7 +35,7 @@ export const server = () => {
       err: IError,
       _req: express.Request,
       res: express.Response,
-      next: express.NextFunction,
+      next: express.NextFunction
     ) => {
       const status = err.status || 500;
       const body = {
@@ -46,7 +46,7 @@ export const server = () => {
       };
       res.status(status).json(body);
       next();
-    },
+    }
   );
 
   const port = 3000;
