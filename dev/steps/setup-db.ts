@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { Client } from "pg";
-import { DbConnectionName } from "../../server/config/get-db-connection";
+import { DbConnectionName } from "../../server/database/get-db-connection";
 import { execCmd } from "../utils/exec-cmd";
 import { log } from "../utils/log";
 

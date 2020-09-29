@@ -1,8 +1,6 @@
 import Redis from "ioredis";
 
-const createClient = () => {
-  return new Redis(6379, "localhost", {});
-};
+const createClient = () => new Redis(6379, "localhost", {});
 
 const clients: { [key: string]: Redis.Redis | undefined } = {};
 

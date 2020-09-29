@@ -1,6 +1,6 @@
 import readlineSync from "readline-sync";
 import chalk from "chalk";
-import { DbConnectionName } from "../../server/config/get-db-connection";
+import { DbConnectionName } from "../../server/database/get-db-connection";
 
 export const getDatabaseName = (): DbConnectionName => {
   // eslint-disable-next-line @typescript-eslint/no-var-requires
