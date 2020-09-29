@@ -10,9 +10,10 @@ export const generateExpressRoutes = async () => {
   const timer = new Timer();
   const metadata = await generateRoutes({
     basePath: "/api",
-    entryFile: "./server/index.ts",
+    entryFile: "",
     routesDir: "./server",
     noImplicitAdditionalProperties: "ignore",
+    controllerPathGlobs: ["server/controllers/**/*-controller.ts"],
   });
 
   log(chalk.greenBright(`✓ Generated Express routes (${timer.elapsed()}ms)`));

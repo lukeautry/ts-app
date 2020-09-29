@@ -4,11 +4,18 @@ import AssetsWebpackPlugin from "assets-webpack-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import webpack from "webpack";
 
-const srcPath = __dirname;
-const publicPath = path.join(srcPath, "../public");
-const tmpPath = path.join(srcPath, "../tmp");
+const srcPath = path.join(__dirname, "../../client");
+const tmpPath = path.join(__dirname, "../../tmp");
 
-const config: webpack.Configuration = {
+interface IGetBaseWebpackConfigParams {
+  output: webpack.Output;
+  plugins?: Array<webpack.Plugin>;
+}
+
+export const getWebpackConfig = ({
+  output,
+  plugins = [],
+}: IGetBaseWebpackConfigParams): webpack.Configuration => ({
   entry: {
     web: path.join(srcPath, "index.tsx"),
   },
@@ -25,26 +32,19 @@ const config: webpack.Configuration = {
       },
     ],
   },
-  output: {
-    filename: "[name].[hash].js",
-    path: publicPath,
-    sourceMapFilename: "[file].map.json",
-  },
+  output,
   plugins: [
     new MiniCssExtractPlugin({
-      // Options similar to the same options in webpackOptions.output
-      // both options are optional
-      filename: "[name].[hash].css",
+      filename: "[name].css",
     }),
     new AssetsWebpackPlugin({
       path: tmpPath,
     }),
     new CleanWebpackPlugin(),
+    ...plugins,
   ],
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
   },
   stats: "minimal",
-};
-
-export default config;
+});

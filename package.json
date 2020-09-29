@@ -6,13 +6,16 @@
   "author": "Luke Autry <lukeautry@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node ./dev/start.ts",
+    "start": "cross-env NODE_ENV=dev ts-node ./dev/start.ts",
+    "start:prod": "cross-env NODE_ENV=prod ts-node ./dev/start.ts",
     "typeorm": "ts-node ./node_modules/.bin/typeorm",
     "db:migrate": "ts-node ./dev/db/migrate.ts",
-    "db:update": "yarn typeorm migration:run",
+    "db:update": "ts-node ./dev/db/update.ts",
+    "db:create": "ts-node ./dev/db/create.ts",
     "test": "mocha -t 15000 -r ts-node/register \"./server/**/*.spec.ts\"",
     "lint": "eslint '*/**/*.{ts,tsx}' --fix",
-    "ts:build": "tsc --incremental"
+    "ts:build": "tsc --incremental",
+    "ts:watch": "yarn ts:build --watch"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -26,7 +29,6 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "reflect-metadata": "^0.1.13",
-    "superagent": "^6.1.0",
     "tsoa": "^3.3.0",
     "typeorm": "^0.2.26"
   },
@@ -43,11 +45,13 @@
     "@types/minimatch": "^3.0.3",
     "@types/mocha": "^8.0.3",
     "@types/node": "^14.11.2",
+    "@types/pg": "^7.14.5",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
     "@types/readline-sync": "^1.4.3",
     "@types/superagent": "^4.1.10",
     "@types/webpack": "^4.41.22",
+    "@types/webpack-livereload-plugin": "^2.3.0",
     "@typescript-eslint/eslint-plugin": "^4.2.0",
     "@typescript-eslint/parser": "^4.2.0",
     "assets-webpack-plugin": "^5.1.2",
@@ -71,11 +75,12 @@
     "prettier": "^2.1.2",
     "readline-sync": "^1.4.10",
     "sass-loader": "^10.0.2",
+    "superagent": "^6.1.0",
     "ts-loader": "^8.0.4",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3",
     "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "webpack-livereload-plugin": "^2.3.0"
   },
   "resolutions": {
     "@types/webpack": "4.41.22"

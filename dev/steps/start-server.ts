@@ -8,11 +8,11 @@ let server: http.Server | undefined;
 /**
  * Starts API server
  */
-export const startApi = async () => {
+export const startServer = async () => {
   if (server) {
-    log(chalk.red("Stopping API server..."));
+    log(chalk.red("Stopping server..."));
     server.close();
-    log(chalk.redBright("API server stopped"));
+    log(chalk.redBright("Server stopped"));
   }
 
   server = undefined;

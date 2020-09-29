@@ -12,9 +12,10 @@ export const generateOpenAPISpec = async (metadata?: Tsoa.Metadata) => {
   await generateSpec(
     {
       basePath: "/api",
-      entryFile: "./api/server.ts",
+      entryFile: "",
       outputDirectory: "./tmp",
       noImplicitAdditionalProperties: "ignore",
+      controllerPathGlobs: ["server/controllers/**/*-controller.ts"],
     },
     undefined,
     undefined,
