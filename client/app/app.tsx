@@ -48,7 +48,7 @@ export class App extends React.Component<{}, IAppState> {
   }
 
   private async load() {
-    const users = await new Api.UsersService().get();
+    const users = await new Api.UsersService().get({});
     this.setState({ users });
   }
 }

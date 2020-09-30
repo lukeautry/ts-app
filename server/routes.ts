@@ -35,8 +35,8 @@ export function RegisterRoutes(app: express.Express) {
         app.get('/api/users',
             function (request: any, response: any, next: any) {
             const args = {
-                    page_size: {"default":20,"in":"query","name":"page_size","dataType":"double"},
                     page: {"default":1,"in":"query","name":"page","dataType":"double"},
+                    page_size: {"default":20,"in":"query","name":"page_size","dataType":"double"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

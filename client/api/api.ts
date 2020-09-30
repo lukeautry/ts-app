@@ -79,8 +79,8 @@ export namespace Api {
 
 
     export interface IUsersGetParams {
-      page_size?: number;
       page?: number;
+      page_size?: number;
     }
 
     export interface IUsersGetUserByIdParams {
@@ -95,8 +95,8 @@ export namespace Api {
         };
 
         requestParams.queryParameters = {
-          page_size: _params.page_size,
           page: _params.page,
+          page_size: _params.page_size,
         };
         return this.executeRequest<IUser[]>(requestParams, requestModFn);
       }

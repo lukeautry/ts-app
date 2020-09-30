@@ -3,7 +3,8 @@ import { IUser } from "../database/entities/user";
 import { UserRepository } from "../database/repositories/user-repository";
 import { HttpStatusCode } from "../utils/http-status-code";
 import { ApiError } from "../utils/api-error";
-import { validateInteger } from "../utils/validation/validate-integer";
+import { validatePageParameter } from "../utils/validation/validate-page-parameter";
+import { validatePageSizeParameter } from "../utils/validation/validate-page-size-parameter";
 
 @Route("users")
 export class UsersController {
@@ -13,21 +14,8 @@ export class UsersController {
     @Query() page = 1,
     @Query() page_size = 20
   ): Promise<IUser[]> {
-    validateInteger("page", page);
-    if (page < 1) {
-      throw new ApiError(
-        `invalid page value ${page}; must be positive integer`,
-        HttpStatusCode.BAD_REQUEST
-      );
-    }
-
-    validateInteger("page_size", page_size);
-    if (page_size < 1) {
-      throw new ApiError(
-        `invalid page_size value ${page}; must be positive integer`,
-        HttpStatusCode.BAD_REQUEST
-      );
-    }
+    validatePageParameter(page);
+    validatePageSizeParameter(page);
 
     const take = page_size;
     const skip = (page - 1) * take;

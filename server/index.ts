@@ -4,8 +4,8 @@ import bodyParser from "body-parser";
 import chalk from "chalk";
 import express from "express";
 import methodOverride from "method-override";
+import { log } from "../dev/utils/log";
 import { RegisterRoutes } from "./routes";
-import { log } from "./utils/log";
 import { getAssetsJSON } from "./utils/get-assets-json";
 
 interface IError {
