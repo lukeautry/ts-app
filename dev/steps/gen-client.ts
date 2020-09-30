@@ -6,7 +6,7 @@ import { Timer } from "../utils/timer";
 import { generateOpenAPISpec } from "./openapi-spec";
 
 /**
- * Generates the client library for the UI
+ * Generates the OpenAPI client library
  */
 export const genClient = async (metadata: Tsoa.Metadata) => {
   await generateOpenAPISpec(metadata);

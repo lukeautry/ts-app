@@ -11,7 +11,6 @@
     "typeorm": "ts-node ./node_modules/.bin/typeorm",
     "db:migrate": "ts-node ./dev/cli/migrate.ts",
     "db:update": "ts-node ./dev/cli/update.ts",
-    "db:seed": "cross-env NODE_ENV=dev DB_CONNECTION=defaultdb ts-node ./dev/cli/seed.ts",
     "cli:tsoa": "ts-node ./dev/cli/tsoa.ts",
     "test": "cross-env NODE_ENV=test DB_CONNECTION=test mocha -t 15000 -r ts-node/register \"./server/**/*.spec.ts\"",
     "lint": "eslint '*/**/*.{ts,tsx}' --fix",

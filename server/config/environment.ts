@@ -30,6 +30,6 @@ const getDbConnectionName = (key: string): DbConnectionName => {
   }
 };
 
-export const getEnv = (): IEnvironment => ({
+export const environment: IEnvironment = {
   DB_CONNECTION: getDbConnectionName("DB_CONNECTION"),
-});
+};

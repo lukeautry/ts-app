@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { Client } from "pg";
-import { getEnv } from "../../server/config/get-env";
+import { environment } from "../../server/config/environment";
 import { execCmd } from "../utils/exec-cmd";
 import { log } from "../utils/log";
 
@@ -8,7 +8,7 @@ import { log } from "../utils/log";
  * Create DB if necessary and run any pending updates
  */
 export const setupDatabase = async (runMigration = true) => {
-  const { DB_CONNECTION } = getEnv();
+  const { DB_CONNECTION } = environment;
 
   const client = new Client({
     port: 5432,

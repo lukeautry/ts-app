@@ -4,7 +4,7 @@ import {
   FindOneOptions,
   Repository,
 } from "typeorm";
-import { getEnv } from "../../config/get-env";
+import { environment } from "../../config/environment";
 import { BaseEntity, IBaseEntity } from "../entities/base";
 import { getDbConnection } from "../get-db-connection";
 import { PostgresError } from "../postgres/postgres-error";
@@ -58,7 +58,7 @@ export abstract class BaseRepository<
   }
 
   private async getRepository(): Promise<Repository<Class>> {
-    const { DB_CONNECTION } = getEnv();
+    const { DB_CONNECTION } = environment;
     const connection = await getDbConnection(DB_CONNECTION);
     return connection.getRepository<Class>(this.classFn);
   }
