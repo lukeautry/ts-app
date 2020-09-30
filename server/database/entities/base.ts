@@ -1,6 +1,12 @@
 import { Column, PrimaryGeneratedColumn } from "typeorm";
 
-export class BaseEntity {
+export interface IBaseEntity {
+  id: number;
+  date_created: Date;
+  date_updated: Date;
+}
+
+export class BaseEntity implements IBaseEntity {
   /**
    * Unique Identifier
    */
@@ -11,11 +17,11 @@ export class BaseEntity {
    * Date of creation
    */
   @Column("timestamp")
-  public dateCreated!: Date;
+  public date_created!: Date;
 
   /**
-   * Date of updated
+   * Date of update
    */
   @Column("timestamp")
-  public dateUpdated!: Date;
+  public date_updated!: Date;
 }

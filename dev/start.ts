@@ -1,4 +1,5 @@
 import chokidar from "chokidar";
+import chalk from "chalk";
 import { checkRedis } from "./steps/check-redis";
 import { genClient } from "./steps/gen-client";
 import { generateExpressRoutes } from "./steps/gen-routes";
@@ -8,16 +9,18 @@ import { startDocker } from "./steps/start-docker";
 import { webpackDevServer } from "./steps/start-webpack";
 import { debounce } from "./utils/debounce";
 import { setupDatabase } from "./steps/setup-db";
+import { log } from "./utils/log";
 
 /**
- * Single function to run API server, webpack dev server, and regenerate route-related content
+ * Single function to run API server, webpack watcher, and regenerate route-related content
  */
 (async () => {
   await startDocker();
 
   try {
-    await Promise.all([setupDatabase("defaultdb"), checkRedis()]);
+    await Promise.all([setupDatabase(), checkRedis()]);
   } catch (err) {
+    log(chalk.red(err.message));
     process.exit(1);
   }
 

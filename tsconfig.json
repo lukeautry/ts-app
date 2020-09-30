@@ -9,8 +9,9 @@
     "lib": ["esnext", "dom"],
     "jsx": "react",
     "sourceMap": true,
-    "target": "es5",
+    "target": "esnext",
     "removeComments": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "moduleResolution": "node"
   }
 }

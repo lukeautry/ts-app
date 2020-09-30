@@ -3,18 +3,21 @@
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, HttpStatusCodeLiteral, TsoaResponse } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-import { WidgetsController } from './controllers/widgets-controller';
+import { UsersController } from './controllers/users-controller';
 import * as express from 'express';
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
-    "IWidget": {
+    "IUser": {
         "dataType": "refObject",
         "properties": {
+            "email": {"dataType":"string","required":true},
+            "name": {"dataType":"string","required":true},
             "id": {"dataType":"double","required":true},
-            "label": {"dataType":"string","required":true},
-            "color": {"dataType":"string","required":true},
+            "date_created": {"dataType":"datetime","required":true},
+            "date_updated": {"dataType":"datetime","required":true},
+            "address": {"dataType":"string"},
         },
         "additionalProperties": true,
     },
@@ -29,9 +32,11 @@ export function RegisterRoutes(app: express.Express) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-        app.get('/api/widgets',
+        app.get('/api/users',
             function (request: any, response: any, next: any) {
             const args = {
+                    page_size: {"default":20,"in":"query","name":"page_size","dataType":"double"},
+                    page: {"default":1,"in":"query","name":"page","dataType":"double"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -43,17 +48,17 @@ export function RegisterRoutes(app: express.Express) {
                 return next(err);
             }
 
-            const controller = new WidgetsController();
+            const controller = new UsersController();
 
 
-            const promise = controller.GetWidgets.apply(controller, validatedArgs as any);
+            const promise = controller.GetUsers.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/api/widgets/:widgetId',
+        app.get('/api/users/:userId',
             function (request: any, response: any, next: any) {
             const args = {
-                    widgetId: {"in":"path","name":"widgetId","required":true,"dataType":"double"},
+                    userId: {"in":"path","name":"userId","required":true,"dataType":"double"},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -65,10 +70,10 @@ export function RegisterRoutes(app: express.Express) {
                 return next(err);
             }
 
-            const controller = new WidgetsController();
+            const controller = new UsersController();
 
 
-            const promise = controller.GetWidget.apply(controller, validatedArgs as any);
+            const promise = controller.GetUserById.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

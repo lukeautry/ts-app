@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import dockerCompose = require("docker-compose");
+import * as dockerCompose from "docker-compose";
 import { log } from "../utils/log";
 
 /**

@@ -68,32 +68,45 @@ export namespace Api {
 
 
 
-    export interface IWidget {
+    export interface IUser {
+      'email': string;
+      'name': string;
       'id': number;
-      'label': string;
-      'color': string;
+      'date_created': Date;
+      'date_updated': Date;
+      'address'?: string;
     }
 
 
-    export interface IWidgetsGetWidgetParams {
-      widgetId: number;
+    export interface IUsersGetParams {
+      page_size?: number;
+      page?: number;
     }
-    export class WidgetsService extends ApiService {
 
-      public async get() {
+    export interface IUsersGetUserByIdParams {
+      userId: number;
+    }
+    export class UsersService extends ApiService {
+
+      public async get(_params: IUsersGetParams) {
         const requestParams: IRequestParams = {
           method: 'GET',
-          url: `${baseApiUrl}/api/widgets`
+          url: `${baseApiUrl}/api/users`
         };
-        return this.executeRequest<IWidget[]>(requestParams, requestModFn);
+
+        requestParams.queryParameters = {
+          page_size: _params.page_size,
+          page: _params.page,
+        };
+        return this.executeRequest<IUser[]>(requestParams, requestModFn);
       }
 
-      public async getWidget(_params: IWidgetsGetWidgetParams) {
+      public async getUserById(_params: IUsersGetUserByIdParams) {
         const requestParams: IRequestParams = {
           method: 'GET',
-          url: `${baseApiUrl}/api/widgets/${_params.widgetId}`
+          url: `${baseApiUrl}/api/users/${_params.userId}`
         };
-        return this.executeRequest<IWidget>(requestParams, requestModFn);
+        return this.executeRequest<IUser>(requestParams, requestModFn);
       }
     }
 }
