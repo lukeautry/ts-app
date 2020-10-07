@@ -1,3 +1,4 @@
+import { generateExpressRoutes } from "../../dev/steps/gen-routes";
 import { setupDatabase } from "../../dev/steps/setup-db";
 import { startDocker } from "../../dev/steps/start-docker";
 import { environment } from "../config/environment";
@@ -6,6 +7,7 @@ import { getDbConnection } from "../database/get-db-connection";
 before(async () => {
   await startDocker();
   await setupDatabase(false);
+  await generateExpressRoutes();
 });
 
 beforeEach(async () => {

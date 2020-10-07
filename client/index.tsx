@@ -4,6 +4,6 @@ import { Api } from "./api/api";
 import { App } from "./app/app";
 import "./index.scss";
 
-Api.Initialize({ host: "localhost:3000", protocol: "http" });
+Api.Initialize({ host: "localhost:3000/api", protocol: "http" });
 
 ReactDOM.render(<App />, document.getElementById("app"));

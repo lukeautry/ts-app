@@ -16,6 +16,7 @@ export const generateOpenAPISpec = async (metadata?: Tsoa.Metadata) => {
       outputDirectory: "./tmp",
       noImplicitAdditionalProperties: "ignore",
       controllerPathGlobs: ["server/controllers/**/*-controller.ts"],
+      specVersion: 3,
     },
     undefined,
     undefined,

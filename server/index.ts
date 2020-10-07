@@ -5,15 +5,9 @@ import chalk from "chalk";
 import express from "express";
 import methodOverride from "method-override";
 import { log } from "../dev/utils/log";
-import { RegisterRoutes } from "./routes";
 import { getAssetsJSON } from "./utils/get-assets-json";
-
-interface IError {
-  status?: number;
-  fields?: string[];
-  message?: string;
-  name?: string;
-}
+import { environment } from "./config/environment";
+import { registerRoutes } from "./register-routes";
 
 export const server = () => {
   const app = express()
@@ -37,32 +31,17 @@ export const server = () => {
     res.render(path.join(__dirname, "./views/index.ejs"), { assetsJSON });
   });
 
-  RegisterRoutes(app);
+  registerRoutes(app);
 
-  app.use(
-    (
-      err: IError,
-      _req: express.Request,
-      res: express.Response,
-      next: express.NextFunction
-    ) => {
-      const status = err.status || 500;
-      const body = {
-        fields: err.fields || undefined,
-        message: err.message || "An error occurred during the request.",
-        name: err.name,
-        status,
-      };
-      res.status(status).json(body);
-      next();
-    }
-  );
-
-  const port = 3000;
+  const { SERVER_PORT } = environment;
 
   return new Promise<http.Server>((resolve) => {
-    const s = app.listen(port, () => {
-      log(chalk.blueBright(`✓ Started API server at http://localhost:${port}`));
+    const s = app.listen(SERVER_PORT, () => {
+      log(
+        chalk.blueBright(
+          `✓ Started API server at http://localhost:${SERVER_PORT}`
+        )
+      );
       resolve(s);
     });
   });

@@ -1,4 +1,3 @@
-import { ApiError } from "../../utils/api-error";
 import { PostgresError } from "../../database/postgres/postgres-error";
 import { PostgresErrorCode } from "../../database/postgres/postgres-error-codes";
 
@@ -28,12 +27,4 @@ export function expectPostgresError(
   }
 
   throw new Error(`expected error to be instance of PostgresError`);
-}
-
-export function expectAPIError(err: Error): asserts err is ApiError {
-  if (err instanceof ApiError) {
-    return;
-  }
-
-  throw new Error(`expected error to be instance of ApiError`);
 }

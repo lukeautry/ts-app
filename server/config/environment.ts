@@ -2,6 +2,7 @@ import { DbConnectionName } from "../database/get-db-connection";
 
 interface IEnvironment {
   DB_CONNECTION: DbConnectionName;
+  SERVER_PORT: number;
 }
 
 const validConnectionNames: ReadonlyArray<DbConnectionName> = [
@@ -30,6 +31,14 @@ const getDbConnectionName = (key: string): DbConnectionName => {
   }
 };
 
+const serverPort = getEnvValue("SERVER_PORT");
+
+const SERVER_PORT = parseInt(serverPort, 10);
+if (isNaN(SERVER_PORT) || SERVER_PORT <= 0) {
+  throw new Error(`Expected SERVER_PORT to be a positive integer`);
+}
+
 export const environment: IEnvironment = {
   DB_CONNECTION: getDbConnectionName("DB_CONNECTION"),
+  SERVER_PORT,
 };

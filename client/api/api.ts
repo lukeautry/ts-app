@@ -79,23 +79,23 @@ export namespace Api {
 
 
     export interface IUsersGetParams {
-      page?: number;
-      page_size?: number;
+      page_number?: any;
+      page_size?: any;
     }
 
     export interface IUsersGetUserByIdParams {
-      userId: number;
+      user_id: any;
     }
     export class UsersService extends ApiService {
 
       public async get(_params: IUsersGetParams) {
         const requestParams: IRequestParams = {
           method: 'GET',
-          url: `${baseApiUrl}/api/users`
+          url: `${baseApiUrl}/users`
         };
 
         requestParams.queryParameters = {
-          page: _params.page,
+          page_number: _params.page_number,
           page_size: _params.page_size,
         };
         return this.executeRequest<IUser[]>(requestParams, requestModFn);
@@ -104,7 +104,7 @@ export namespace Api {
       public async getUserById(_params: IUsersGetUserByIdParams) {
         const requestParams: IRequestParams = {
           method: 'GET',
-          url: `${baseApiUrl}/api/users/${_params.userId}`
+          url: `${baseApiUrl}/users/${_params.user_id}`
         };
         return this.executeRequest<IUser>(requestParams, requestModFn);
       }
