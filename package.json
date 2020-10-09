@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "start": "cross-env NODE_ENV=dev DB_CONNECTION=defaultdb SERVER_PORT=3000 ts-node ./dev/start.ts",
-    "start:prod": "cross-env NODE_ENV=prod ts-node ./dev/start.ts",
+    "start:prod": "cross-env NODE_ENV=prod DB_CONNECTION=defaultdb SERVER_PORT=3000 ts-node ./dev/start.ts",
     "typeorm": "ts-node ./node_modules/.bin/typeorm",
     "db:migrate": "ts-node ./dev/cli/migrate.ts",
     "db:update": "ts-node ./dev/cli/update.ts",
@@ -16,7 +16,8 @@
     "lint": "eslint '*/**/*.{ts,tsx}'",
     "lint:fix": "yarn lint --fix",
     "ts:build": "tsc --incremental",
-    "ts:watch": "yarn ts:build --watch"
+    "ts:watch": "yarn ts:build --watch",
+    "wp:analyze": "ts-node ./dev/cli/analyze-bundle.ts"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -53,6 +54,7 @@
     "@types/superagent": "^4.1.10",
     "@types/supertest": "^2.0.10",
     "@types/webpack": "^4.41.22",
+    "@types/webpack-bundle-analyzer": "^3.8.0",
     "@types/webpack-livereload-plugin": "^2.3.0",
     "@typescript-eslint/eslint-plugin": "^4.4.0",
     "@typescript-eslint/parser": "^4.4.0",
@@ -83,6 +85,7 @@
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3",
     "webpack": "^4.44.2",
+    "webpack-bundle-analyzer": "^3.9.0",
     "webpack-livereload-plugin": "^2.3.0"
   },
   "resolutions": {

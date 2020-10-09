@@ -8,23 +8,32 @@ const srcPath = path.join(__dirname, "../../client");
 const tmpPath = path.join(__dirname, "../../tmp");
 
 interface IGetBaseWebpackConfigParams {
+  mode: "development" | "production";
   output: webpack.Output;
   plugins?: Array<webpack.Plugin>;
+  cssFileName: string;
 }
 
 export const getWebpackConfig = ({
   output,
   plugins = [],
+  cssFileName,
+  mode,
 }: IGetBaseWebpackConfigParams): webpack.Configuration => ({
   entry: {
     web: path.join(srcPath, "index.tsx"),
   },
-  mode: "development",
+  mode,
   module: {
     rules: [
       {
         loader: "ts-loader",
         test: /\.tsx?$/,
+        options: {
+          compilerOptions: {
+            target: "es5",
+          },
+        },
       },
       {
         test: /\.scss|sass|css$/,
@@ -35,7 +44,7 @@ export const getWebpackConfig = ({
   output,
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "[name].css",
+      filename: cssFileName,
     }),
     new AssetsWebpackPlugin({
       path: tmpPath,
