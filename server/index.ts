@@ -1,29 +1,14 @@
 import http from "http";
 import path from "path";
-import bodyParser from "body-parser";
 import chalk from "chalk";
 import express from "express";
-import methodOverride from "method-override";
 import { log } from "../dev/utils/log";
 import { getAssetsJSON } from "./utils/get-assets-json";
 import { environment } from "./config/environment";
 import { registerRoutes } from "./register-routes";
 
 export const server = () => {
-  const app = express()
-    .use(bodyParser.urlencoded({ extended: true }))
-    .use(bodyParser.json())
-    .use(methodOverride())
-    .use((_req, res, next) => {
-      res.header("Access-Control-Allow-Origin", "*");
-      res.header(
-        "Access-Control-Allow-Headers",
-        `Origin, X-Requested-With, Content-Type, Accept, Authorization`
-      );
-      next();
-    })
-    .set("view engine", "ejs")
-    .use(express.static("public"));
+  const app = express().set("view engine", "ejs").use(express.static("public"));
 
   app.get("/", async (_req, res) => {
     const assetsJSON = await getAssetsJSON();

@@ -1,5 +1,10 @@
+import bodyParser from "body-parser";
 import express from "express";
+import methodOverride from "method-override";
+import { ValidateError } from "tsoa";
 import { RegisterRoutes } from "./routes";
+import { HttpStatusCode } from "./utils/http-status-code";
+import { OperationError } from "./utils/operation-error";
 
 interface IError {
   status?: number;
@@ -9,7 +14,41 @@ interface IError {
 }
 
 export const registerRoutes = (app: express.Express) => {
+  app
+    .use(bodyParser.urlencoded({ extended: true }))
+    .use(bodyParser.json())
+    .use(methodOverride())
+    .use((_req, res, next) => {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header(
+        "Access-Control-Allow-Headers",
+        `Origin, X-Requested-With, Content-Type, Accept, Authorization`
+      );
+      next();
+    });
+
   RegisterRoutes(app);
+
+  const getErrorBody = (err: unknown) => {
+    if (err instanceof ValidateError) {
+      return {
+        message: err.message,
+        status: HttpStatusCode.BAD_REQUEST,
+        fields: err.fields,
+        name: err.name,
+      };
+    } else if (err instanceof OperationError) {
+      return {
+        message: err.message,
+        status: err.status,
+      };
+    } else {
+      return {
+        message: "UNKNOWN_ERROR",
+        status: HttpStatusCode.INTERNAL_SERVER_ERROR,
+      };
+    }
+  };
 
   app.use(
     (
@@ -18,14 +57,8 @@ export const registerRoutes = (app: express.Express) => {
       res: express.Response,
       next: express.NextFunction
     ) => {
-      const status = err.status || 500;
-      const body = {
-        fields: err.fields || undefined,
-        message: err.message || "An error occurred during the request.",
-        name: err.name,
-        status,
-      };
-      res.status(status).json(body);
+      const body = getErrorBody(err);
+      res.status(body.status).json(body);
       next();
     }
   );

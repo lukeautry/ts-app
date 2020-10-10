@@ -10,7 +10,9 @@
       "protocol": "inspector",
       "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
       "env": {
-        "TS_NODE_PROJECT": "${workspaceFolder}/server/tsconfig.json"
+        "NODE_ENV": "dev",
+        "DB_CONNECTION": "defaultdb",
+        "SERVER_PORT": "3000"
       }
     },
     {
@@ -41,7 +43,9 @@
       "protocol": "inspector",
       "internalConsoleOptions": "openOnSessionStart",
       "env": {
-        "TS_NODE_PROJECT": "${workspaceFolder}/server/tsconfig.json"
+        "NODE_ENV": "test",
+        "DB_CONNECTION": "test",
+        "SERVER_PORT": "3037"
       }
     }
   ]

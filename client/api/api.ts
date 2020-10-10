@@ -78,12 +78,23 @@ export namespace Api {
     }
 
 
+    export interface ICreateUserRequest {
+      'email': string;
+      'name': string;
+      'address'?: string;
+    }
+
+
     export interface IUsersGetParams {
       page_number?: any;
       page_size?: any;
     }
 
     export interface IUsersGetUserByIdParams {
+      user_id: any;
+    }
+
+    export interface IUsersDeleteUserParams {
       user_id: any;
     }
     export class UsersService extends ApiService {
@@ -101,12 +112,30 @@ export namespace Api {
         return this.executeRequest<IUser[]>(requestParams, requestModFn);
       }
 
+      public async createUser(_params: ICreateUserRequest) {
+        const requestParams: IRequestParams = {
+          method: 'POST',
+          url: `${baseApiUrl}/users`
+        };
+
+        requestParams.body = _params;
+        return this.executeRequest<IUser>(requestParams, requestModFn);
+      }
+
       public async getUserById(_params: IUsersGetUserByIdParams) {
         const requestParams: IRequestParams = {
           method: 'GET',
           url: `${baseApiUrl}/users/${_params.user_id}`
         };
         return this.executeRequest<IUser>(requestParams, requestModFn);
+      }
+
+      public async deleteUser(_params: IUsersDeleteUserParams) {
+        const requestParams: IRequestParams = {
+          method: 'DELETE',
+          url: `${baseApiUrl}/users/${_params.user_id}`
+        };
+        return this.executeRequest<void>(requestParams, requestModFn);
       }
     }
 }

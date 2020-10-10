@@ -1,8 +1,6 @@
-import { Get, Path, Query, Route, Tags } from "tsoa";
+import { Body, Delete, Get, Path, Post, Query, Route, Tags } from "tsoa";
 import { IUser } from "../database/entities/user";
-import { UserRepository } from "../database/repositories/user-repository";
-import { HttpStatusCode } from "../utils/http-status-code";
-import { ApiError } from "../utils/api-error";
+import { ICreateUserRequest, UserService } from "../services/user-service";
 
 @Route("users")
 export class UsersController {
@@ -18,12 +16,9 @@ export class UsersController {
     @Query() page_number = 1,
     @Query() page_size = 20
   ): Promise<IUser[]> {
-    const take = page_size;
-    const skip = (page_number - 1) * take;
-
-    return await this.repository.find({
-      take,
-      skip,
+    return this.service.getUsers({
+      page: page_number,
+      pageSize: page_size,
     });
   }
 
@@ -34,22 +29,26 @@ export class UsersController {
   @Get("{user_id}")
   @Tags("Users")
   public async GetUserById(@Path() user_id: number): Promise<IUser> {
-    const user = await this.repository.findOne({
-      where: {
-        id: user_id,
-      },
-    });
-    if (!user) {
-      throw new ApiError(
-        `user not found with id ${user_id}`,
-        HttpStatusCode.NOT_FOUND
-      );
-    }
-
-    return user;
+    return this.service.getUserById(user_id);
   }
 
-  private get repository() {
-    return new UserRepository();
+  @Post()
+  @Tags("Users")
+  public async CreateUser(@Body() request: ICreateUserRequest): Promise<IUser> {
+    return this.service.createUser(request);
+  }
+
+  /**
+   * @isInt user_id user_id must be a positive integer
+   * @minimum user_id 1
+   */
+  @Delete(`{user_id}`)
+  @Tags("Users")
+  public async DeleteUser(@Path() user_id: number) {
+    return this.service.deleteUser(user_id);
+  }
+
+  private get service() {
+    return new UserService();
   }
 }
