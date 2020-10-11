@@ -1,14 +1,14 @@
 import chokidar from "chokidar";
 import chalk from "chalk";
 import { checkRedis } from "../common/check-redis";
-import { genClient } from "../common/gen-client";
-import { generateExpressRoutes } from "../common/gen-routes";
+import { generateOpenAPIClient } from "../common/generate-openapi-client";
+import { generateExpressRoutes } from "../common/generate-express-routes";
 import { registerQuitKey } from "../common/register-quit-key";
 import { startServer } from "../common/start-server";
 import { startDocker } from "../common/start-docker";
-import { webpackDevServer } from "../common/start-webpack";
+import { startWebpack } from "../common/start-webpack";
 import { debounce } from "../utils/debounce";
-import { setupDatabase } from "../common/setup-db";
+import { setupDatabase } from "../common/setup-database";
 import { log } from "../utils/log";
 
 /**
@@ -25,7 +25,7 @@ import { log } from "../utils/log";
   }
 
   const metadata = await generateExpressRoutes();
-  await Promise.all([startServer(), webpackDevServer(metadata)]);
+  await Promise.all([startServer(), startWebpack(metadata)]);
 
   const regenerateApiRoutes = debounce(async (args) => {
     const routesChanged =
@@ -34,7 +34,7 @@ import { log } from "../utils/log";
 
     if (routesChanged) {
       const metadata = await generateExpressRoutes();
-      await genClient(metadata);
+      await generateOpenAPIClient(metadata);
     } else {
       await startServer();
     }

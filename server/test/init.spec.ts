@@ -1,5 +1,5 @@
-import { generateExpressRoutes } from "../../dev/common/gen-routes";
-import { setupDatabase } from "../../dev/common/setup-db";
+import { generateExpressRoutes } from "../../dev/common/generate-express-routes";
+import { setupDatabase } from "../../dev/common/setup-database";
 import { startDocker } from "../../dev/common/start-docker";
 import { environment } from "../config/environment";
 import { getDbConnection } from "../database/get-db-connection";

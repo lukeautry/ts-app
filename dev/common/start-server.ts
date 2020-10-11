@@ -6,7 +6,7 @@ import { log } from "../utils/log";
 let server: http.Server | undefined;
 
 /**
- * Starts API server
+ * Starts server
  */
 export const startServer = async () => {
   if (server) {

@@ -1,7 +1,7 @@
-import { genClient } from "../common/gen-client";
-import { generateExpressRoutes } from "../common/gen-routes";
+import { generateOpenAPIClient } from "../common/generate-openapi-client";
+import { generateExpressRoutes } from "../common/generate-express-routes";
 
 (async () => {
   const metadata = await generateExpressRoutes();
-  await genClient(metadata);
+  await generateOpenAPIClient(metadata);
 })();

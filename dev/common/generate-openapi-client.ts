@@ -3,12 +3,12 @@ import { generate } from "openapi-ts-client-gen";
 import { Tsoa } from "tsoa";
 import { log } from "../utils/log";
 import { Timer } from "../utils/timer";
-import { generateOpenAPISpec } from "./openapi-spec";
+import { generateOpenAPISpec } from "./generate-openapi-spec";
 
 /**
  * Generates the OpenAPI client library
  */
-export const genClient = async (metadata: Tsoa.Metadata) => {
+export const generateOpenAPIClient = async (metadata: Tsoa.Metadata) => {
   await generateOpenAPISpec(metadata);
 
   const timer = new Timer();

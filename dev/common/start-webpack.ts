@@ -5,7 +5,7 @@ import { devWebpackConfig } from "../webpack/webpack.config.dev";
 import { log } from "../utils/log";
 import { sleep } from "../utils/sleep";
 import { prodWebpackConfig } from "../webpack/webpack.config.prod";
-import { genClient } from "./gen-client";
+import { generateOpenAPIClient } from "./generate-openapi-client";
 
 const envConfigs = {
   prod: prodWebpackConfig,
@@ -23,8 +23,8 @@ const getConfig = () => {
   return envConfigs[NODE_ENV as keyof typeof envConfigs];
 };
 
-export const webpackDevServer = async (metadata: Tsoa.Metadata) => {
-  await genClient(metadata);
+export const startWebpack = async (metadata: Tsoa.Metadata) => {
+  await generateOpenAPIClient(metadata);
 
   // somehow prevents compiling twice on webpack start
   await sleep(1000);

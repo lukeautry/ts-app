@@ -23,9 +23,7 @@ export const server = () => {
   return new Promise<http.Server>((resolve) => {
     const s = app.listen(SERVER_PORT, () => {
       log(
-        chalk.blueBright(
-          `✓ Started API server at http://localhost:${SERVER_PORT}`
-        )
+        chalk.blueBright(`✓ Started server at http://localhost:${SERVER_PORT}`)
       );
       resolve(s);
     });
