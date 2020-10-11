@@ -2,8 +2,8 @@ import { IUser } from "../database/entities/user";
 import { PostgresError } from "../database/postgres/postgres-error";
 import { PostgresErrorCode } from "../database/postgres/postgres-error-codes";
 import { UserRepository } from "../database/repositories/user-repository";
-import { HttpStatusCode } from "../utils/http-status-code";
-import { OperationError } from "../utils/operation-error";
+import { HttpStatusCode } from "../common/http-status-code";
+import { OperationError } from "../common/operation-error";
 
 export interface ICreateUserRequest {
   email: string;

@@ -3,8 +3,8 @@ import express from "express";
 import methodOverride from "method-override";
 import { ValidateError } from "tsoa";
 import { RegisterRoutes } from "./routes";
-import { HttpStatusCode } from "./utils/http-status-code";
-import { OperationError } from "./utils/operation-error";
+import { HttpStatusCode } from "./common/http-status-code";
+import { OperationError } from "./common/operation-error";
 
 interface IError {
   status?: number;

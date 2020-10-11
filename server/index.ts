@@ -3,7 +3,7 @@ import path from "path";
 import chalk from "chalk";
 import express from "express";
 import { log } from "../dev/utils/log";
-import { getAssetsJSON } from "./utils/get-assets-json";
+import { getAssetsJSON } from "./common/get-assets-json";
 import { environment } from "./config/environment";
 import { registerRoutes } from "./register-routes";
 

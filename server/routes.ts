@@ -14,10 +14,10 @@ const models: TsoaRoute.Models = {
         "properties": {
             "email": {"dataType":"string","required":true},
             "name": {"dataType":"string","required":true},
+            "address": {"dataType":"string"},
             "id": {"dataType":"integer","required":true},
             "date_created": {"dataType":"datetime","required":true},
             "date_updated": {"dataType":"datetime","required":true},
-            "address": {"dataType":"string"},
         },
         "additionalProperties": true,
     },

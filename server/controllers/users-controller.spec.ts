@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { IUser } from "../database/entities/user";
 import { UserRepository } from "../database/repositories/user-repository";
 import { getTestServer } from "../test/get-test-server";
-import { HttpStatusCode } from "../utils/http-status-code";
+import { HttpStatusCode } from "../common/http-status-code";
 
 describe("UsersController", () => {
   const server = getTestServer();
