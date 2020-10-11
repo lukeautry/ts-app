@@ -1,17 +1,16 @@
 import { Column, Entity } from "typeorm";
 import { BaseEntity, IBaseEntity } from "./base";
 
-export interface IUserRequired {
+export interface IUserCreateProps {
   email: string;
   name: string;
-}
-
-export interface IUser extends IUserRequired, IBaseEntity {
   address?: string;
 }
 
+export interface IUser extends IUserCreateProps, IBaseEntity {}
+
 @Entity("users")
-export class User extends BaseEntity implements IUserRequired {
+export class User extends BaseEntity implements IUserCreateProps {
   @Column({
     nullable: true,
     type: "text",

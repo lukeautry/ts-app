@@ -9,13 +9,22 @@ import { BaseEntity, IBaseEntity } from "../entities/base";
 import { getDbConnection } from "../get-db-connection";
 import { PostgresError } from "../postgres/postgres-error";
 
+/**
+ * The generic type arguments for BaseRepository seem a little convoluted,
+ * but there's a strategy in mind. TypeORM uses classes and class decorators
+ * to set up establish ORM models and model relations.
+ *
+ * By only accepting and producing the interface version of models, we can keep
+ * the class models from propagating throughout the app and allows repositories
+ * to run on pure data structures
+ */
 export abstract class BaseRepository<
-  // Props in an existing record
+  // Properties in an existing record
   Props extends IBaseEntity,
   // Class representing TypeORM model
   Class extends BaseEntity & Props,
-  // Props required to create this record
-  RequiredProps
+  // Properties required to create this record
+  CreateProps
 > {
   constructor(private readonly classFn: new () => Class) {}
 
@@ -27,20 +36,24 @@ export abstract class BaseRepository<
     return this.execute((repo) => repo.find(options));
   }
 
-  public create(model: RequiredProps & Partial<Props>): Promise<Props> {
-    if (!model.date_created) {
-      model.date_created = model.date_updated = new Date();
-    }
+  public create(model: CreateProps): Promise<Props> {
+    const now = new Date();
 
-    return this.execute((repo) => repo.save(model));
+    return this.execute((repo) =>
+      repo.save({
+        ...model,
+        date_created: now,
+        date_updated: now,
+      })
+    );
   }
 
-  public update(model: RequiredProps & Props): Promise<Props> {
+  public update(model: Props): Promise<Props> {
     return this.execute((repo) =>
       repo.save({
         ...model,
         date_updated: new Date(),
-      })
+      } as CreateProps & Props)
     );
   }
 
