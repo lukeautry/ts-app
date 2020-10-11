@@ -71,10 +71,10 @@ export namespace Api {
     export interface IUser {
       'email': string;
       'name': string;
+      'address'?: string;
       'id': number;
       'date_created': Date;
       'date_updated': Date;
-      'address'?: string;
     }
 
 

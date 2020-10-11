@@ -1,5 +1,5 @@
-import { genClient } from "../steps/gen-client";
-import { generateExpressRoutes } from "../steps/gen-routes";
+import { genClient } from "../common/gen-client";
+import { generateExpressRoutes } from "../common/gen-routes";
 
 (async () => {
   const metadata = await generateExpressRoutes();

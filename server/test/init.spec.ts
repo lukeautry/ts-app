@@ -1,6 +1,6 @@
-import { generateExpressRoutes } from "../../dev/steps/gen-routes";
-import { setupDatabase } from "../../dev/steps/setup-db";
-import { startDocker } from "../../dev/steps/start-docker";
+import { generateExpressRoutes } from "../../dev/common/gen-routes";
+import { setupDatabase } from "../../dev/common/setup-db";
+import { startDocker } from "../../dev/common/start-docker";
 import { environment } from "../config/environment";
 import { getDbConnection } from "../database/get-db-connection";
 
