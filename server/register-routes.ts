@@ -2,6 +2,7 @@ import bodyParser from "body-parser";
 import express from "express";
 import methodOverride from "method-override";
 import { ValidateError } from "tsoa";
+import { log } from "../dev/utils/log";
 import { RegisterRoutes } from "./routes";
 import { HttpStatusCode } from "./common/http-status-code";
 import { OperationError } from "./common/operation-error";
@@ -57,6 +58,8 @@ export const registerRoutes = (app: express.Express) => {
       res: express.Response,
       next: express.NextFunction
     ) => {
+      log(err);
+
       const body = getErrorBody(err);
       res.status(body.status).json(body);
       next();

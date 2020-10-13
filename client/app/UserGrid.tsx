@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { isValidEmail } from "../../common/validation/is-valid-email";
 import { Api } from "../api/api";
-import { ActionButton } from "../common/ActionButton";
-import { UserGridInput } from "../common/UserGridInput";
+import { CreateUserRow } from "./CreateUserRow";
 import { EditUserModal } from "./EditUserModal";
 import { UserRow } from "./UserRow";
 
@@ -11,7 +9,7 @@ interface IUserGridProps {
   users: Api.IUser[];
   onDeleteUser: (user: Api.IUser) => void;
   onCreateUser: (params: Api.ICreateUserRequest) => void;
-  onUpdateUser: (user: Api.IUser) => void;
+  onUpdateUser: (user: Api.IUpdateUserRequest) => void;
 }
 
 const Container = styled.div`
@@ -42,35 +40,21 @@ const Table = styled.table`
   }
 `;
 
-export const UserGrid: React.FC<IUserGridProps> = (props) => {
-  const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
+export const UserGrid: React.FC<IUserGridProps> = ({
+  users,
+  onCreateUser,
+  onUpdateUser,
+  onDeleteUser,
+}) => {
   const [editUser, setEditUser] = useState<Api.IUser | undefined>(undefined);
-
-  const canSubmitCreate = () => !!email && !!name;
-
-  const onClickCreate = () => {
-    if (!canSubmitCreate) {
-      return;
-    }
-
-    props.onCreateUser({
-      email,
-      name,
-      address,
-    });
-  };
-
-  const showEmailError = () => !!email && !isValidEmail(email);
 
   return (
     <Container>
       {editUser && (
         <EditUserModal
           user={editUser}
-          onSuccess={(user) => {
-            props.onUpdateUser(user);
+          onConfirm={(request) => {
+            onUpdateUser(request);
             setEditUser(undefined);
           }}
           onClose={() => setEditUser(undefined)}
@@ -89,53 +73,15 @@ export const UserGrid: React.FC<IUserGridProps> = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.users.map((user) => (
+          {users.map((user) => (
             <UserRow
               key={user.id}
               user={user}
-              onDeleteUser={props.onDeleteUser}
+              onDeleteUser={onDeleteUser}
               onClickEdit={() => setEditUser(user)}
             />
           ))}
-          <tr key="create-user">
-            <td />
-            <td>
-              <UserGridInput
-                type="email"
-                placeholder="Email Address"
-                value={email}
-                className={showEmailError() ? "error" : undefined}
-                onChange={(event) => setEmail(event.target.value)}
-              />
-            </td>
-            <td>
-              <UserGridInput
-                type="text"
-                placeholder="Name"
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-              />
-            </td>
-            <td>
-              <UserGridInput
-                type="text"
-                placeholder="Address (Optional)"
-                value={address}
-                onChange={(event) => setAddress(event.target.value)}
-              ></UserGridInput>
-            </td>
-            <td />
-            <td />
-            <td>
-              <ActionButton
-                type="button"
-                disabled={!canSubmitCreate()}
-                onClick={onClickCreate}
-              >
-                Save
-              </ActionButton>
-            </td>
-          </tr>
+          <CreateUserRow onCreateUser={onCreateUser} />
         </tbody>
       </Table>
     </Container>

@@ -46,7 +46,9 @@ export const App = () => {
     getUsers();
   };
 
-  const onUpdateUser = () => {
+  const onUpdateUser = async (params: Api.IUpdateUserRequest) => {
+    setUsers(undefined);
+    await new Api.UsersService().updateUser(params);
     getUsers();
   };
 

@@ -9,14 +9,14 @@ import { ModalHeader } from "../common/Modal/ModalHeader";
 
 interface IEditUserModal {
   user: Api.IUser;
-  onSuccess: (user: Api.IUser) => void;
+  onConfirm: (user: Api.IUpdateUserRequest) => void;
   onClose: () => void;
 }
 
 export const EditUserModal: React.FC<IEditUserModal> = ({
   onClose,
   user,
-  onSuccess,
+  onConfirm,
 }) => {
   const [email, setEmail] = useState(user.email);
   const [name, setName] = useState(user.name);
@@ -31,14 +31,12 @@ export const EditUserModal: React.FC<IEditUserModal> = ({
       return;
     }
 
-    const updatedUser = await new Api.UsersService().updateUser({
+    onConfirm({
       user_id: user.id,
       email,
       name,
       address,
     });
-
-    onSuccess(updatedUser);
   };
 
   return (

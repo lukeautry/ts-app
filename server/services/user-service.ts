@@ -47,6 +47,9 @@ export class UserService {
     return await this.repository.find({
       take,
       skip,
+      order: {
+        id: "ASC",
+      },
     });
   }
 
