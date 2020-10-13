@@ -4,8 +4,15 @@ import { PostgresErrorCode } from "../database/postgres/postgres-error-codes";
 import { UserRepository } from "../database/repositories/user-repository";
 import { HttpStatusCode } from "../common/http-status-code";
 import { OperationError } from "../common/operation-error";
+import { isValidEmail } from "../../common/validation/is-valid-email";
 
 export interface ICreateUserRequest {
+  email: string;
+  name: string;
+  address?: string;
+}
+
+export interface IUpdateUserRequest {
   email: string;
   name: string;
   address?: string;
@@ -44,6 +51,8 @@ export class UserService {
   }
 
   public async createUser({ email, name, address }: ICreateUserRequest) {
+    this.checkEmail(email);
+
     try {
       return await this.repository.create({
         email,
@@ -51,12 +60,7 @@ export class UserService {
         address,
       });
     } catch (err) {
-      const emailInUse =
-        err instanceof PostgresError &&
-        err.code === PostgresErrorCode.UNIQUE_VIOLATION;
-      if (emailInUse) {
-        throw new OperationError("EMAIL_IN_USE", HttpStatusCode.BAD_REQUEST);
-      }
+      this.checkForUniqueViolation(err);
 
       throw new OperationError(
         "UNKNOWN_ERROR",
@@ -70,6 +74,46 @@ export class UserService {
     await this.repository.delete({
       id: user.id,
     });
+  }
+
+  public async updateUser(
+    userId: number,
+    { email, name, address }: IUpdateUserRequest
+  ): Promise<IUser> {
+    this.checkEmail(email);
+
+    const user = await this.getUserById(userId);
+
+    try {
+      return await this.repository.update({
+        ...user,
+        email,
+        name,
+        address,
+      });
+    } catch (err) {
+      this.checkForUniqueViolation(err);
+
+      throw new OperationError(
+        "UNKNOWN_ERROR",
+        HttpStatusCode.INTERNAL_SERVER_ERROR
+      );
+    }
+  }
+
+  private checkForUniqueViolation(err: unknown) {
+    const emailInUse =
+      err instanceof PostgresError &&
+      err.code === PostgresErrorCode.UNIQUE_VIOLATION;
+    if (emailInUse) {
+      throw new OperationError("EMAIL_IN_USE", HttpStatusCode.BAD_REQUEST);
+    }
+  }
+
+  private checkEmail(email: string) {
+    if (!isValidEmail(email)) {
+      throw new OperationError("INVALID_EMAIL", HttpStatusCode.BAD_REQUEST);
+    }
   }
 
   private get repository() {

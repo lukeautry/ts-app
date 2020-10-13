@@ -12,5 +12,4 @@ export const analyzeWebpackConfig = getWebpackConfig({
     sourceMapFilename: "[file].map.json",
   },
   plugins: [new BundleAnalyzerPlugin()],
-  cssFileName: "[name].css",
 });

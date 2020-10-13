@@ -85,12 +85,23 @@ export namespace Api {
     }
 
 
+    export interface IUpdateUserRequest {
+      'email': string;
+      'name': string;
+      'address'?: string;
+    }
+
+
     export interface IUsersGetParams {
       page_number?: any;
       page_size?: any;
     }
 
     export interface IUsersGetUserByIdParams {
+      user_id: any;
+    }
+
+    export interface IUpdateUserRequest {
       user_id: any;
     }
 
@@ -127,6 +138,16 @@ export namespace Api {
           method: 'GET',
           url: `${baseApiUrl}/users/${_params.user_id}`
         };
+        return this.executeRequest<IUser>(requestParams, requestModFn);
+      }
+
+      public async updateUser(_params: IUpdateUserRequest) {
+        const requestParams: IRequestParams = {
+          method: 'PATCH',
+          url: `${baseApiUrl}/users/${_params.user_id}`
+        };
+
+        requestParams.body = _params;
         return this.executeRequest<IUser>(requestParams, requestModFn);
       }
 

@@ -1,6 +1,10 @@
-import { Body, Delete, Get, Path, Post, Query, Route, Tags } from "tsoa";
+import { Body, Delete, Get, Patch, Path, Post, Query, Route, Tags } from "tsoa";
 import { IUser } from "../database/entities/user";
-import { ICreateUserRequest, UserService } from "../services/user-service";
+import {
+  ICreateUserRequest,
+  IUpdateUserRequest,
+  UserService,
+} from "../services/user-service";
 
 @Route("users")
 export class UsersController {
@@ -36,6 +40,15 @@ export class UsersController {
   @Tags("Users")
   public async CreateUser(@Body() request: ICreateUserRequest): Promise<IUser> {
     return this.service.createUser(request);
+  }
+
+  @Patch("{user_id}")
+  @Tags("Users")
+  public async UpdateUser(
+    @Path() user_id: number,
+    @Body() request: IUpdateUserRequest
+  ): Promise<IUser> {
+    return this.service.updateUser(user_id, request);
   }
 
   /**

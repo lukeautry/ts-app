@@ -125,4 +125,29 @@ describe("UsersController", () => {
       await server.delete(`/api/users/one`).expect(HttpStatusCode.BAD_REQUEST);
     });
   });
+
+  describe("UpdateUser", () => {
+    beforeEach(() => createTestUsers(2));
+
+    it("should be able to update", async () => {
+      const email = "new_test@test.com";
+
+      await server
+        .patch("/api/users/1")
+        .send({ email, name: `Test User #0` })
+        .expect(HttpStatusCode.OK)
+        .expect(({ body: user }) => {
+          expect(user.email).to.equal(email);
+        });
+    });
+
+    it("should reject email in use", async () => {
+      const email = "test_1@test.com";
+
+      await server
+        .patch("/api/users/1")
+        .send({ email })
+        .expect(HttpStatusCode.BAD_REQUEST);
+    });
+  });
 });

@@ -1,54 +1,93 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import { Api } from "../api/api";
+import { Modal } from "../common/Modal/Modal";
+import { ModalBody } from "../common/Modal/ModalBody";
+import { ModalButton } from "../common/Modal/ModalButton";
+import { ModalFooter } from "../common/Modal/ModalFooter";
+import { ModalHeader } from "../common/Modal/ModalHeader";
+import { UserGrid } from "./UserGrid";
 
-interface IAppState {
-  users?: Api.IUser[];
-}
-
-export class App extends React.Component<{}, IAppState> {
-  constructor(public readonly props: {}) {
-    super(props);
-    this.state = {};
-    this.load();
+const Container = styled.div`
+  * {
+    font-family: monospace;
   }
+`;
 
-  public render() {
-    if (!this.state.users) {
+export const App = () => {
+  const [users, setUsers] = useState<Api.IUser[] | undefined>(undefined);
+  const [confirmingDeleteUser, setConfirmingDeleteUser] = useState<
+    Api.IUser | undefined
+  >(undefined);
+
+  const getUsers = async () => {
+    const users = await new Api.UsersService().get({});
+    setUsers(users);
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const onDeleteUser = async (user: Api.IUser) => {
+    setConfirmingDeleteUser(user);
+  };
+
+  const onConfirmDeleteUser = async (user: Api.IUser) => {
+    setUsers(undefined);
+    await new Api.UsersService().deleteUser({ user_id: user.id });
+    getUsers();
+    setConfirmingDeleteUser(undefined);
+  };
+
+  const onCreateUser = async (params: Api.ICreateUserRequest) => {
+    setUsers(undefined);
+    await new Api.UsersService().createUser(params);
+    getUsers();
+  };
+
+  const onUpdateUser = () => {
+    getUsers();
+  };
+
+  const content = () => {
+    if (users) {
+      return (
+        <UserGrid
+          users={users}
+          onDeleteUser={onDeleteUser}
+          onCreateUser={onCreateUser}
+          onUpdateUser={onUpdateUser}
+        />
+      );
+    } else {
       return <div>Loading...</div>;
     }
+  };
 
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Email</th>
-            <th>Name</th>
-            <th>Date Created</th>
-            <th>Date Updated</th>
-            <th>Address</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.state.users.map((w) => {
-            return (
-              <tr key={w.id}>
-                <td>{w.id}</td>
-                <td>{w.email}</td>
-                <td>{w.name}</td>
-                <td>{w.date_created}</td>
-                <td>{w.date_updated}</td>
-                <td>{w.address}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    );
-  }
-
-  private async load() {
-    const users = await new Api.UsersService().get({});
-    this.setState({ users });
-  }
-}
+  return (
+    <Container>
+      {confirmingDeleteUser && (
+        <Modal onClose={() => setConfirmingDeleteUser(undefined)}>
+          <ModalHeader>Confirm Delete</ModalHeader>
+          <ModalBody>Are you sure you want to delete this user?</ModalBody>
+          <ModalFooter>
+            <ModalButton
+              bgColor="cancel"
+              onClick={() => setConfirmingDeleteUser(undefined)}
+            >
+              Cancel
+            </ModalButton>
+            <ModalButton
+              bgColor="primary"
+              onClick={() => onConfirmDeleteUser(confirmingDeleteUser)}
+            >
+              Confirm
+            </ModalButton>
+          </ModalFooter>
+        </Modal>
+      )}
+      {content()}
+    </Container>
+  );
+};

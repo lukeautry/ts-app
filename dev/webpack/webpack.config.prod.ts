@@ -9,5 +9,4 @@ export const prodWebpackConfig = getWebpackConfig({
     filename: "[name].[hash].js",
     path: publicPath,
   },
-  cssFileName: "[name].[hash].css",
 });

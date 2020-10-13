@@ -16,5 +16,4 @@ export const devWebpackConfig = getWebpackConfig({
       quiet: true,
     } as LiveReloadPlugin.Options),
   ],
-  cssFileName: "[name].css",
 });
