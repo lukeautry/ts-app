@@ -3,12 +3,16 @@ import { DbConnectionName } from "../database/get-db-connection";
 interface IEnvironment {
   DB_CONNECTION: DbConnectionName;
   SERVER_PORT: number;
+  NODE_ENV: NodeEnvironment;
 }
 
 const validConnectionNames: ReadonlyArray<DbConnectionName> = [
   "defaultdb",
   "test",
 ];
+
+const validNodeEnvs = ["dev", "test", "prod"] as const;
+type NodeEnvironment = typeof validNodeEnvs[number];
 
 const getEnvValue = (key: string) => {
   const value = process.env[key];
@@ -19,16 +23,17 @@ const getEnvValue = (key: string) => {
   return value;
 };
 
-const getDbConnectionName = (key: string): DbConnectionName => {
+const getConstrainedEnvValue = <T extends string>(
+  key: string,
+  values: ReadonlyArray<T>
+) => {
   const value = getEnvValue(key);
 
-  if (validConnectionNames.includes(value as DbConnectionName)) {
-    return value as DbConnectionName;
-  } else {
-    throw new Error(
-      `Expected ${key} to be one of ${validConnectionNames.join(",")}`
-    );
+  if (values.includes(value as T)) {
+    return value as T;
   }
+
+  throw new Error(`Expected ${key} to be one of ${values.join(",")}`);
 };
 
 const serverPort = getEnvValue("SERVER_PORT");
@@ -39,6 +44,7 @@ if (isNaN(SERVER_PORT) || SERVER_PORT <= 0) {
 }
 
 export const environment: IEnvironment = {
-  DB_CONNECTION: getDbConnectionName("DB_CONNECTION"),
+  DB_CONNECTION: getConstrainedEnvValue("DB_CONNECTION", validConnectionNames),
   SERVER_PORT,
+  NODE_ENV: getConstrainedEnvValue("NODE_ENV", validNodeEnvs),
 };

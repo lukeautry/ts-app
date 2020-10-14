@@ -6,6 +6,7 @@ import { log } from "../dev/utils/log";
 import { RegisterRoutes } from "./routes";
 import { HttpStatusCode } from "./common/http-status-code";
 import { OperationError } from "./common/operation-error";
+import { environment } from "./config/environment";
 
 interface IError {
   status?: number;
@@ -58,7 +59,9 @@ export const registerRoutes = (app: express.Express) => {
       res: express.Response,
       next: express.NextFunction
     ) => {
-      log(err);
+      if (environment.NODE_ENV === "dev") {
+        log(err);
+      }
 
       const body = getErrorBody(err);
       res.status(body.status).json(body);
