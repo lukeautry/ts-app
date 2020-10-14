@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Api } from "../api/api";
+import { IUpdateUserRequest } from "../api/models/IUpdateUserRequest";
+import { IUser } from "../api/models/IUser";
 import { FormInput } from "../common/FormInput";
 import { Modal } from "../common/Modal/Modal";
 import { ModalBody } from "../common/Modal/ModalBody";
@@ -8,8 +9,8 @@ import { ModalFooter } from "../common/Modal/ModalFooter";
 import { ModalHeader } from "../common/Modal/ModalHeader";
 
 interface IEditUserModal {
-  user: Api.IUser;
-  onConfirm: (user: Api.IUpdateUserRequest) => void;
+  user: IUser;
+  onConfirm: (userId: number, request: IUpdateUserRequest) => void;
   onClose: () => void;
 }
 
@@ -31,8 +32,7 @@ export const EditUserModal: React.FC<IEditUserModal> = ({
       return;
     }
 
-    onConfirm({
-      user_id: user.id,
+    onConfirm(user.id, {
       email,
       name,
       address,

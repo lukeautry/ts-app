@@ -1,10 +1,10 @@
 import React from "react";
-import { Api } from "../api/api";
+import { IUser } from "../api";
 import { ActionButton } from "../common/ActionButton";
 
 interface IUserRowProps {
-  user: Api.IUser;
-  onDeleteUser: (user: Api.IUser) => void;
+  user: IUser;
+  onDeleteUser: (user: IUser) => void;
   onClickEdit: () => void;
 }
 

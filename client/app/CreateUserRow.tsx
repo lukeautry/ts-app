@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { isValidEmail } from "../../common/validation/is-valid-email";
-import { Api } from "../api/api";
+import { ICreateUserRequest } from "../api";
 import { ActionButton } from "../common/ActionButton";
 import { UserGridInput } from "../common/UserGridInput";
 
 interface ICreateUserProps {
-  onCreateUser: (params: Api.ICreateUserRequest) => void;
+  onCreateUser: (params: ICreateUserRequest) => void;
 }
 
 export const CreateUserRow: React.FC<ICreateUserProps> = ({ onCreateUser }) => {

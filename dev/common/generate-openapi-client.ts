@@ -1,9 +1,11 @@
 import chalk from "chalk";
-import { generate } from "openapi-ts-client-gen";
 import { Tsoa } from "tsoa";
 import { log } from "../utils/log";
 import { Timer } from "../utils/timer";
 import { generateOpenAPISpec } from "./generate-openapi-spec";
+
+// eslint-disable-next-line
+const OpenAPI = require("openapi-typescript-codegen");
 
 /**
  * Generates the OpenAPI client library
@@ -13,11 +15,10 @@ export const generateOpenAPIClient = async (metadata: Tsoa.Metadata) => {
 
   const timer = new Timer();
 
-  await generate({
-    destPath: "./client/api/api.ts",
-    namespace: "Api",
-    srcPath: "./tmp/swagger.json",
-    type: "file",
+  OpenAPI.generate({
+    input: "./tmp/swagger.json",
+    output: "./client/api",
+    useOptions: true,
   });
 
   log(chalk.greenBright(`✓ Generated Client (${timer.elapsed()}ms)`));

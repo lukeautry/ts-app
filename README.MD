@@ -5,7 +5,7 @@ This project is a starting point for developing an API-first application using T
 Unlike tools such as [create-react-app](https://github.com/facebook/create-react-app), this project aims to use a "domain-driven" approach. The developer designs the API (and database, if applicable). A client library
 is automatically generated from the API, providing a statically typed interface with which to interact with the API from the React UI.
 
-The overall goal is to provide a type-safe and productive developer experience for rapid web application development.
+The goal is to provide a type-safe and productive developer experience for rapid web application development.
 
 ## Technologies Used
 - [TypeScript](http://www.typescriptlang.org/)
@@ -20,15 +20,15 @@ The overall goal is to provide a type-safe and productive developer experience f
             - Optional: ORM-like queries
     - [Redis](https://redis.io/) for caching/messaging
 - Frontend
-    - [React.js](https://reactjs.org/)
-    - [openapi-ts-client-gen](https://github.com/lukeautry/openapi-ts-client-gen) for API client generation
-    - [SASS](https://sass-lang.com) as a CSS preprocessor
+    - [react](https://reactjs.org/)
+    - [openapi-typescript-codegen](https://github.com/ferdikoomen/openapi-typescript-codegen) for API client generation
+    - [styled-components](https://styled-components.com/) for styling/css
     - [webpack](https://webpack.js.org) for bundling static assets and dev server
     - **Aside from the items above, UI remains fairly unopinionated and assumes some knowledge of how to build a React app**
 - Developer environment
     - [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose) for non-Node.js project dependencies
     - Single `start` script that live reloads the API, UI, and related services
-    - VSCode [launch.json](./.vscode/launch.json) settings have been included to allow debugging
+    - VSCode [launch.json](./.vscode/launch.json) settings have been included to support debugging
 - Testing
     - Mocha/Chai tests for API
 
@@ -48,8 +48,8 @@ The overall goal is to provide a type-safe and productive developer experience f
 ## Database Operations
 
 ### Creating a new migration
-- Create a new class under [the entities directory](./api/database/entities) extending from [base.ts](./api/database/entities/base.ts)
-    - See [user.ts](./api/database/entities/user.ts) as an example
+- Create a new class under [the entities directory](./server/database/entities) extending from [base.ts](./server/database/entities/base.ts)
+    - See [user.ts](./server/database/entities/user.ts) as an example
     - Review [TypeORM documentation](http://typeorm.io) for the full migration API
 - `yarn db:migrate`
 

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Api } from "../api/api";
+import { IUser, ICreateUserRequest, IUpdateUserRequest } from "../api";
 import { CreateUserRow } from "./CreateUserRow";
 import { EditUserModal } from "./EditUserModal";
 import { UserRow } from "./UserRow";
 
 interface IUserGridProps {
-  users: Api.IUser[];
-  onDeleteUser: (user: Api.IUser) => void;
-  onCreateUser: (params: Api.ICreateUserRequest) => void;
-  onUpdateUser: (user: Api.IUpdateUserRequest) => void;
+  users: IUser[];
+  onDeleteUser: (user: IUser) => void;
+  onCreateUser: (params: ICreateUserRequest) => void;
+  onUpdateUser: (userId: number, user: IUpdateUserRequest) => void;
 }
 
 const Container = styled.div`
@@ -46,15 +46,15 @@ export const UserGrid: React.FC<IUserGridProps> = ({
   onUpdateUser,
   onDeleteUser,
 }) => {
-  const [editUser, setEditUser] = useState<Api.IUser | undefined>(undefined);
+  const [editUser, setEditUser] = useState<IUser | undefined>(undefined);
 
   return (
     <Container>
       {editUser && (
         <EditUserModal
           user={editUser}
-          onConfirm={(request) => {
-            onUpdateUser(request);
+          onConfirm={(userId, request) => {
+            onUpdateUser(userId, request);
             setEditUser(undefined);
           }}
           onClose={() => setEditUser(undefined)}

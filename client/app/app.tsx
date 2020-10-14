@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Api } from "../api/api";
+import {
+  ICreateUserRequest,
+  IUpdateUserRequest,
+  IUser,
+  UsersService,
+} from "../api";
 import { Modal } from "../common/Modal/Modal";
 import { ModalBody } from "../common/Modal/ModalBody";
 import { ModalButton } from "../common/Modal/ModalButton";
@@ -15,13 +20,13 @@ const Container = styled.div`
 `;
 
 export const App = () => {
-  const [users, setUsers] = useState<Api.IUser[] | undefined>(undefined);
+  const [users, setUsers] = useState<IUser[] | undefined>(undefined);
   const [confirmingDeleteUser, setConfirmingDeleteUser] = useState<
-    Api.IUser | undefined
+    IUser | undefined
   >(undefined);
 
   const getUsers = async () => {
-    const users = await new Api.UsersService().get({});
+    const users = await UsersService.getUsers({});
     setUsers(users);
   };
 
@@ -29,26 +34,31 @@ export const App = () => {
     getUsers();
   }, []);
 
-  const onDeleteUser = async (user: Api.IUser) => {
+  const onDeleteUser = async (user: IUser) => {
     setConfirmingDeleteUser(user);
   };
 
-  const onConfirmDeleteUser = async (user: Api.IUser) => {
+  const onConfirmDeleteUser = async (user: IUser) => {
     setUsers(undefined);
-    await new Api.UsersService().deleteUser({ user_id: user.id });
+    await UsersService.deleteUser({ userId: user.id });
     getUsers();
     setConfirmingDeleteUser(undefined);
   };
 
-  const onCreateUser = async (params: Api.ICreateUserRequest) => {
+  const onCreateUser = async (params: ICreateUserRequest) => {
     setUsers(undefined);
-    await new Api.UsersService().createUser(params);
+    await UsersService.createUser({
+      requestBody: params,
+    });
     getUsers();
   };
 
-  const onUpdateUser = async (params: Api.IUpdateUserRequest) => {
+  const onUpdateUser = async (userId: number, request: IUpdateUserRequest) => {
     setUsers(undefined);
-    await new Api.UsersService().updateUser(params);
+    await UsersService.updateUser({
+      userId,
+      requestBody: request,
+    });
     getUsers();
   };
 
