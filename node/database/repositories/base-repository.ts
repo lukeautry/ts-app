@@ -4,7 +4,7 @@ import {
   FindOneOptions,
   Repository,
 } from "typeorm";
-import { environment } from "../../config/environment";
+import { environment } from "../../environment";
 import { BaseEntity, IBaseEntity } from "../entities/base";
 import { getDbConnection } from "../get-db-connection";
 import { PostgresError } from "../postgres/postgres-error";

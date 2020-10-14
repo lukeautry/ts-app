@@ -2,11 +2,11 @@ import bodyParser from "body-parser";
 import express from "express";
 import methodOverride from "method-override";
 import { ValidateError } from "tsoa";
-import { log } from "../dev/utils/log";
+import { environment } from "../node/environment";
 import { RegisterRoutes } from "./routes";
 import { HttpStatusCode } from "./common/http-status-code";
 import { OperationError } from "./common/operation-error";
-import { environment } from "./config/environment";
+import { log } from "./common/log";
 
 interface IError {
   status?: number;

@@ -1,0 +1,14 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "target": "es5",
+    "jsx": "react",
+    "lib": ["esnext", "dom"],
+  },
+  "references": [
+    {
+      "path": "../common"
+    }
+  ]
+}

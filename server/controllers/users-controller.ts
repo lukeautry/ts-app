@@ -1,5 +1,5 @@
 import { Body, Delete, Get, Patch, Path, Post, Query, Route, Tags } from "tsoa";
-import { IUser } from "../database/entities/user";
+import { IUser } from "../../node/database/entities/user";
 import {
   ICreateUserRequest,
   IUpdateUserRequest,

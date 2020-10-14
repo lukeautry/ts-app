@@ -1,6 +1,6 @@
 import { expect } from "chai";
-import { IUser } from "../database/entities/user";
-import { UserRepository } from "../database/repositories/user-repository";
+import { IUser } from "../../node/database/entities/user";
+import { UserRepository } from "../../node/database/repositories/user-repository";
 import { getTestServer } from "../test/get-test-server";
 import { HttpStatusCode } from "../common/http-status-code";
 

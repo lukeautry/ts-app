@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import { getRedisClient } from "../../server/config/redis";
+import { getRedisClient } from "../../node/redis";
 import { log } from "../utils/log";
 
 /**

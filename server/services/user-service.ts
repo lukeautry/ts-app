@@ -1,10 +1,10 @@
-import { IUser } from "../database/entities/user";
-import { PostgresError } from "../database/postgres/postgres-error";
-import { PostgresErrorCode } from "../database/postgres/postgres-error-codes";
-import { UserRepository } from "../database/repositories/user-repository";
+import { IUser } from "../../node/database/entities/user";
+import { PostgresError } from "../../node/database/postgres/postgres-error";
+import { PostgresErrorCode } from "../../node/database/postgres/postgres-error-codes";
 import { HttpStatusCode } from "../common/http-status-code";
 import { OperationError } from "../common/operation-error";
 import { isValidEmail } from "../../common/validation/is-valid-email";
+import { UserRepository } from "../../node/database/repositories/user-repository";
 
 export interface ICreateUserRequest {
   email: string;

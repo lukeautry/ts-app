@@ -27,9 +27,7 @@ export const getWebpackConfig = ({
         loader: "ts-loader",
         test: /\.tsx?$/,
         options: {
-          compilerOptions: {
-            target: "es5",
-          },
+          projectReferences: true,
         },
       },
     ],

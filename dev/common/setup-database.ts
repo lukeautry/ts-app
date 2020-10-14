@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import { Client } from "pg";
-import { environment } from "../../server/config/environment";
+import { environment } from "../../node/environment";
 import { execCmd } from "../utils/exec-cmd";
 import { log } from "../utils/log";
 

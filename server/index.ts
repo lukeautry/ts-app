@@ -2,10 +2,10 @@ import http from "http";
 import path from "path";
 import chalk from "chalk";
 import express from "express";
-import { log } from "../dev/utils/log";
+import { environment } from "../node/environment";
 import { getAssetsJSON } from "./common/get-assets-json";
-import { environment } from "./config/environment";
 import { registerRoutes } from "./register-routes";
+import { log } from "./common/log";
 
 export const server = () => {
   const app = express().set("view engine", "ejs").use(express.static("public"));

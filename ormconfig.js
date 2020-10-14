@@ -1,15 +1,16 @@
 const baseOptions = {
   cli: {
-    migrationsDir: `server/database/migrations`,
+    migrationsDir: `node/database/migrations`,
   },
-  entities: [`${__dirname}/server/database/entities/**/*.ts`],
+  entities: [`${__dirname}/node/database/entities/**/*.ts`],
   host: "localhost",
   logging: false,
-  migrations: [`${__dirname}/server/database/migrations/*.ts`],
+  migrations: [`${__dirname}/node/database/migrations/*.ts`],
   password: "admin",
   port: 5432,
   type: "postgres",
   username: "postgres",
+  autoLoadEntities: true,
 };
 
 module.exports = [
