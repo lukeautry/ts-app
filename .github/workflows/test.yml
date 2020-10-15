@@ -1,0 +1,13 @@
+name: test
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Yarn Install
+        run: yarn
+      - name: Start docker services
+        run: yarn cli:docker_start
+      - name: Test
+        run: yarn test
