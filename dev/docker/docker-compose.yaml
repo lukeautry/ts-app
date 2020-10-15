@@ -8,6 +8,7 @@ services:
     ports:
       - 6379:6379
     restart: always
+    container_name: tsapp_redis
   postgres:
     build:
       context: ./postgres
@@ -16,8 +17,10 @@ services:
       - 5432:5432
     environment:
       - PGDATA=/var/lib/postgresql/data
+      - POSTGRES_PASSWORD=admin
     volumes:
       - pgdata:/var/lib/postgresql/data
+    container_name: tsapp_postgres
 volumes:
   pgdata:
     driver: local
