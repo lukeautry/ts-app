@@ -5,5 +5,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Yarn Install
+        run: yarn
       - name: Test
         run: yarn test
