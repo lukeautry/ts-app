@@ -1,5 +1,5 @@
 import { Connection, createConnection, getConnection } from "typeorm";
-import { DbConnectionName } from "../db-connection-name";
+import { DbConnectionName } from "./db-connection-name";
 
 export const getDbConnection = async (
   name: DbConnectionName

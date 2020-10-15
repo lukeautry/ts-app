@@ -1,4 +1,4 @@
-import { DbConnectionName } from "./db-connection-name";
+import { DbConnectionName } from "./database/db-connection-name";
 
 interface IEnvironment {
   DB_CONNECTION: DbConnectionName;
