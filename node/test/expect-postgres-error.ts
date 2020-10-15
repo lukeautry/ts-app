@@ -1,5 +1,5 @@
-import { PostgresError } from "../../database/postgres/postgres-error";
-import { PostgresErrorCode } from "../../database/postgres/postgres-error-codes";
+import { PostgresError } from "../database/postgres/postgres-error";
+import { PostgresErrorCode } from "../database/postgres/postgres-error-codes";
 
 export function expectPostgresError(
   err: Error,
