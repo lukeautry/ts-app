@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { expectError } from "../../test/utils/expect-error";
+import { expectError } from "../../test/expect-error";
 import { expectPostgresError } from "../../test/utils/expect-postgres-error";
 import { PostgresErrorCode } from "../postgres/postgres-error-codes";
 import { UserRepository } from "./user-repository";

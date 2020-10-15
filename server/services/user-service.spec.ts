@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { HttpStatusCode } from "../common/http-status-code";
 import { expectOperationError } from "../test/expect-operation-error";
-import { expectError } from "../../node/test/utils/expect-error";
+import { expectError } from "../../node/test/expect-error";
 import { UserService } from "./user-service";
 
 const email = "test@test.com";
