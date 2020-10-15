@@ -40,7 +40,9 @@ import { log } from "../utils/log";
     }
   }, 100);
 
-  chokidar.watch("./server/**/*.ts").on("change", regenerateApiRoutes);
+  chokidar
+    .watch(["./server/**/*.ts", "./common/**/*.ts", "./node/**/*.ts"])
+    .on("change", regenerateApiRoutes);
 
   registerQuitKey();
 })();

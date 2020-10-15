@@ -30,9 +30,10 @@ export const startServer = async () => {
   try {
     const connection = getConnection(environment.DB_CONNECTION);
     if (connection) {
-      log(chalk.red("Restarting db connection"));
+      log(chalk.green("Resetting database connection"));
       await connection.close();
       await connection.connect();
+      log(chalk.green("Database connection reset"));
     }
   } catch {}
 };
