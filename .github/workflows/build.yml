@@ -1,0 +1,11 @@
+name: build
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Yarn Install
+        run: yarn
+      - name: TypeScript Build
+        run: yarn ts:build
