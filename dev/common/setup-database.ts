@@ -1,13 +1,13 @@
 import chalk from "chalk";
 import { Client } from "pg";
 import { environment } from "../../node/environment";
-import { execCmd } from "../utils/exec-cmd";
 import { log } from "../utils/log";
+import { runMigration } from "./run-migration";
 
 /**
  * Create DB if necessary and run any pending updates
  */
-export const setupDatabase = async (runMigration = true) => {
+export const setupDatabase = async (doMigration = true) => {
   const { DB_CONNECTION } = environment;
 
   const client = new Client({
@@ -60,7 +60,7 @@ export const setupDatabase = async (runMigration = true) => {
     log(chalk.greenBright(`✓ Database '${DB_CONNECTION}' already exists`));
   }
 
-  if (runMigration) {
-    await execCmd(`yarn typeorm migration:run --connection ${DB_CONNECTION}`);
+  if (doMigration) {
+    await runMigration(DB_CONNECTION);
   }
 };

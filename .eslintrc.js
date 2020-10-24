@@ -29,5 +29,11 @@ module.exports = {
     "react/prop-types": "off",
     "react/display-name": "off",
     "import/order": ["error"],
+    "prettier/prettier": [
+      "error",
+      {
+        endOfLine: "auto",
+      },
+    ],
   },
 };
