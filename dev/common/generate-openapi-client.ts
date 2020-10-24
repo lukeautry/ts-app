@@ -1,11 +1,9 @@
 import chalk from "chalk";
 import { Tsoa } from "tsoa";
+import { generate } from "openapi-typescript-codegen";
 import { log } from "../utils/log";
 import { Timer } from "../utils/timer";
 import { generateOpenAPISpec } from "./generate-openapi-spec";
-
-// eslint-disable-next-line
-const OpenAPI = require("openapi-typescript-codegen");
 
 /**
  * Generates the OpenAPI client library
@@ -15,7 +13,7 @@ export const generateOpenAPIClient = async (metadata: Tsoa.Metadata) => {
 
   const timer = new Timer();
 
-  OpenAPI.generate({
+  generate({
     input: "./tmp/swagger.json",
     output: "./client/api",
     useOptions: true,
