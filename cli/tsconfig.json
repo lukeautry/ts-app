@@ -2,17 +2,14 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "rootDir": "./src",
-    "outDir": "./dist",
-    "target": "es5",
-    "jsx": "react",
-    "lib": ["esnext", "dom"],
+    "outDir": "./dist"
   },
   "references": [
     {
       "path": "../common"
     },
     {
-      "path": "../openapi-client"
+      "path": "../node"
     }
   ]
 }

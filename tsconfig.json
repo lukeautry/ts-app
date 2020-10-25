@@ -4,8 +4,9 @@
   "references": [
     { "path": "./client" },
     { "path": "./server" },
-    { "path": "./dev" },
+    { "path": "./cli" },
     { "path": "./common" },
-    { "path": "./node" }
+    { "path": "./node" },
+    { "path": "./openapi-client" }
   ]
 }

@@ -1,5 +1,6 @@
 node_modules
 dist
 yarn-error.log
-tmp
-public
+.tmp
+.public
+tsconfig.tsbuildinfo

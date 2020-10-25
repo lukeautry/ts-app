@@ -6,17 +6,10 @@
   "author": "Luke Autry <lukeautry@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "cli:analyze_bundle": "ts-node ./dev/cli/analyze-bundle.ts",
-    "cli:docker_stop": "ts-node ./dev/cli/stop-docker.ts",
-    "cli:docker_start": "ts-node ./dev/cli/start-docker.ts",
-    "cli:migrate": "ts-node ./dev/cli/db-migrate.ts",
-    "cli:start_prod": "cross-env NODE_ENV=prod DB_CONNECTION=defaultdb SERVER_PORT=3000 ts-node ./dev/cli/start-dev-env.ts",
-    "cli:start_dev": "cross-env NODE_ENV=dev DB_CONNECTION=defaultdb SERVER_PORT=3000 ts-node ./dev/cli/start-dev-env.ts",
-    "cli:tsoa": "ts-node ./dev/cli/tsoa.ts",
-    "cli:update": "ts-node ./dev/cli/db-update.ts",
+    "cli": "ts-node ./cli/src/index.ts",
+    "cli:analyze_bundle": "ts-node ./dev/src/cli/analyze-bundle.ts",
     "lint:fix": "yarn lint --fix",
     "lint": "eslint */**/*.{ts,tsx}",
-    "start": "yarn cli:start_dev",
     "test": "cross-env NODE_ENV=test DB_CONNECTION=test SERVER_PORT=3037 mocha -t 15000 -r ts-node/register \"./**/*.spec.ts\"",
     "ts:build": "tsc --build",
     "ts:watch": "yarn ts:build --watch",
@@ -57,6 +50,7 @@
     "@types/webpack": "^4.41.23",
     "@types/webpack-bundle-analyzer": "^3.9.0",
     "@types/webpack-livereload-plugin": "^2.3.0",
+    "@types/yargs": "^15.0.9",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
     "assets-webpack-plugin": "^5.1.2",
@@ -86,9 +80,11 @@
     "typescript": "^4.0.3",
     "webpack": "^4.44.2",
     "webpack-bundle-analyzer": "^3.9.0",
-    "webpack-livereload-plugin": "^2.3.0"
+    "webpack-livereload-plugin": "^2.3.0",
+    "yargs": "^16.1.0"
   },
   "resolutions": {
-    "@types/react": "16.9.52"
+    "@types/react": "16.9.53",
+    "@types/webpack": "4.41.23"
   }
 }

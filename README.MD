@@ -45,7 +45,7 @@ The goal is to provide a type-safe and productive developer experience for rapid
 - `yarn` to install dependencies
 - `yarn start` to start environment
 
-![alt text](dev/docs/shell.png "Developer experience")
+![alt text](.docs/shell.png "Developer experience")
 
 ## Database Operations
 
