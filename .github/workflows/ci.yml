@@ -24,6 +24,6 @@ jobs:
       - name: Yarn Install
         run: yarn
       - name: Start docker services
-        run: yarn cli:docker_start
+        run: yarn cli docker start
       - name: Test
         run: yarn test
