@@ -16,7 +16,7 @@ jobs:
       - name: Yarn Install
         run: yarn
       - name: TypeScript Build
-        run: yarn ts:build
+        run: yarn build
   test:
     runs-on: ubuntu-latest
     steps:
