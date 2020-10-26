@@ -8,7 +8,7 @@
   "scripts": {
     "cli": "ts-node ./src/cli/index.ts",
     "lint:fix": "yarn lint --fix",
-    "lint": "eslint */**/*.{ts,tsx}",
+    "lint": "eslint .",
     "test": "cross-env NODE_ENV=test DB_CONNECTION=test SERVER_PORT=3037 mocha -t 15000 -r ts-node/register \"./**/*.spec.ts\"",
     "build": "tsc --build",
     "watch": "yarn build --watch",
