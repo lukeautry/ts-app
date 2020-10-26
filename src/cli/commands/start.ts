@@ -45,7 +45,8 @@ const start: CommandModule<{}, { db: string; port: string; env: string }> = {
     }
 
     const metadata = await generateExpressRoutes();
-    await Promise.all([startServer(), startWebpack(metadata)]);
+    await startWebpack(metadata);
+    await startServer();
 
     const regenerateApiRoutes = debounce(async (args) => {
       const routesChanged =

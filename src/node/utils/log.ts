@@ -36,5 +36,5 @@ export const log = {
   pending: (message: unknown) => _log(message, { type: "pending" }),
   success: (message: unknown) => _log(message, { type: "success" }),
   error: (message: unknown) => _log(message, { type: "error" }),
-  custom: (message: unknown) => _log(message, { type: "error" }),
+  custom: (message: unknown) => _log(message, { type: "custom" }),
 };

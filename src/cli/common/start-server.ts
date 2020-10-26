@@ -30,10 +30,8 @@ export const startServer = async () => {
   try {
     const connection = getConnection(DB_CONNECTION);
     if (connection) {
-      log.pending("Resetting database connection");
       await connection.close();
       await connection.connect();
-      log.success("Database connection reset");
     }
   } catch {}
 };

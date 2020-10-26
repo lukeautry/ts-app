@@ -10,11 +10,3 @@ export const getDbConnection = async (
     return await createConnection(name);
   }
 };
-
-// export const closeDbConnection = async (name: DbConnectionName) => {
-//   const connection = getConnection;
-//   if (connection) {
-//     delete connectionMap[name];
-//     await connection.close();
-//   }
-// };

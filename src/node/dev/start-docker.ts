@@ -7,5 +7,5 @@ import { log } from "../utils/log";
 export const startDocker = async () => {
   log.pending("Starting docker-compose services...");
   const upResult = await dockerCompose.upAll({ cwd: "./.docker" });
-  log.pending((upResult.out || upResult.err || "").trim());
+  log.custom((upResult.out || upResult.err || "").trim());
 };

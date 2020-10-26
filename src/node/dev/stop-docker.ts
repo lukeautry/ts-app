@@ -7,5 +7,5 @@ import { log } from "../utils/log";
 export const stopDocker = async () => {
   log.pending("Stopping docker-compose services...");
   const upResult = await dockerCompose.down({ cwd: "./.docker" });
-  log.pending((upResult.out || upResult.err || "").trim());
+  log.custom((upResult.out || upResult.err || "").trim());
 };
