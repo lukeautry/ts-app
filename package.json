@@ -6,8 +6,7 @@
   "author": "Luke Autry <lukeautry@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "cli": "ts-node ./cli/src/index.ts",
-    "cli:analyze_bundle": "ts-node ./dev/src/cli/analyze-bundle.ts",
+    "cli": "ts-node ./src/cli/index.ts",
     "lint:fix": "yarn lint --fix",
     "lint": "eslint */**/*.{ts,tsx}",
     "test": "cross-env NODE_ENV=test DB_CONNECTION=test SERVER_PORT=3037 mocha -t 15000 -r ts-node/register \"./**/*.spec.ts\"",

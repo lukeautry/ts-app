@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "../../dist/server"
+  },
+  "references": [
+    {
+      "path": "../common"
+    },
+    {
+      "path": "../node"
+    }
+  ]
+}
