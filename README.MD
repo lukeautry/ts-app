@@ -13,12 +13,14 @@ This project aims to support a "domain driven" approach. A client library is aut
     - Includes dev environment setup, docker management, database management, and more
     - [Full CLI docs](./src/cli)
 
+## Developer experience
+
+![alt text](.docs/shell.png "Developer experience")
+
 ### System Requirements
 - [Node.js 10+](https://nodejs.org/en/download/)
 - [docker](https://www.docker.com) and [docker-compose](https://docs.docker.com/compose)
 - [yarn](https://yarnpkg.com/en)
-
-![alt text](.docs/shell.png "Developer experience")
 
 ## Technologies Used
 - [TypeScript](http://www.typescriptlang.org/)
