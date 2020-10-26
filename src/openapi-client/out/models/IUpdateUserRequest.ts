@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export interface ICreateUserRequest {
+export interface IUpdateUserRequest {
     email: string;
     name: string;
     address?: string;

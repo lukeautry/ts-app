@@ -14,7 +14,7 @@ export const generateOpenAPIClient = async (metadata: Tsoa.Metadata) => {
 
   generate({
     input: "./.tmp/swagger.json",
-    output: "./openapi-client/src",
+    output: "./src/openapi-client/out",
     useOptions: true,
   });
 

@@ -4,7 +4,7 @@ import {
   IUser,
   ICreateUserRequest,
   IUpdateUserRequest,
-} from "../../openapi-client";
+} from "../../openapi-client/out";
 import { CreateUserRow } from "./CreateUserRow";
 import { EditUserModal } from "./EditUserModal";
 import { UserRow } from "./UserRow";

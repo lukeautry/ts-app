@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ICreateUserRequest } from "../../openapi-client";
+import { ICreateUserRequest } from "../../openapi-client/out";
 import { ActionButton } from "../common/ActionButton";
 import { UserGridInput } from "../common/UserGridInput";
 import { isValidEmail } from "../../common/validation/is-valid-email";

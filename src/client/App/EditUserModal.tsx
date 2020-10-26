@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IUser, IUpdateUserRequest } from "../../openapi-client";
+import { IUser, IUpdateUserRequest } from "../../openapi-client/out";
 import { FormInput } from "../common/FormInput";
 import { Modal } from "../common/Modal/Modal";
 import { ModalBody } from "../common/Modal/ModalBody";

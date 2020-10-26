@@ -5,7 +5,7 @@ import {
   IUpdateUserRequest,
   IUser,
   UsersService,
-} from "../../openapi-client";
+} from "../../openapi-client/out";
 import { Modal } from "../common/Modal/Modal";
 import { ModalBody } from "../common/Modal/ModalBody";
 import { ModalButton } from "../common/Modal/ModalButton";

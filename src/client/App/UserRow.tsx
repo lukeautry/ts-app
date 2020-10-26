@@ -1,5 +1,5 @@
 import React from "react";
-import { IUser } from "../../openapi-client";
+import { IUser } from "../../openapi-client/out";
 import { ActionButton } from "../common/ActionButton";
 
 interface IUserRowProps {
