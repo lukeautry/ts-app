@@ -11,3 +11,4 @@
 - Stop docker-compose services: `yarn cli docker stop`
 - Generate tsoa routes/OpenAPI client: `yarn cli tsoa`
 - Analyze webpack bundle size: `yarn cli webpack analyze`
+- Reset developer environment (deletes starter controllers/models/etc, blank slate): `yarn cli reset`
