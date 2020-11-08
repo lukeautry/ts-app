@@ -62,7 +62,11 @@ const start: CommandModule<{}, { db: string; port: string; env: string }> = {
     }, 100);
 
     chokidar
-      .watch(["./server/**/*.ts", "./common/**/*.ts", "./node/**/*.ts"])
+      .watch([
+        "./src/server/**/*.ts",
+        "./src/common/**/*.ts",
+        "./src/node/**/*.ts",
+      ])
       .on("change", regenerateApiRoutes);
 
     registerQuitKey();
