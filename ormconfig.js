@@ -16,8 +16,8 @@ const baseOptions = {
 module.exports = [
   Object.assign({}, baseOptions, { name: "defaultdb", database: "defaultdb" }),
   Object.assign({}, baseOptions, {
-    name: "test",
-    database: "test",
+    name: "defaultdb_test",
+    database: "defaultdb_test",
     synchronize: true,
     logging: process.env.LOG === "1",
   }),

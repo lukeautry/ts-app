@@ -1,3 +1,3 @@
-export const dbConnectionNames = ["defaultdb", "test"] as const;
+export const dbConnectionNames = ["defaultdb", "defaultdb_test"] as const;
 
 export type DbConnectionName = typeof dbConnectionNames[number];

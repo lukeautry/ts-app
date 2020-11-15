@@ -44,7 +44,7 @@
       "internalConsoleOptions": "openOnSessionStart",
       "env": {
         "NODE_ENV": "test",
-        "DB_CONNECTION": "test",
+        "DB_CONNECTION": "defaultdb_test",
         "SERVER_PORT": "3037"
       }
     }
