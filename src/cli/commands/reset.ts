@@ -6,6 +6,8 @@ import { dbConnectionNames } from "../../node/database/db-connection-name";
 import { getDbConnection } from "../../node/database/get-db-connection";
 import { environment, validNodeEnvs } from "../../node/environment";
 import { log } from "../../node/utils/log";
+import { generateExpressRoutes } from "../../node/dev/generate-express-routes";
+import { generateOpenAPIClient } from "../common/generate-openapi-client";
 
 const reset: CommandModule<{}, { db: string; port: string; env: string }> = {
   command: "reset",
@@ -83,6 +85,9 @@ export class InitController {
       fs.writeFileSync(getPathFromRoot(p), content);
       log.success(`Created ${p}`);
     });
+
+    const metadata = await generateExpressRoutes();
+    await generateOpenAPIClient(metadata);
   },
 };
 
