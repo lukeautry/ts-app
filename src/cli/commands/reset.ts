@@ -46,6 +46,7 @@ const reset: CommandModule<{}, { db: string; port: string; env: string }> = {
       "./src/server/controllers",
       "./src/server/services",
       "./src/client/App",
+      "./src/client/common",
     ];
 
     const getPathFromRoot = (p: string) => path.join(__dirname, "../../..", p);
