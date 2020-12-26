@@ -8,8 +8,8 @@ const tmpPath = path.join(__dirname, "../../../.tmp");
 
 interface IGetBaseWebpackConfigParams {
   mode: "development" | "production";
-  output: webpack.Output;
-  plugins?: Array<webpack.Plugin>;
+  output: webpack.Configuration["output"];
+  plugins?: webpack.Configuration["plugins"];
 }
 
 export const getWebpackConfig = ({

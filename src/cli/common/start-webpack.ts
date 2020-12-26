@@ -26,19 +26,19 @@ export const startWebpack = async (metadata: Tsoa.Metadata) => {
 
   const compiler = webpack(getConfig());
 
-  return new Promise((resolve) => {
+  return new Promise<void>((resolve) => {
     compiler.watch({}, (err, stats) => {
       if (err) {
         log.error(err.message);
         return;
       }
 
-      if (!stats.hasErrors()) {
+      if (stats && !stats.hasErrors()) {
         log.success(
           `Webpack Compiled (${+stats.endTime! - +stats.startTime!}ms)`
         );
       } else {
-        log.success(stats.toString("minimal"));
+        log.success(stats?.toString("minimal"));
       }
 
       resolve();
