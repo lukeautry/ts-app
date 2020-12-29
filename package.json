@@ -12,7 +12,8 @@
     "test": "cross-env NODE_ENV=test DB_CONNECTION=defaultdb_test SERVER_PORT=3037 mocha -t 15000 -r ts-node/register \"./**/*.spec.ts\"",
     "build": "tsc --build",
     "watch": "yarn build --watch",
-    "typeorm": "ts-node ./node_modules/.bin/typeorm"
+    "typeorm": "ts-node ./node_modules/.bin/typeorm",
+    "start": "cross-env COMPILED_JS=true NODE_ENV=dev DB_CONNECTION=defaultdb SERVER_PORT=3000 node --es-module-specifier-resolution=node ./dist/server/start.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

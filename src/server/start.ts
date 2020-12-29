@@ -1,3 +1,3 @@
-import { server } from ".";
+import { server } from "./index";
 
 server();
