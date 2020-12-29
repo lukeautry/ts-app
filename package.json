@@ -9,7 +9,7 @@
     "cli": "ts-node ./src/cli/index.ts",
     "lint:fix": "yarn lint --fix",
     "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test DB_CONNECTION=defaultdb_test SERVER_PORT=3037 mocha -t 15000 -r ts-node/register \"./**/*.spec.ts\"",
+    "test": "cross-env NODE_ENV=test DB_CONNECTION=defaultdb_test SERVER_PORT=3037 mocha -t 15000 -r ts-node/register \"./src/**/*.spec.ts\"",
     "build": "tsc --build",
     "watch": "yarn build --watch",
     "typeorm": "ts-node ./node_modules/.bin/typeorm",
