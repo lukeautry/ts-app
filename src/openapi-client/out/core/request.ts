@@ -14,6 +14,10 @@ function isString(value: any): value is string {
     return typeof value === 'string';
 }
 
+function isStringWithValue(value: any): value is string {
+    return isString(value) && value !== '';
+}
+
 function isBlob(value: any): value is Blob {
     return value instanceof Blob;
 }
@@ -59,22 +63,33 @@ function getFormData(params: Record<string, any>): FormData {
     return formData;
 }
 
-async function getToken(): Promise<string> {
-    if (typeof OpenAPI.TOKEN === 'function') {
-        return OpenAPI.TOKEN();
+type Resolver<T> = () => Promise<T>;
+
+async function resolve<T>(resolver?: T | Resolver<T>): Promise<T | undefined> {
+    if (typeof resolver === 'function') {
+        return (resolver as Resolver<T>)();
     }
-    return OpenAPI.TOKEN;
+    return resolver;
 }
 
 async function getHeaders(options: ApiRequestOptions): Promise<Headers> {
     const headers = new Headers({
         Accept: 'application/json',
+        ...OpenAPI.HEADERS,
         ...options.headers,
     });
 
-    const token = await getToken();
-    if (isDefined(token) && token !== '') {
+    const token = await resolve(OpenAPI.TOKEN);
+    const username = await resolve(OpenAPI.USERNAME);
+    const password = await resolve(OpenAPI.PASSWORD);
+
+    if (isStringWithValue(token)) {
         headers.append('Authorization', `Bearer ${token}`);
+    }
+
+    if (isStringWithValue(username) && isStringWithValue(password)) {
+        const credentials = btoa(`${username}:${password}`);
+        headers.append('Authorization', `Basic ${credentials}`);
     }
 
     if (options.body) {
@@ -109,6 +124,9 @@ async function sendRequest(options: ApiRequestOptions, url: string): Promise<Res
         headers: await getHeaders(options),
         body: getRequestBody(options),
     };
+    if (OpenAPI.WITH_CREDENTIALS) {
+        request.credentials = 'include';
+    }
     return await fetch(url, request);
 }
 
@@ -164,7 +182,7 @@ function catchErrors(options: ApiRequestOptions, result: ApiResult): void {
 /**
  * Request using fetch client
  * @param options The request options from the the service
- * @result ApiResult
+ * @returns ApiResult
  * @throws ApiError
  */
 export async function request(options: ApiRequestOptions): Promise<ApiResult> {
@@ -184,4 +202,3 @@ export async function request(options: ApiRequestOptions): Promise<ApiResult> {
     catchErrors(options, result);
     return result;
 }
-

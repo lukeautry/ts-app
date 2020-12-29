@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export interface ApiResult {
+export type ApiResult = {
     readonly url: string;
     readonly ok: boolean;
     readonly status: number;

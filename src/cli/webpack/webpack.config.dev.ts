@@ -1,6 +1,9 @@
 import path from "path";
-import LiveReloadPlugin from "webpack-livereload-plugin";
 import { getWebpackConfig } from "./get-webpack-config";
+
+// TODO: Use upstream package when fixed
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const LiveReloadPlugin = require("@kooneko/livereload-webpack-plugin");
 
 const publicPath = path.join(__dirname, "../../../.public");
 
@@ -14,6 +17,6 @@ export const devWebpackConfig = getWebpackConfig({
   plugins: [
     new LiveReloadPlugin({
       quiet: true,
-    } as LiveReloadPlugin.Options),
+    }),
   ],
 });

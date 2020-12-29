@@ -1,7 +1,8 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export interface IUser {
+
+export type IUser = {
     email: string;
     name: string;
     address?: string;

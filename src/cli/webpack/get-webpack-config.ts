@@ -2,6 +2,7 @@ import path from "path";
 import AssetsWebpackPlugin from "assets-webpack-plugin";
 import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import webpack from "webpack";
+import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 
 const srcPath = path.join(__dirname, "../../../src/client");
 const tmpPath = path.join(__dirname, "../../../.tmp");
@@ -28,6 +29,7 @@ export const getWebpackConfig = ({
         test: /\.tsx?$/,
         options: {
           projectReferences: true,
+          transpileOnly: true,
         },
       },
     ],
@@ -36,8 +38,10 @@ export const getWebpackConfig = ({
   plugins: [
     new AssetsWebpackPlugin({
       path: tmpPath,
+      removeFullPathAutoPrefix: true,
     }),
     new CleanWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin(),
     ...plugins,
   ],
   resolve: {
