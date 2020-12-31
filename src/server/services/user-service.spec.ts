@@ -1,14 +1,14 @@
-import { expect } from "chai";
 import { HttpStatusCode } from "../common/http-status-code";
 import { expectOperationError } from "../test/expect-operation-error";
 import { expectError } from "../../node/test/expect-error";
+import { describeIntegration } from "../../node/test/describe-integration";
 import { UserService } from "./user-service";
 
 const email = "test@test.com";
 const name = "Test User";
 const address = "123 Washington Avenue";
 
-describe("UserService", () => {
+describeIntegration("UserService", () => {
   const service = new UserService();
 
   const createUser = () =>
@@ -21,9 +21,9 @@ describe("UserService", () => {
   describe("createUser", () => {
     it("should be able to create user", async () => {
       const user = await createUser();
-      expect(user.email).to.equal(email);
-      expect(user.name).to.equal(name);
-      expect(user.address).to.equal(address);
+      expect(user.email).toEqual(email);
+      expect(user.name).toEqual(name);
+      expect(user.address).toEqual(address);
     });
 
     it("should reject invalid email", async () => {
@@ -49,7 +49,7 @@ describe("UserService", () => {
         address: user.address,
       });
 
-      expect(updatedUser.email).to.equal(newEmail);
+      expect(updatedUser.email).toEqual(newEmail);
     });
 
     it("should reject invalid email", async () => {

@@ -1,10 +1,10 @@
-import { expect } from "chai";
 import { IUser } from "../../node/database/entities/user";
 import { UserRepository } from "../../node/database/repositories/user-repository";
 import { getTestServer } from "../test/get-test-server";
+import { describeIntegration } from "../../node/test/describe-integration";
 import { HttpStatusCode } from "../common/http-status-code";
 
-describe("UsersController", () => {
+describeIntegration("UsersController", () => {
   const server = getTestServer();
 
   const createTestUsers = async (count: number) => {
@@ -35,7 +35,7 @@ describe("UsersController", () => {
           .get(`/api/users/1`)
           .expect(HttpStatusCode.OK)
           .expect(({ body: user }) => {
-            expect(user.email).to.equal("test_0@test.com");
+            expect(user.email).toEqual("test_0@test.com");
           });
       });
 
@@ -50,7 +50,7 @@ describe("UsersController", () => {
           .get(`/api/users`)
           .expect(HttpStatusCode.OK)
           .expect(({ body: users }) => {
-            expect(users.length).to.equal(USER_COUNT);
+            expect(users.length).toEqual(USER_COUNT);
           });
       });
 
@@ -59,7 +59,7 @@ describe("UsersController", () => {
         await server
           .get(`/api/users?page_size=${size}`)
           .expect(({ body: users }) => {
-            expect(users.length).to.equal(size);
+            expect(users.length).toEqual(size);
           });
       });
 
@@ -69,8 +69,8 @@ describe("UsersController", () => {
           .get(`/api/users?page_size=${size}&page_number=${2}`)
           .expect(HttpStatusCode.OK)
           .expect(({ body: users }) => {
-            expect(users.length).to.equal(size);
-            expect(users[0].id).to.equal(6);
+            expect(users.length).toEqual(size);
+            expect(users[0].id).toEqual(6);
           });
       });
 
@@ -104,8 +104,8 @@ describe("UsersController", () => {
         .send({ email, name })
         .expect(HttpStatusCode.OK)
         .expect(({ body: user }) => {
-          expect(user.email).to.equal(email);
-          expect(user.name).to.equal(name);
+          expect(user.email).toEqual(email);
+          expect(user.name).toEqual(name);
         });
     });
   });
@@ -137,7 +137,7 @@ describe("UsersController", () => {
         .send({ email, name: `Test User #0` })
         .expect(HttpStatusCode.OK)
         .expect(({ body: user }) => {
-          expect(user.email).to.equal(email);
+          expect(user.email).toEqual(email);
         });
     });
 

@@ -59,9 +59,8 @@ This project uses [TypeScript Project References] to organize modules. This give
     - Single `start` script that live reloads the API, UI, and related services
     - VSCode [launch.json](./.vscode/launch.json) settings have been included to support debugging
 - Testing
-    - [mocha](https://mochajs.org) test runner
-      - [chai](https://www.chaijs.com) assertion library
-    - [supertest](https://github.com/visionmedia/supertest) for API endpoitn tests
+    - [jest](https://jestjs.io) test runner/assertions/utilities
+    - [supertest](https://github.com/visionmedia/supertest) for API endpoint tests
     - [cypress](https://www.cypress.io/) for end-to-end testing
 
 ## Contributing

@@ -1,10 +1,10 @@
-import { expect } from "chai";
+import { describeIntegration } from "../../test/describe-integration";
 import { expectError } from "../../test/expect-error";
 import { expectPostgresError } from "../../test/expect-postgres-error";
 import { PostgresErrorCode } from "../postgres/postgres-error-codes";
 import { UserRepository } from "./user-repository";
 
-describe("UserRepository", () => {
+describeIntegration("UserRepository", () => {
   const repo = new UserRepository();
   const email = "test@test.com";
   const name = "Test User";
@@ -18,8 +18,8 @@ describe("UserRepository", () => {
   describe("create", () => {
     it("should create basic user", async () => {
       const user = await createUser();
-      expect(user.email).to.equal(email);
-      expect(user.name).to.equal(name);
+      expect(user.email).toEqual(email);
+      expect(user.name).toEqual(name);
     });
 
     it("should reject non-unique email", async () => {
@@ -39,8 +39,8 @@ describe("UserRepository", () => {
         ...user,
         name: newName,
       });
-      expect(updatedUser.name).to.equal(newName);
-      expect(updatedUser.date_updated).to.be.greaterThan(user.date_updated);
+      expect(updatedUser.name).toEqual(newName);
+      expect(+updatedUser.date_updated).toBeGreaterThan(+user.date_updated);
     });
   });
 
@@ -55,7 +55,7 @@ describe("UserRepository", () => {
           id: user.id,
         },
       });
-      expect(deletedUser).to.equal(undefined);
+      expect(deletedUser).toEqual(undefined);
     });
   });
 
@@ -63,7 +63,7 @@ describe("UserRepository", () => {
     it("should be able to find user", async () => {
       const user = await createUser();
       const foundUser = await repo.findOne({ where: { id: user.id } });
-      expect(foundUser).to.deep.equal(user);
+      expect(foundUser).toMatchObject(user);
     });
   });
 
@@ -71,10 +71,10 @@ describe("UserRepository", () => {
     it("should be able to find list of users", async () => {
       const user = await createUser();
       const users = await repo.find({ where: { id: user.id } });
-      expect(users.length).to.equal(1);
+      expect(users.length).toEqual(1);
 
       const [foundUser] = users;
-      expect(foundUser).to.deep.equal(user);
+      expect(foundUser).toMatchObject(user);
     });
   });
 });

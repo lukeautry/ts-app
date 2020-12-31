@@ -1,4 +1,3 @@
-import { expect } from "chai";
 import { isValidEmail } from "./is-valid-email";
 
 describe("validateEmail", () => {
@@ -17,10 +16,7 @@ describe("validateEmail", () => {
   it("should validate test cases", () => {
     tests.forEach(({ input, pass }) => {
       const result = isValidEmail(input);
-      expect(result).to.equal(
-        pass,
-        `expected ${input} to be ${pass ? "valid" : "invalid"}`
-      );
+      expect(result).toEqual(pass);
     });
   });
 });
