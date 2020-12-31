@@ -1,7 +1,7 @@
 import { CommandModule } from "yargs";
 import { commandDirOptions } from "../common/command-dir-options";
 
-const migrate: CommandModule = {
+const test: CommandModule = {
   command: "test",
   describe: "Test commands",
   builder: (yargs) =>
@@ -9,4 +9,4 @@ const migrate: CommandModule = {
   handler: () => undefined,
 };
 
-export default migrate;
+export default test;

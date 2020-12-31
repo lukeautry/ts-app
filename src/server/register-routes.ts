@@ -43,6 +43,7 @@ export const registerRoutes = (app: express.Express) => {
       return {
         message: err.message,
         status: err.status,
+        info: err.info,
       };
     } else {
       return {

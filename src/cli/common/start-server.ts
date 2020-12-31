@@ -17,7 +17,7 @@ export const startServer = async () => {
 
   server = undefined;
   Object.keys(require.cache).forEach((key) => {
-    if (minimatch(key, "*.ts", { matchBase: true })) {
+    if (minimatch(key, "*.+(ts|tsx)", { matchBase: true })) {
       delete require.cache[key];
     }
   });

@@ -7,6 +7,7 @@ interface IEnvironment {
   DB_CONNECTION: DbConnectionName;
   SERVER_PORT: number;
   NODE_ENV: NodeEnvironment;
+  JWT_SECRET: string;
 }
 
 export const validNodeEnvs = ["dev", "test", "prod"] as const;
@@ -46,5 +47,6 @@ export const environment = (): IEnvironment => {
     DB_CONNECTION: getConstrainedEnvValue("DB_CONNECTION", dbConnectionNames),
     SERVER_PORT,
     NODE_ENV: getConstrainedEnvValue("NODE_ENV", validNodeEnvs),
+    JWT_SECRET: getEnvValue("JWT_SECRET"),
   };
 };

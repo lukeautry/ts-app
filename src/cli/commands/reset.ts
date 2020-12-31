@@ -9,7 +9,10 @@ import { log } from "../../node/utils/log";
 import { generateExpressRoutes } from "../../node/dev/generate-express-routes";
 import { generateOpenAPIClient } from "../common/generate-openapi-client";
 
-const reset: CommandModule<{}, { db: string; port: string; env: string }> = {
+const reset: CommandModule<
+  {},
+  { db: string; port: string; env: string; jwt: string }
+> = {
   command: "reset",
   describe:
     "Reset development environment and remove starter content, e.g. models/controllers/front-end application",
@@ -21,16 +24,22 @@ const reset: CommandModule<{}, { db: string; port: string; env: string }> = {
       },
       db: {
         choices: dbConnectionNames,
-        default: "defaultdb",
+        default: "saas",
+      },
+      jwt: {
+        required: true,
+        type: "string",
+        default: "abc123",
       },
       port: {
         default: "3000",
       },
     }),
-  handler: async ({ db, env, port }) => {
+  handler: async ({ db, env, port, jwt }) => {
     process.env.DB_CONNECTION = db;
     process.env.NODE_ENV = env;
     process.env.SERVER_PORT = port;
+    process.env.JWT_SECRET = jwt;
 
     const { DB_CONNECTION } = environment();
     const connection = await getDbConnection(DB_CONNECTION);

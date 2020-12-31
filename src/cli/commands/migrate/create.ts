@@ -13,7 +13,7 @@ const create: CommandModule<{}, { name: string; db: string }> = {
       },
       db: {
         choices: dbConnectionNames,
-        default: "defaultdb",
+        default: "saas",
       },
     }),
   handler: async (args) => {

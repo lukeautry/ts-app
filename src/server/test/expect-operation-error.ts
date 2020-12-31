@@ -1,8 +1,6 @@
 import { HttpStatusCode } from "../common/http-status-code";
-import {
-  OperationErrorMessage,
-  OperationError,
-} from "../common/operation-error";
+import { OperationError } from "../common/operation-error";
+import { OperationErrorMessage } from "../../common/operation-error-message";
 
 export function expectOperationError(
   err: Error,

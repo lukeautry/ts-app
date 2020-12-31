@@ -11,8 +11,9 @@
       "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
       "env": {
         "NODE_ENV": "dev",
-        "DB_CONNECTION": "defaultdb",
-        "SERVER_PORT": "3000"
+        "DB_CONNECTION": "saas",
+        "SERVER_PORT": "3000",
+        "JWT_SECRET": "abc123"
       }
     },
     {
@@ -37,15 +38,16 @@
         "999999999",
         "-r",
         "ts-node/register",
-        "./server/**/*.spec.ts"
+        "./**/*.spec.ts"
       ],
       "cwd": "${workspaceRoot}",
       "protocol": "inspector",
       "internalConsoleOptions": "openOnSessionStart",
       "env": {
         "NODE_ENV": "test",
-        "DB_CONNECTION": "defaultdb_test",
-        "SERVER_PORT": "3037"
+        "DB_CONNECTION": "saas_test",
+        "SERVER_PORT": "3037",
+        "JWT_SECRET": "abc123"
       }
     }
   ]

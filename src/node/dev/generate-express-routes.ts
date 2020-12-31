@@ -13,6 +13,7 @@ export const generateExpressRoutes = async () => {
     routesDir: "./src/server",
     noImplicitAdditionalProperties: "ignore",
     controllerPathGlobs: ["src/server/controllers/**/*-controller.ts"],
+    authenticationModule: "./src/server/middleware.ts",
   });
 
   log.success(`Generated Express routes (${timer.elapsed()}ms)`);

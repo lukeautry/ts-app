@@ -1,12 +1,7 @@
 import { isValidEmail } from "./is-valid-email";
 
-describe("validateEmail", () => {
-  interface IValidateTest {
-    input: string;
-    pass: boolean;
-  }
-
-  const tests: IValidateTest[] = [
+describe("isValidEmail", () => {
+  const tests = [
     { input: "test@test.com", pass: true },
     { input: "@test@test.com", pass: false },
     { input: "testtest.com", pass: false },

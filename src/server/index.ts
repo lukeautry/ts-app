@@ -5,6 +5,7 @@ import { environment } from "../node/environment";
 import { log } from "../node/utils/log";
 import { getAssetsJSON } from "./common/get-assets-json";
 import { registerRoutes } from "./register-routes";
+import { registerEmailPreview } from "./register-email-preview";
 
 export const server = () => {
   const app = express()
@@ -17,9 +18,13 @@ export const server = () => {
     res.render(path.join(__dirname, "../../views/index.ejs"), { assetsJSON });
   });
 
-  registerRoutes(app);
+  const { SERVER_PORT, NODE_ENV } = environment();
 
-  const { SERVER_PORT } = environment();
+  if (NODE_ENV === "dev") {
+    registerEmailPreview(app);
+  }
+
+  registerRoutes(app);
 
   return new Promise<http.Server>((resolve) => {
     const s = app.listen(SERVER_PORT, () => {

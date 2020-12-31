@@ -1,47 +1,46 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { ICreateUserRequest } from '../models/ICreateUserRequest';
-import type { IUpdateUserRequest } from '../models/IUpdateUserRequest';
+import type { IAccessToken } from '../models/IAccessToken';
+import type { IChangePasswordParams } from '../models/IChangePasswordParams';
+import type { IConsumeResetPasswordParams } from '../models/IConsumeResetPasswordParams';
+import type { ILoginRequest } from '../models/ILoginRequest';
+import type { IUpdateUserParams } from '../models/IUpdateUserParams';
 import type { IUser } from '../models/IUser';
+import type { IUserRegisterParams } from '../models/IUserRegisterParams';
 import { request as __request } from '../core/request';
 
 export class UsersService {
 
     /**
-     * @returns IUser Ok
+     * @returns IAccessToken Ok
      * @throws ApiError
      */
-    public static async getUsers({
-        pageNumber = 1,
-        pageSize = 20,
+    public static async register({
+        requestBody,
     }: {
-        pageNumber?: number,
-        pageSize?: number,
-    }): Promise<Array<IUser>> {
+        requestBody: IUserRegisterParams,
+    }): Promise<IAccessToken> {
         const result = await __request({
-            method: 'GET',
-            path: `/users`,
-            query: {
-                'page_number': pageNumber,
-                'page_size': pageSize,
-            },
+            method: 'POST',
+            path: `/users/register`,
+            body: requestBody,
         });
         return result.body;
     }
 
     /**
-     * @returns IUser Ok
+     * @returns IAccessToken Ok
      * @throws ApiError
      */
-    public static async createUser({
+    public static async login({
         requestBody,
     }: {
-        requestBody: ICreateUserRequest,
-    }): Promise<IUser> {
+        requestBody: ILoginRequest,
+    }): Promise<IAccessToken> {
         const result = await __request({
             method: 'POST',
-            path: `/users`,
+            path: `/users/login`,
             body: requestBody,
         });
         return result.body;
@@ -51,14 +50,10 @@ export class UsersService {
      * @returns IUser Ok
      * @throws ApiError
      */
-    public static async getUserById({
-        userId,
-    }: {
-        userId: number,
-    }): Promise<IUser> {
+    public static async current(): Promise<IUser> {
         const result = await __request({
             method: 'GET',
-            path: `/users/${userId}`,
+            path: `/users`,
         });
         return result.body;
     }
@@ -67,16 +62,14 @@ export class UsersService {
      * @returns IUser Ok
      * @throws ApiError
      */
-    public static async updateUser({
-        userId,
+    public static async update({
         requestBody,
     }: {
-        userId: number,
-        requestBody: IUpdateUserRequest,
+        requestBody: IUpdateUserParams,
     }): Promise<IUser> {
         const result = await __request({
-            method: 'PATCH',
-            path: `/users/${userId}`,
+            method: 'PUT',
+            path: `/users`,
             body: requestBody,
         });
         return result.body;
@@ -86,14 +79,51 @@ export class UsersService {
      * @returns any No content
      * @throws ApiError
      */
-    public static async deleteUser({
-        userId,
+    public static async changePassword({
+        requestBody,
     }: {
-        userId: number,
+        requestBody: IChangePasswordParams,
     }): Promise<any> {
         const result = await __request({
-            method: 'DELETE',
-            path: `/users/${userId}`,
+            method: 'POST',
+            path: `/users/change_password`,
+            body: requestBody,
+        });
+        return result.body;
+    }
+
+    /**
+     * @returns any No content
+     * @throws ApiError
+     */
+    public static async resetPassword({
+        email,
+    }: {
+        email: string,
+    }): Promise<any> {
+        const result = await __request({
+            method: 'POST',
+            path: `/users/reset_password`,
+            query: {
+                'email': email,
+            },
+        });
+        return result.body;
+    }
+
+    /**
+     * @returns IAccessToken Ok
+     * @throws ApiError
+     */
+    public static async consumeResetPassword({
+        requestBody,
+    }: {
+        requestBody: IConsumeResetPasswordParams,
+    }): Promise<IAccessToken> {
+        const result = await __request({
+            method: 'POST',
+            path: `/users/consume_reset_password`,
+            body: requestBody,
         });
         return result.body;
     }

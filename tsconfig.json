@@ -8,6 +8,7 @@
     { "path": "./src/common" },
     { "path": "./src/node" },
     { "path": "./src/openapi-client" },
-    { "path": "./src/cypress" }
+    { "path": "./src/cypress" },
+    { "path": "./src/email" }
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "rootDir": "../",
+  "globalImports": [
+    "./src/client/common/styles/fonts.ts"
+  ],
+  "webpack": {
+    "overridePath": "./.cosmos/webpack.override.js"
+  }
+}

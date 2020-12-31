@@ -1,7 +1,7 @@
 import { Tsoa } from "tsoa";
 import webpack from "webpack";
 import { devWebpackConfig } from "../webpack/webpack.config.dev";
-import { sleep } from "../../node/utils/sleep";
+import { sleep } from "../../common/utils/sleep";
 import { prodWebpackConfig } from "../webpack/webpack.config.prod";
 import { environment } from "../../node/environment";
 import { log } from "../../node/utils/log";

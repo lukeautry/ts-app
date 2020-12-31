@@ -1,108 +1,92 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import {
-  ICreateUserRequest,
-  IUpdateUserRequest,
-  IUser,
-  UsersService,
-} from "../../openapi-client/out";
-import { Modal } from "../common/Modal/Modal";
-import { ModalBody } from "../common/Modal/ModalBody";
-import { ModalButton } from "../common/Modal/ModalButton";
-import { ModalFooter } from "../common/Modal/ModalFooter";
-import { ModalHeader } from "../common/Modal/ModalHeader";
-import { AppSelectors } from "./App.selectors";
-import { UserGrid } from "./UserGrid";
+import React, { useContext, useEffect, useState } from "react";
+import { IUser, UsersService, OpenAPI } from "../../openapi-client/out";
+import { AppLoading } from "../common/components/AppLoading";
+import { AppContext, AppMessage, IAppContext } from "./AppContext";
+import { Authenticated } from "./Authenticated/Authenticated";
+import { clearAccessToken, getAccessToken } from "./common/access-token-cache";
+import { MessageQueue } from "./common/MessageQueue";
+import { UnauthenticatedRouter } from "./Unauthenticated/UnauthenticatedRouter";
 
-const Container = styled.div`
-  * {
-    font-family: monospace;
-  }
-`;
+const AppRouter = () => {
+  const { user } = useContext(AppContext);
 
-export const App = () => {
-  const [users, setUsers] = useState<IUser[] | undefined>(undefined);
-  const [confirmingDeleteUser, setConfirmingDeleteUser] = useState<
-    IUser | undefined
-  >(undefined);
-
-  const getUsers = async () => {
-    const users = await UsersService.getUsers({});
-    setUsers(users);
-  };
-
-  useEffect(() => {
-    getUsers();
-  }, []);
-
-  const onDeleteUser = async (user: IUser) => {
-    setConfirmingDeleteUser(user);
-  };
-
-  const onConfirmDeleteUser = async (user: IUser) => {
-    setUsers(undefined);
-    await UsersService.deleteUser({ userId: user.id });
-    getUsers();
-    setConfirmingDeleteUser(undefined);
-  };
-
-  const onCreateUser = async (params: ICreateUserRequest) => {
-    setUsers(undefined);
-    await UsersService.createUser({
-      requestBody: params,
-    });
-    getUsers();
-  };
-
-  const onUpdateUser = async (userId: number, request: IUpdateUserRequest) => {
-    setUsers(undefined);
-    await UsersService.updateUser({
-      userId,
-      requestBody: request,
-    });
-    getUsers();
-  };
-
-  const content = () => {
-    if (users) {
-      return (
-        <UserGrid
-          users={users}
-          onDeleteUser={onDeleteUser}
-          onCreateUser={onCreateUser}
-          onUpdateUser={onUpdateUser}
-        />
-      );
+  const render = () => {
+    if (user === "loading") {
+      return <AppLoading />;
+    } else if (user) {
+      return <Authenticated user={user} />;
     } else {
-      return <div>Loading...</div>;
+      return <UnauthenticatedRouter />;
     }
   };
 
   return (
-    <Container>
-      {confirmingDeleteUser && (
-        <Modal onClose={() => setConfirmingDeleteUser(undefined)}>
-          <ModalHeader>Confirm Delete</ModalHeader>
-          <ModalBody>Are you sure you want to delete this user?</ModalBody>
-          <ModalFooter>
-            <ModalButton
-              bgColor="cancel"
-              onClick={() => setConfirmingDeleteUser(undefined)}
-              data-testid={AppSelectors.CancelDeleteButton}
-            >
-              Cancel
-            </ModalButton>
-            <ModalButton
-              bgColor="primary"
-              onClick={() => onConfirmDeleteUser(confirmingDeleteUser)}
-              data-testid={AppSelectors.ConfirmDeleteButton}
-            >
-              Confirm
-            </ModalButton>
-          </ModalFooter>
-        </Modal>
-      )}
-      {content()}
-    </Container>
+    <div>
+      {render()}
+      <MessageQueue />
+    </div>
+  );
+};
+
+export const App = () => {
+  const [user, setUser] = useState<IUser | "loading" | undefined>("loading");
+  const [messages, setMessages] = useState<Array<AppMessage>>([]);
+
+  const removeMessage = (message: AppMessage): void =>
+    setMessages((m) => m.filter((element) => element !== message));
+
+  const addMessage = (message: AppMessage) => {
+    setMessages((m) => [message, ...m]);
+
+    if (message.timeout !== "none") {
+      setTimeout(() => {
+        console.log(message);
+        removeMessage(message);
+      }, message.timeout ?? 5000);
+    }
+  };
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const storedToken = getAccessToken();
+        if (storedToken) {
+          OpenAPI.TOKEN = storedToken;
+          const currentUser = await UsersService.current();
+          setUser(currentUser);
+        } else {
+          setUser(undefined);
+        }
+      } catch (err) {
+        addMessage({
+          type: "error",
+          title: "Session expired",
+          subtitle:
+            "You've been logged out for your security. Please log in again.",
+        });
+        setUser(undefined);
+      }
+    };
+
+    load();
+  }, []);
+
+  const value: IAppContext = {
+    user,
+    setUser,
+    messages,
+    addMessage,
+    removeMessage,
+    onLogOut: () => {
+      OpenAPI.TOKEN = "";
+      clearAccessToken();
+      setUser(undefined);
+    },
+  };
+
+  return (
+    <AppContext.Provider value={value}>
+      <AppRouter />
+    </AppContext.Provider>
   );
 };

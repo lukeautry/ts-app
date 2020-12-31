@@ -15,6 +15,7 @@ export const devWebpackConfig = getWebpackConfig({
     sourceMapFilename: "[file].map.json",
   },
   plugins: [
+    // this is broken atm, see: https://github.com/statianzo/webpack-livereload-plugin/issues/63
     new LiveReloadPlugin({
       quiet: true,
     }),

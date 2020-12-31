@@ -12,7 +12,7 @@ const run: CommandModule<{}, { db: string }> = {
     yargs.options({
       db: {
         choices: dbConnectionNames,
-        default: "defaultdb",
+        default: "saas",
       },
     }),
   handler: async ({ db }) => {

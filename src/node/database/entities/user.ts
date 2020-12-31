@@ -1,18 +1,17 @@
 import { Column, Entity } from "typeorm";
 import { BaseEntity, IBaseEntity } from "./base";
 
-export interface IUserCreateProps {
-  email: string;
-  name: string;
-  address?: string;
+export interface IUser extends ICreateUserProps, IBaseEntity {}
+
+export interface ICreateUserProps {
+  readonly email: string;
+  readonly name: string;
 }
 
-export interface IUser extends IUserCreateProps, IBaseEntity {}
-
 @Entity("users")
-export class User extends BaseEntity implements IUserCreateProps {
+export class User extends BaseEntity implements ICreateUserProps {
   @Column({
-    nullable: true,
+    nullable: false,
     type: "text",
     unique: true,
   })
@@ -23,10 +22,4 @@ export class User extends BaseEntity implements IUserCreateProps {
     type: "text",
   })
   public name!: string;
-
-  @Column({
-    nullable: true,
-    type: "text",
-  })
-  public address?: string;
 }

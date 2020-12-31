@@ -32,10 +32,10 @@ const baseOptions = {
 };
 
 module.exports = [
-  Object.assign({}, baseOptions, { name: "defaultdb", database: "defaultdb" }),
+  Object.assign({}, baseOptions, { name: "saas", database: "saas" }),
   Object.assign({}, baseOptions, {
-    name: "defaultdb_test",
-    database: "defaultdb_test",
+    name: "saas_test",
+    database: "saas_test",
     synchronize: true,
     logging: process.env.LOG === "1",
   }),

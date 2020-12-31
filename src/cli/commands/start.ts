@@ -13,7 +13,10 @@ import { setupDatabase } from "../../node/dev/setup-database";
 import { generateExpressRoutes } from "../../node/dev/generate-express-routes";
 import { debounce } from "../../node/utils/debounce";
 
-const start: CommandModule<{}, { db: string; port: string; env: string }> = {
+const start: CommandModule<
+  {},
+  { db: string; port: string; env: string; jwt: string }
+> = {
   command: "start",
   describe: "Start developer environment",
   builder: (yargs) =>
@@ -24,16 +27,22 @@ const start: CommandModule<{}, { db: string; port: string; env: string }> = {
       },
       db: {
         choices: dbConnectionNames,
-        default: "defaultdb",
+        default: "saas",
+      },
+      jwt: {
+        required: true,
+        type: "string",
+        default: "abc123",
       },
       port: {
         default: "3000",
       },
     }),
-  handler: async ({ db, env, port }) => {
+  handler: async ({ db, env, port, jwt }) => {
     process.env.DB_CONNECTION = db;
     process.env.NODE_ENV = env;
     process.env.SERVER_PORT = port;
+    process.env.JWT_SECRET = jwt;
 
     await startDocker();
 
@@ -66,6 +75,8 @@ const start: CommandModule<{}, { db: string; port: string; env: string }> = {
         "./src/server/**/*.ts",
         "./src/common/**/*.ts",
         "./src/node/**/*.ts",
+        "./src/email/**/*.ts",
+        "./src/email/**/*.tsx",
       ])
       .on("change", regenerateApiRoutes);
 
