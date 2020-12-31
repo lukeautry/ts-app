@@ -19,7 +19,7 @@ This project aims to support a "domain driven" approach. A client library is aut
 
 ## Project structure
 
-This project uses [TypeScript Project References] to organize modules. This gives us:
+This project uses [TypeScript Project References](https://www.typescriptlang.org/docs/handbook/project-references.html) to organize modules. This gives us:
 - Faster builds
 - Formal project dependencies; subprojects can't import from other subprojects unless the dependency is configured
 
