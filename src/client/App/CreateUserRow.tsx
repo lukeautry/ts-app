@@ -39,6 +39,7 @@ export const CreateUserRow: React.FC<ICreateUserProps> = ({ onCreateUser }) => {
           value={email}
           className={showEmailError() ? "error" : undefined}
           onChange={(event) => setEmail(event.target.value)}
+          data-cy="create-user-email"
         />
       </td>
       <td>
@@ -47,6 +48,7 @@ export const CreateUserRow: React.FC<ICreateUserProps> = ({ onCreateUser }) => {
           placeholder="Name"
           value={name}
           onChange={(event) => setName(event.target.value)}
+          data-cy="create-user-name"
         />
       </td>
       <td>
@@ -55,6 +57,7 @@ export const CreateUserRow: React.FC<ICreateUserProps> = ({ onCreateUser }) => {
           placeholder="Address (Optional)"
           value={address}
           onChange={(event) => setAddress(event.target.value)}
+          data-cy="create-user-address"
         ></UserGridInput>
       </td>
       <td />
@@ -64,6 +67,7 @@ export const CreateUserRow: React.FC<ICreateUserProps> = ({ onCreateUser }) => {
           type="button"
           disabled={!canSubmitCreate()}
           onClick={onClickCreate}
+          data-cy="create-user-save"
         >
           Save
         </ActionButton>

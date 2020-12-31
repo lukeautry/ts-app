@@ -14,7 +14,7 @@ export const UserRow: React.FC<IUserRowProps> = ({
   onClickEdit,
 }) => {
   return (
-    <tr key={user.id}>
+    <tr key={user.id} data-cy="user-row">
       <td>{user.id}</td>
       <td>{user.email}</td>
       <td>{user.name}</td>
@@ -22,10 +22,18 @@ export const UserRow: React.FC<IUserRowProps> = ({
       <td>{user.date_created}</td>
       <td>{user.date_updated}</td>
       <td>
-        <ActionButton onClick={onClickEdit} type="button">
+        <ActionButton
+          onClick={onClickEdit}
+          type="button"
+          data-cy="user-row-edit"
+        >
           Edit
         </ActionButton>
-        <ActionButton onClick={() => onDeleteUser(user)} type="button">
+        <ActionButton
+          onClick={() => onDeleteUser(user)}
+          type="button"
+          data-cy="user-row-delete"
+        >
           Delete
         </ActionButton>
       </td>

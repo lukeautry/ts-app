@@ -7,6 +7,7 @@
     { "path": "./src/cli" },
     { "path": "./src/common" },
     { "path": "./src/node" },
-    { "path": "./src/openapi-client" }
+    { "path": "./src/openapi-client" },
+    { "path": "./src/cypress" }
   ]
 }

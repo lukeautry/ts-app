@@ -1,5 +1,6 @@
 import chokidar from "chokidar";
 import { CommandModule } from "yargs";
+import cypress from "cypress";
 import { checkRedis } from "../common/check-redis";
 import { generateOpenAPIClient } from "../common/generate-openapi-client";
 import { registerQuitKey } from "../common/register-quit-key";
@@ -13,7 +14,10 @@ import { setupDatabase } from "../../node/dev/setup-database";
 import { generateExpressRoutes } from "../../node/dev/generate-express-routes";
 import { debounce } from "../../node/utils/debounce";
 
-const start: CommandModule<{}, { db: string; port: string; env: string }> = {
+const start: CommandModule<
+  {},
+  { db: string; port: string; env: string; e2e: boolean }
+> = {
   command: "start",
   describe: "Start developer environment",
   builder: (yargs) =>
@@ -29,8 +33,12 @@ const start: CommandModule<{}, { db: string; port: string; env: string }> = {
       port: {
         default: "3000",
       },
+      e2e: {
+        type: "boolean",
+        default: false,
+      },
     }),
-  handler: async ({ db, env, port }) => {
+  handler: async ({ db, env, port, e2e }) => {
     process.env.DB_CONNECTION = db;
     process.env.NODE_ENV = env;
     process.env.SERVER_PORT = port;
@@ -70,6 +78,15 @@ const start: CommandModule<{}, { db: string; port: string; env: string }> = {
       .on("change", regenerateApiRoutes);
 
     registerQuitKey();
+
+    if (e2e) {
+      try {
+        await cypress.run();
+        process.exit(0);
+      } catch (err) {
+        throw err;
+      }
+    }
   },
 };
 

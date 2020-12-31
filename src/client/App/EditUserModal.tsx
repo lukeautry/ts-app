@@ -39,7 +39,7 @@ export const EditUserModal: React.FC<IEditUserModal> = ({
   };
 
   return (
-    <Modal onClose={onClose}>
+    <Modal onClose={onClose} data-cy="edit-user-modal">
       <ModalHeader>Edit User</ModalHeader>
       <ModalBody>
         <FormInput
@@ -47,24 +47,35 @@ export const EditUserModal: React.FC<IEditUserModal> = ({
           value={email}
           onChange={(value) => setEmail(value)}
           style={inputSpacing}
+          cy="edit-user-modal-email"
         />
         <FormInput
           label="Name"
           value={name}
           onChange={(value) => setName(value)}
           style={inputSpacing}
+          cy="edit-user-modal-name"
         />
         <FormInput
           label="Address"
           value={address}
           onChange={(value) => setAddress(value)}
+          cy="edit-user-modal-address"
         />
       </ModalBody>
       <ModalFooter>
-        <ModalButton bgColor="cancel" onClick={onClose}>
+        <ModalButton
+          bgColor="cancel"
+          onClick={onClose}
+          data-cy="edit-user-modal-cancel"
+        >
           Cancel
         </ModalButton>
-        <ModalButton bgColor="primary" onClick={onSubmit}>
+        <ModalButton
+          bgColor="primary"
+          onClick={onSubmit}
+          data-cy="edit-user-modal-submit"
+        >
           Submit
         </ModalButton>
       </ModalFooter>

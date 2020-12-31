@@ -87,12 +87,14 @@ export const App = () => {
             <ModalButton
               bgColor="cancel"
               onClick={() => setConfirmingDeleteUser(undefined)}
+              data-cy="cancel-delete-user"
             >
               Cancel
             </ModalButton>
             <ModalButton
               bgColor="primary"
               onClick={() => onConfirmDeleteUser(confirmingDeleteUser)}
+              data-cy="confirm-delete-user"
             >
               Confirm
             </ModalButton>

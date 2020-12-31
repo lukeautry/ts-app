@@ -1,0 +1,10 @@
+{
+  "defaultCommandTimeout": 10000,
+  "fixturesFolder": "src/cypress/fixtures",
+  "integrationFolder": "src/cypress/integration",
+  "screenshotsFolder": "src/cypress/screenshots",
+  "supportFile": "src/cypress/support/index.ts",
+  "pluginsFile": "src/cypress/plugins/index.ts",
+  "testFiles": "**/*.cypress.ts",
+  "videosFolder": "src/cypress/videos"
+}

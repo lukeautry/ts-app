@@ -4,3 +4,5 @@ yarn-error.log
 .tmp
 .public
 tsconfig.tsbuildinfo
+src/cypress/videos
+src/cypress/screenshots

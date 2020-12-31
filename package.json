@@ -13,7 +13,8 @@
     "build": "tsc --build",
     "watch": "yarn build --watch",
     "typeorm": "ts-node ./node_modules/.bin/typeorm",
-    "start": "cross-env COMPILED_JS=true NODE_ENV=dev DB_CONNECTION=defaultdb SERVER_PORT=3000 node --es-module-specifier-resolution=node ./dist/server/start.js"
+    "start": "cross-env COMPILED_JS=true NODE_ENV=dev DB_CONNECTION=defaultdb SERVER_PORT=3000 node --es-module-specifier-resolution=node ./dist/server/start.js",
+    "test:cypress": "cypress run"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -61,6 +62,7 @@
     "chokidar": "^3.4.3",
     "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^7.0.3",
+    "cypress": "^6.2.0",
     "docker-compose": "^0.23.5",
     "eslint": "^7.16.0",
     "eslint-config-prettier": "^7.1.0",
