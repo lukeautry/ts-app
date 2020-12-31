@@ -17,7 +17,7 @@ jobs:
         run: yarn
       - name: TypeScript Build
         run: yarn build
-  test:
+  jest:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -25,8 +25,8 @@ jobs:
         run: yarn
       - name: Start docker services
         run: yarn cli docker start
-      - name: Test
-        run: yarn cli test
+      - name: Run Jest Tests
+        run: yarn cli jest
   cypress:
     runs-on: ubuntu-latest
     steps:

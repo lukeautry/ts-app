@@ -4,8 +4,8 @@ import { runCLI } from "jest";
 import { startDocker } from "../../node/dev/start-docker";
 import { setupDatabase } from "../../node/dev/setup-database";
 
-const test: CommandModule<{}, { path?: string }> = {
-  command: "test [path]",
+const jest: CommandModule<{}, { path?: string }> = {
+  command: "jest [path]",
   describe: "Run Jest Tests",
   builder: (yargs) =>
     yargs.positional("path", {
@@ -37,4 +37,4 @@ const test: CommandModule<{}, { path?: string }> = {
   },
 };
 
-export default test;
+export default jest;

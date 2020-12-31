@@ -64,5 +64,23 @@ This project uses [TypeScript Project References](https://www.typescriptlang.org
     - [cypress](https://www.cypress.io/) for end-to-end testing
     - [react-testing-library](https://testing-library.com/docs/react-testing-library/intro) for component testing
 
+## Running Tests
+
+### Jest Tests
+
+Includes server node.js tests and front-end react-testing-library tests.
+
+```
+yarn cli jest
+```
+
+### Cypress Tests
+
+End to end tests that touch everything and hit a running version of the application
+
+```
+yarn cli start --e2e
+```
+
 ## Contributing
 - Features and bug fixes welcome
