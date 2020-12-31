@@ -3,10 +3,18 @@ import { ICreateUserRequest } from "../../openapi-client/out";
 import { ActionButton } from "../common/ActionButton";
 import { UserGridInput } from "../common/UserGridInput";
 import { isValidEmail } from "../../common/validation/is-valid-email";
+import { componentSelectors } from "../common/utils/component-selectors";
 
 interface ICreateUserProps {
   onCreateUser: (params: ICreateUserRequest) => void;
 }
+
+export const CreateUserRowSelectors = componentSelectors("CreateUserRow", [
+  "EmailInput",
+  "NameInput",
+  "AddressInput",
+  "SaveButton",
+]);
 
 export const CreateUserRow: React.FC<ICreateUserProps> = ({ onCreateUser }) => {
   const [email, setEmail] = useState("");
@@ -39,7 +47,7 @@ export const CreateUserRow: React.FC<ICreateUserProps> = ({ onCreateUser }) => {
           value={email}
           className={showEmailError() ? "error" : undefined}
           onChange={(event) => setEmail(event.target.value)}
-          data-cy="create-user-email"
+          data-testid={CreateUserRowSelectors.EmailInput}
         />
       </td>
       <td>
@@ -48,7 +56,7 @@ export const CreateUserRow: React.FC<ICreateUserProps> = ({ onCreateUser }) => {
           placeholder="Name"
           value={name}
           onChange={(event) => setName(event.target.value)}
-          data-cy="create-user-name"
+          data-testid={CreateUserRowSelectors.NameInput}
         />
       </td>
       <td>
@@ -57,7 +65,7 @@ export const CreateUserRow: React.FC<ICreateUserProps> = ({ onCreateUser }) => {
           placeholder="Address (Optional)"
           value={address}
           onChange={(event) => setAddress(event.target.value)}
-          data-cy="create-user-address"
+          data-testid={CreateUserRowSelectors.AddressInput}
         ></UserGridInput>
       </td>
       <td />
@@ -67,7 +75,7 @@ export const CreateUserRow: React.FC<ICreateUserProps> = ({ onCreateUser }) => {
           type="button"
           disabled={!canSubmitCreate()}
           onClick={onClickCreate}
-          data-cy="create-user-save"
+          data-testid={CreateUserRowSelectors.SaveButton}
         >
           Save
         </ActionButton>

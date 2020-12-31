@@ -4,4 +4,9 @@
     "rootDir": ".",
     "outDir": "../../dist/cypress"
   },
+  "references": [
+    {
+      "path": "../client"
+    }
+  ]
 }

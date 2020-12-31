@@ -4,7 +4,6 @@
     "rootDir": ".",
     "outDir": "../../dist/client",
     "target": "es5",
-    "jsx": "react",
     "lib": ["esnext", "dom"]
   },
   "references": [

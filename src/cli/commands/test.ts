@@ -4,10 +4,14 @@ import { runCLI } from "jest";
 import { startDocker } from "../../node/dev/start-docker";
 import { setupDatabase } from "../../node/dev/setup-database";
 
-const start: CommandModule<{}> = {
-  command: "test",
+const test: CommandModule<{}, { path?: string }> = {
+  command: "test [path]",
   describe: "Run Jest Tests",
-  handler: async () => {
+  builder: (yargs) =>
+    yargs.positional("path", {
+      type: "string",
+    }),
+  handler: async ({ path: filePath }) => {
     process.env.DB_CONNECTION = "defaultdb_test";
     process.env.NODE_ENV = "test";
     process.env.SERVER_PORT = "3037";
@@ -15,12 +19,15 @@ const start: CommandModule<{}> = {
     await startDocker();
     await setupDatabase(false);
 
+    const base = path.join(__dirname, "../../..");
+    const testMatch = [path.join(base, filePath ?? "src/**/*.spec.{ts,tsx}")];
+
     runCLI(
       {
         _: [],
         $0: "",
         runInBand: true,
-        testMatch: [path.join(__dirname, "../../**/*.spec.{ts,tsx}")],
+        testMatch,
         preset: "ts-jest",
         watch: false,
         globalTeardown: path.join(__dirname, "../common/global-teardown.ts"),
@@ -30,4 +37,4 @@ const start: CommandModule<{}> = {
   },
 };
 
-export default start;
+export default test;

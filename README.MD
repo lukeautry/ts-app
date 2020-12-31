@@ -62,6 +62,7 @@ This project uses [TypeScript Project References](https://www.typescriptlang.org
     - [jest](https://jestjs.io) test runner/assertions/utilities
     - [supertest](https://github.com/visionmedia/supertest) for API endpoint tests
     - [cypress](https://www.cypress.io/) for end-to-end testing
+    - [react-testing-library](https://testing-library.com/docs/react-testing-library/intro) for component testing
 
 ## Contributing
 - Features and bug fixes welcome

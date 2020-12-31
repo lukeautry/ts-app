@@ -11,6 +11,7 @@ import { ModalBody } from "../common/Modal/ModalBody";
 import { ModalButton } from "../common/Modal/ModalButton";
 import { ModalFooter } from "../common/Modal/ModalFooter";
 import { ModalHeader } from "../common/Modal/ModalHeader";
+import { componentSelectors } from "../common/utils/component-selectors";
 import { UserGrid } from "./UserGrid";
 
 const Container = styled.div`
@@ -18,6 +19,11 @@ const Container = styled.div`
     font-family: monospace;
   }
 `;
+
+export const AppSelectors = componentSelectors("app", [
+  "CancelDeleteButton",
+  "ConfirmDeleteButton",
+]);
 
 export const App = () => {
   const [users, setUsers] = useState<IUser[] | undefined>(undefined);
@@ -87,14 +93,14 @@ export const App = () => {
             <ModalButton
               bgColor="cancel"
               onClick={() => setConfirmingDeleteUser(undefined)}
-              data-cy="cancel-delete-user"
+              data-testid={AppSelectors.CancelDeleteButton}
             >
               Cancel
             </ModalButton>
             <ModalButton
               bgColor="primary"
               onClick={() => onConfirmDeleteUser(confirmingDeleteUser)}
-              data-cy="confirm-delete-user"
+              data-testid={AppSelectors.ConfirmDeleteButton}
             >
               Confirm
             </ModalButton>

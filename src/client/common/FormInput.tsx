@@ -6,7 +6,7 @@ interface IFormInputProps {
   value: string;
   onChange: (value: string) => void;
   style?: React.CSSProperties;
-  cy?: string;
+  testId?: string;
 }
 
 const Label = styled.label`
@@ -25,7 +25,7 @@ export const FormInput: React.FC<IFormInputProps> = ({
   value,
   onChange,
   style,
-  cy,
+  testId,
 }) => {
   return (
     <div style={style}>
@@ -34,7 +34,7 @@ export const FormInput: React.FC<IFormInputProps> = ({
         placeholder={label}
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        data-cy={cy}
+        data-testid={testId}
       />
     </div>
   );

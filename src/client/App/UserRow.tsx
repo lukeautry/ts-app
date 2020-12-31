@@ -1,6 +1,7 @@
 import React from "react";
 import { IUser } from "../../openapi-client/out";
 import { ActionButton } from "../common/ActionButton";
+import { componentSelectors } from "../common/utils/component-selectors";
 
 interface IUserRowProps {
   user: IUser;
@@ -8,13 +9,19 @@ interface IUserRowProps {
   onClickEdit: () => void;
 }
 
+export const UserRowSelectors = componentSelectors("UserRow", [
+  "TableRow",
+  "EditButton",
+  "DeleteButton",
+]);
+
 export const UserRow: React.FC<IUserRowProps> = ({
   user,
   onDeleteUser,
   onClickEdit,
 }) => {
   return (
-    <tr key={user.id} data-cy="user-row">
+    <tr key={user.id} data-testid={UserRowSelectors.TableRow}>
       <td>{user.id}</td>
       <td>{user.email}</td>
       <td>{user.name}</td>
@@ -25,14 +32,14 @@ export const UserRow: React.FC<IUserRowProps> = ({
         <ActionButton
           onClick={onClickEdit}
           type="button"
-          data-cy="user-row-edit"
+          data-testid={UserRowSelectors.EditButton}
         >
           Edit
         </ActionButton>
         <ActionButton
           onClick={() => onDeleteUser(user)}
           type="button"
-          data-cy="user-row-delete"
+          data-testid={UserRowSelectors.DeleteButton}
         >
           Delete
         </ActionButton>
