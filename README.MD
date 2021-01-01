@@ -1,3 +1,5 @@
+![ci](https://github.com/lukeautry/ts-app/workflows/ci/badge.svg?branch=master)
+
 # ts-app: Full-stack TypeScript Development Framework
 
 This project is a starting point for developing an API-first application using TypeScript, Node.js, and React.
