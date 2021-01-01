@@ -7,7 +7,7 @@ const selector = (val: string) => `[data-testid=${val}]`;
 
 context("Basic Actions", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3037");
+    cy.visit("/");
   });
 
   it("can add user", () => {
