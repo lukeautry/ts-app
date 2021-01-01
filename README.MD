@@ -71,7 +71,7 @@ This project uses [TypeScript Project References](https://www.typescriptlang.org
 Includes server node.js tests and front-end react-testing-library tests.
 
 ```
-yarn cli jest
+yarn cli test jest
 ```
 
 ### Cypress Tests
@@ -79,7 +79,7 @@ yarn cli jest
 End to end tests that touch everything and hit a running version of the application
 
 ```
-yarn cli start --e2e
+yarn cli test cypress
 ```
 
 ## Contributing

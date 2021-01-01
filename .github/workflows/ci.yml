@@ -26,7 +26,7 @@ jobs:
       - name: Start docker services
         run: yarn cli docker start
       - name: Run Jest Tests
-        run: yarn cli jest
+        run: yarn cli test jest
   cypress:
     runs-on: ubuntu-latest
     steps:
@@ -36,5 +36,5 @@ jobs:
       - name: Start docker services
         run: yarn cli docker start
       - name: Run Cypress Tests
-        run: yarn cli start --e2e
+        run: yarn cli test jest
       

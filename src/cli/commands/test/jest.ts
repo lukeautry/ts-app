@@ -1,8 +1,8 @@
 import path from "path";
 import { CommandModule } from "yargs";
 import { runCLI } from "jest";
-import { startDocker } from "../../node/dev/start-docker";
-import { setupDatabase } from "../../node/dev/setup-database";
+import { startDocker } from "../../../node/dev/start-docker";
+import { setupDatabase } from "../../../node/dev/setup-database";
 
 const jest: CommandModule<{}, { path?: string }> = {
   command: "jest [path]",
@@ -19,7 +19,7 @@ const jest: CommandModule<{}, { path?: string }> = {
     await startDocker();
     await setupDatabase(false);
 
-    const base = path.join(__dirname, "../../..");
+    const base = path.join(__dirname, "../../../..");
     const testMatch = [path.join(base, filePath ?? "src/**/*.spec.{ts,tsx}")];
 
     runCLI(
@@ -30,9 +30,9 @@ const jest: CommandModule<{}, { path?: string }> = {
         testMatch,
         preset: "ts-jest",
         watch: false,
-        globalTeardown: path.join(__dirname, "../common/global-teardown.ts"),
+        globalTeardown: path.join(__dirname, "../../common/global-teardown.ts"),
       },
-      [path.join(__dirname, "../../..")]
+      [base]
     );
   },
 };

@@ -1,11 +1,4 @@
-import { getDbConnection } from "../database/get-db-connection";
-import { environment } from "../environment";
-
-const clearDb = async () => {
-  const { DB_CONNECTION } = environment();
-  const connection = await getDbConnection(DB_CONNECTION);
-  await connection.synchronize(true);
-};
+import { clearDb } from "./clear-db";
 
 /**
  * Works like a standard Jest describe block, but executes a database setup before each test.
