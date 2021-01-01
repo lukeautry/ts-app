@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "baseUrl": "http://localhost:3037",
     "rootDir": ".",
     "outDir": "../../dist/cypress"
   },
