@@ -5,6 +5,7 @@ import { FormError } from "../../../common/components/Form/FormError";
 import { FormInput } from "../../../common/components/Form/FormInput";
 import { FormSubmitButton } from "../../../common/components/Form/FormSubmitButton";
 import { InlineErrorMessage } from "../../../common/components/Form/InlineErrorMessage";
+import { ChangePasswordSelectors } from "./ChangePassword.selectors";
 
 export type ChangePasswordSubmitFn = (params: {
   oldPassword: string;
@@ -95,6 +96,7 @@ export const ChangePassword: React.FC<IChangePasswordProps> = (props) => {
           <InlineErrorMessage>{currentPasswordError()}</InlineErrorMessage>
         }
         autoFocus={true}
+        testId={ChangePasswordSelectors.PasswordInput}
       />
       <FormInput
         inputType="password"
@@ -106,6 +108,7 @@ export const ChangePassword: React.FC<IChangePasswordProps> = (props) => {
         secondaryLabel={
           <InlineErrorMessage>{newPasswordError()}</InlineErrorMessage>
         }
+        testId={ChangePasswordSelectors.NewPasswordInput}
       />
       <FormInput
         inputType="password"
@@ -117,9 +120,12 @@ export const ChangePassword: React.FC<IChangePasswordProps> = (props) => {
         secondaryLabel={
           <InlineErrorMessage>{confirmPasswordError()}</InlineErrorMessage>
         }
+        testId={ChangePasswordSelectors.ConfirmNewPasswordInput}
       />
       <FormSubmitButton processing={isProcessing}>
-        Update Password
+        <span data-testid={ChangePasswordSelectors.SaveButton}>
+          Update Password
+        </span>
       </FormSubmitButton>
       {error && <FormError>{error}</FormError>}
     </Form>

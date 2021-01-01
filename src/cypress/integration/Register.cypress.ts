@@ -2,13 +2,19 @@ import { LoginSelectors } from "../../client/App/Unauthenticated/Login/Login.sel
 import { NavigationSelectors } from "../../client/App/Authenticated/Navigation/Navigation.selectors";
 import { RegisterSelectors } from "../../client/App/Unauthenticated/Register/Register.selectors";
 import { click, get, type } from "../common/utilities";
+import { getCypressTaskRoute } from "../../server/cypress-tasks";
 
 context("Register", () => {
+  const baseUrl = "http://localhost:3037";
   const email = "test_new@test.com";
 
   beforeEach(() => {
-    cy.task("deleteUserByEmail", email);
-    cy.visit("http://localhost:3037");
+    cy.visit(baseUrl);
+    cy.request(
+      getCypressTaskRoute(baseUrl, "deleteUserByEmail", {
+        email,
+      })
+    );
   });
 
   it("can register for an account", () => {

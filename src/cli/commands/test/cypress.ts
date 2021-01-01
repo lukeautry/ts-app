@@ -7,7 +7,7 @@ import { log } from "../../../node/utils/log";
 import { generateExpressRoutes } from "../../../node/dev/generate-express-routes";
 import { startWebpack } from "../../common/start-webpack";
 import { startServer } from "../../common/start-server";
-import { createSeedData } from "../../common/create-seed-data";
+import { clearDb } from "../../../node/test/clear-db";
 
 const cypress: CommandModule<{}, { open: boolean }> = {
   command: "cypress",
@@ -30,7 +30,7 @@ const cypress: CommandModule<{}, { open: boolean }> = {
 
     try {
       await Promise.all([setupDatabase(false), checkRedis()]);
-      await createSeedData();
+      await clearDb();
     } catch (err) {
       log.error(err.message);
       process.exit(1);

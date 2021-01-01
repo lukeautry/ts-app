@@ -1,7 +1,5 @@
 /// <reference types="cypress" />
 
-import { UserRepository } from "../../node/database/repositories/user-repository";
-
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
 //
@@ -15,17 +13,9 @@ import { UserRepository } from "../../node/database/repositories/user-repository
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-const handler = (on: (val: "task", handlers: {}) => null) => {
-  on("task", {
-    async deleteUserByEmail(email: string) {
-      await new UserRepository().delete({
-        email,
-      });
-      console.log(`user ${email} deleted`);
-
-      return null;
-    },
-  });
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const handler = (_on: (val: "task", handlers: {}) => null) => {
+  return;
 };
 
 export default handler;

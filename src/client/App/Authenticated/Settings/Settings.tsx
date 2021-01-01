@@ -9,6 +9,7 @@ import { SecondaryNavigation } from "../../../common/components/SecondaryNavigat
 import { SecondaryNavigationLink } from "../../../common/components/SecondaryNavigation/SecondaryNavigationLink";
 import { WiredChangePassword } from "./ChangePassword.wired";
 import { WiredProfile } from "./Profile.wired";
+import { SettingsSelectors } from "./Settings.selectors";
 
 const SettingsContentContainer = styled.div`
   flex: 1;
@@ -32,13 +33,15 @@ export const Settings = () => {
             href={`#${profilePath}`}
             isActive={profileMatch?.path.includes(profilePath)}
           >
-            Profile
+            <span data-testid={SettingsSelectors.ProfileLink}>Profile</span>
           </SecondaryNavigationLink>
           <SecondaryNavigationLink
             href={`#${changePasswordPath}`}
             isActive={changePasswordMatch?.path.includes(changePasswordPath)}
           >
-            Change Password
+            <span data-testid={SettingsSelectors.ChangePasswordLink}>
+              ChangePassword
+            </span>
           </SecondaryNavigationLink>
         </SecondaryNavigation>
         <SettingsContentContainer>
