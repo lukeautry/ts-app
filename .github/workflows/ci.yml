@@ -53,8 +53,8 @@ jobs:
       - name: Start docker services
         run: yarn cli docker start
       - name: Check running network
-        run: docker network ls
+        run: netstat -tulnp
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          wait-on: 'http://localhost:8080'
+          wait-on: 'http://localhost:3037'
