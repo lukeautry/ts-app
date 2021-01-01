@@ -20,17 +20,18 @@ const jest: CommandModule<{}, { path?: string }> = {
     await setupDatabase(false);
 
     const base = path.join(__dirname, "../../../..");
-    const testMatch = [path.join(base, filePath ?? "src/**/*.spec.{ts,tsx}")];
 
     runCLI(
       {
         _: [],
         $0: "",
         runInBand: true,
-        testMatch,
         preset: "ts-jest",
         watch: false,
         globalTeardown: path.join(__dirname, "../../common/global-teardown.ts"),
+        testMatch: filePath
+          ? [path.join(base, filePath)]
+          : [path.join(base, "src/**/*.spec.*")],
       },
       [base]
     );
