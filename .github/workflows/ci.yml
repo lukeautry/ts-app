@@ -5,6 +5,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: node_modules cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/Cypress
+            **/node_modules
+          key: ${{ runner.os }}-modules-v3-${{ hashFiles('**/yarn.lock') }}
       - name: Yarn Install
         run: yarn
       - name: Run linters
@@ -13,6 +20,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: node_modules cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/Cypress
+            **/node_modules
+          key: ${{ runner.os }}-modules-v3-${{ hashFiles('**/yarn.lock') }}
       - name: Yarn Install
         run: yarn
       - name: TypeScript Build
@@ -21,6 +35,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: node_modules cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/Cypress
+            **/node_modules
+          key: ${{ runner.os }}-modules-v3-${{ hashFiles('**/yarn.lock') }}
       - name: Yarn Install
         run: yarn
       - name: Start docker services
@@ -31,10 +52,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: node_modules cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/Cypress
+            **/node_modules
+          key: ${{ runner.os }}-modules-v3-${{ hashFiles('**/yarn.lock') }}
       - name: Yarn Install
         run: yarn
       - name: Start docker services
         run: yarn cli docker start
       - name: Run Cypress Tests
-        run: yarn cli test jest
+        run: yarn cli test cypress
       
