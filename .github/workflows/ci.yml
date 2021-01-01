@@ -48,16 +48,19 @@ jobs:
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - name: Check running network
+        run: netstat -tulnp
+      - name: Check docker network
+        run: docker network ls
       - name: Yarn Install
         run: yarn
       - name: Start docker services
         run: yarn cli docker start
       - name: Check running network
         run: netstat -tulnp
-      - name: npm install
-        run: npm install
+      - name: Check docker network
+        run: docker network ls
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          start: npm start
           wait-on: 'http://localhost:3000'
