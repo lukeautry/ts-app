@@ -5,6 +5,9 @@ const paths = {
   forgotPassword: {
     path: "/forgot-password",
   },
+  resetPassword: {
+    path: "/reset-password/:token",
+  },
   register: {
     path: "/register",
   },

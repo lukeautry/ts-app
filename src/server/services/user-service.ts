@@ -8,6 +8,8 @@ import { validatePasswordRequirements } from "../../common/validation/validate-p
 import { log } from "../../node/utils/log";
 import { IUser } from "../../node/database/entities/user";
 import { renderResetPassword } from "../../email/templates/ResetEmail";
+import { environment } from "../../node/environment";
+import { getPath } from "../../common/paths";
 import { AuthenticationService, IAccessToken } from "./authentication-service";
 import { UserPasswordService } from "./user-password-service";
 import { VerificationTokenService } from "./verification-token-service";
@@ -166,9 +168,12 @@ export class UserService {
       type: "reset_password",
     });
 
-    // const path = getPath((p) => p.resetPassword, { token: token.value });
-    // const url = `${env.uiHost}/#${path}`;
-    const url = `PLACEHOLDER_URL/${token}`;
+    const { SERVER_PORT } = environment();
+
+    const url = `http://localhost:${SERVER_PORT}/#${getPath(
+      (p) => p.resetPassword,
+      { token: token.value }
+    )}`;
 
     await this.emailService.send({
       to: email,

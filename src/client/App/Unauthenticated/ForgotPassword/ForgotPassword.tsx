@@ -12,9 +12,11 @@ import { InlineErrorMessage } from "../../../common/components/Form/InlineErrorM
 import { Link } from "../../../common/components/Link/Link";
 import { FullPageContainer } from "../../common/FullPageContainer";
 
+export type OnSendResetFn = (email: string) => Promise<Try>;
+
 interface IForgotPasswordProps {
   email?: string;
-  onSendReset: (email: string) => Promise<Try>;
+  onSendReset: OnSendResetFn;
   onBackToLogin: () => void;
 }
 
@@ -78,6 +80,7 @@ export const ForgotPassword: React.FC<IForgotPasswordProps> = ({
               secondaryLabel={
                 <InlineErrorMessage>{emailError()}</InlineErrorMessage>
               }
+              autoFocus={true}
             />
             <FormSubmitButton processing={isProcessing}>
               Send Reset Password Link
