@@ -1,18 +1,27 @@
 name: ci
 on: push
-jobs:
+jobs:     
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Yarn Install
         run: yarn
       - name: Run linters
         run: yarn lint
+      
   typescript:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Yarn Install
         run: yarn
       - name: TypeScript Build
@@ -21,6 +30,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Yarn Install
         run: yarn
       - name: Start docker services
@@ -31,10 +44,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
       - name: Yarn Install
         run: yarn
       - name: Start docker services
         run: yarn cli docker start
-      - name: Run Cypress Tests
-        run: yarn cli test jest
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
       
