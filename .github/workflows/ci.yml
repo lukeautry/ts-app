@@ -54,7 +54,10 @@ jobs:
         run: yarn cli docker start
       - name: Check running network
         run: netstat -tulnp
+      - name: npm install
+        run: npm install
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          wait-on: 'http://localhost:44431'
+          start: npm start
+          wait-on: 'http://localhost:3000'
