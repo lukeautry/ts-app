@@ -1,6 +1,6 @@
 import chalk from "chalk";
 
-export type MessageType = "pending" | "success" | "error" | "custom";
+type MessageType = "pending" | "success" | "error" | "custom";
 
 interface ILogOptions {
   type: MessageType;

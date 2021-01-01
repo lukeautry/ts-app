@@ -3,14 +3,14 @@ import {
   dbConnectionNames,
 } from "./database/db-connection-name";
 
-export interface IEnvironment {
+interface IEnvironment {
   DB_CONNECTION: DbConnectionName;
   SERVER_PORT: number;
   NODE_ENV: NodeEnvironment;
 }
 
 export const validNodeEnvs = ["dev", "test", "prod"] as const;
-export type NodeEnvironment = typeof validNodeEnvs[number];
+type NodeEnvironment = typeof validNodeEnvs[number];
 
 const getEnvValue = (key: string) => {
   const value = process.env[key];

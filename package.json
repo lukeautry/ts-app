@@ -13,7 +13,8 @@
     "watch": "yarn build --watch",
     "typeorm": "ts-node ./node_modules/.bin/typeorm",
     "start": "cross-env COMPILED_JS=true NODE_ENV=dev DB_CONNECTION=defaultdb SERVER_PORT=3000 node --es-module-specifier-resolution=node ./dist/server/start.js",
-    "cypress": "cypress open"
+    "cypress": "cypress open",
+    "unused": "ts-prune -p tsconfig.prune.json -i \"src/cli/commands|src/openapi-client/out|src/node/database/migrations\""
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -86,6 +87,7 @@
     "ts-jest": "^26.4.4",
     "ts-loader": "^8.0.13",
     "ts-node": "^9.1.1",
+    "ts-prune": "^0.8.4",
     "typescript": "^4.1.3",
     "webpack": "^5.11.1",
     "webpack-bundle-analyzer": "^4.3.0",
