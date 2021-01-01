@@ -4,6 +4,8 @@ This project is a starting point for developing an API-first application using T
 
 This project aims to support a "domain driven" approach. A client library is automatically generated from the API, providing a statically typed interface with which to interact with the API from the React UI. The goal is to provide a type-safe and productive developer experience for rapid web application development.
 
+** **Check out the new [SaaS branch](https://github.com/lukeautry/ts-app/tree/saas)!** Includes login flow, password reset, routing, emails and email previews, component library development via Cosmos, and more **
+
 ## Getting started
 
 - `yarn` to install dependencies
