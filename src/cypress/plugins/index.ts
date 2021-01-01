@@ -1,4 +1,7 @@
 /// <reference types="cypress" />
+
+import { UserRepository } from "../../node/database/repositories/user-repository";
+
 // ***********************************************************
 // This example plugins/index.js can be used to load plugins
 //
@@ -12,11 +15,17 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-/**
- * @type {Cypress.PluginConfig}
- */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-module.exports = (_on: {}, _config: {}) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+const handler = (on: (val: "task", handlers: {}) => null) => {
+  on("task", {
+    async deleteUserByEmail(email: string) {
+      await new UserRepository().delete({
+        email,
+      });
+      console.log(`user ${email} deleted`);
+
+      return null;
+    },
+  });
 };
+
+export default handler;

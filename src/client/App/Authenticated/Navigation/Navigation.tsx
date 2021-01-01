@@ -15,6 +15,7 @@ import { NavigationBrand } from "../../../common/components/Navigation/Navigatio
 import { NavigationLink } from "../../../common/components/Navigation/NavigationLink";
 import { UserChip } from "../../../common/components/UserChip/UserChip";
 import { AuthenticatedContext } from "../AuthenticatedContext";
+import { NavigationSelectors } from "./Navigation.selectors";
 
 const PrimaryLinkGroup = styled.div`
   flex-grow: 1;
@@ -52,7 +53,7 @@ export const Navigation = () => {
           Settings
         </NavigationLink>
         <NavigationLink onClick={appContext.onLogOut} icon={<PowerOff />}>
-          Log Out
+          <span data-testid={NavigationSelectors.LogOutLink}>Log Out</span>
         </NavigationLink>
       </SecondaryLinkGroup>
     </NavigationBar>

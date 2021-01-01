@@ -13,7 +13,6 @@ interface IButtonProps {
   type?: "button" | "submit";
   processing?: boolean;
   disabled?: boolean;
-  testId?: string;
 }
 
 const StyledButton = styled.button`
@@ -43,9 +42,8 @@ export const Button: React.FC<IButtonProps> = ({
   children,
   processing,
   disabled,
-  testId,
 }) => (
-  <StyledButton type={type} disabled={disabled} data-testid={testId}>
+  <StyledButton type={type} disabled={disabled}>
     {processing ? <ButtonLoader size={25} /> : children}
   </StyledButton>
 );

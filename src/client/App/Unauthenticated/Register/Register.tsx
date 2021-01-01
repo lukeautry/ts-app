@@ -11,6 +11,7 @@ import { FormError } from "../../../common/components/Form/FormError";
 import { FullPageContainer } from "../../common/FullPageContainer";
 import { FormLinks } from "../../../common/components/Form/FormLinks";
 import { Link } from "../../../common/components/Link/Link";
+import { RegisterSelectors } from "./Register.selectors";
 
 interface IRegisterProps {
   onRegister: (params: IOnRegisterParams) => Promise<Try>;
@@ -129,6 +130,7 @@ export const Register: React.FC<IRegisterProps> = ({
               hasError={!!emailError()}
               secondaryLabel={renderErrorMessage(emailError())}
               autoFocus={true}
+              testId={RegisterSelectors.EmailInput}
             />
             <FormInput
               label="Name"
@@ -137,6 +139,7 @@ export const Register: React.FC<IRegisterProps> = ({
               onChange={(val) => setName(val)}
               hasError={!!nameError()}
               secondaryLabel={renderErrorMessage(nameError())}
+              testId={RegisterSelectors.NameInput}
             />
             <FormInput
               label="Password"
@@ -146,6 +149,7 @@ export const Register: React.FC<IRegisterProps> = ({
               onChange={(val) => setPassword(val)}
               hasError={!!passwordError()}
               secondaryLabel={renderErrorMessage(passwordError())}
+              testId={RegisterSelectors.PasswordInput}
             />
             <FormInput
               label="Confirm Password"
@@ -155,9 +159,10 @@ export const Register: React.FC<IRegisterProps> = ({
               onChange={(val) => setConfirmPassword(val)}
               hasError={!!confirmPasswordError()}
               secondaryLabel={renderErrorMessage(confirmPasswordError())}
+              testId={RegisterSelectors.ConfirmPasswordInput}
             />
             <FormSubmitButton processing={isProcessing}>
-              Register
+              <span data-testid={RegisterSelectors.SubmitButton}>Register</span>
             </FormSubmitButton>
             <FormLinks>
               <Link onClick={onBackToLogin}>Back to Login</Link>

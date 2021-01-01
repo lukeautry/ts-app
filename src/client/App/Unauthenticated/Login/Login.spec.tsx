@@ -1,6 +1,7 @@
 import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import { Login, LoginSelectors } from "./Login";
+import { Login } from "./Login";
+import { LoginSelectors } from "./Login.selectors";
 
 describe("Login", () => {
   const email = "test@test.com";

@@ -11,7 +11,7 @@ import { FormError } from "../../../common/components/Form/FormError";
 import { FullPageContainer } from "../../common/FullPageContainer";
 import { FormLinks } from "../../../common/components/Form/FormLinks";
 import { Link } from "../../../common/components/Link/Link";
-import { componentSelectors } from "../../../common/utils/component-selectors";
+import { LoginSelectors } from "./Login.selectors";
 
 export interface IOnLoginParams {
   email: string;
@@ -27,12 +27,6 @@ interface ILoginProps {
 const Container = styled.div`
   width: 320px;
 `;
-
-export const LoginSelectors = componentSelectors("Login", [
-  "EmailInput",
-  "PasswordInput",
-  "SubmitButton",
-]);
 
 export const Login: React.FC<ILoginProps> = ({
   onLogin,
@@ -117,14 +111,15 @@ export const Login: React.FC<ILoginProps> = ({
               }
               testId={LoginSelectors.PasswordInput}
             />
-            <FormSubmitButton
-              processing={isProcessing}
-              testId={LoginSelectors.SubmitButton}
-            >
-              Login
+            <FormSubmitButton processing={isProcessing}>
+              <span data-testid={LoginSelectors.SubmitButton}>Login</span>
             </FormSubmitButton>
             <FormLinks>
-              <Link onClick={onRegister}>Not signed up? Register</Link>
+              <Link onClick={onRegister}>
+                <span data-testid={LoginSelectors.RegisterLink}>
+                  Not signed up? Register
+                </span>
+              </Link>
               <Link onClick={onForgotPassword}>Forgot Password?</Link>
             </FormLinks>
             {error && <FormError>{error}</FormError>}
