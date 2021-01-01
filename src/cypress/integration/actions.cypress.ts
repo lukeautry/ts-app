@@ -1,7 +1,7 @@
-import { AppSelectors } from "../../client/App/App";
-import { CreateUserRowSelectors } from "../../client/App/CreateUserRow";
-import { EditUserModalSelectors } from "../../client/App/EditUserModal";
-import { UserRowSelectors } from "../../client/App/UserRow";
+import { AppSelectors } from "../../client/App/App.selectors";
+import { CreateUserRowSelectors } from "../../client/App/CreateUserRow.selectors";
+import { EditUserModalSelectors } from "../../client/App/EditUserModal.selectors";
+import { UserRowSelectors } from "../../client/App/UserRow.selectors";
 
 const selector = (val: string) => `[data-testid=${val}]`;
 

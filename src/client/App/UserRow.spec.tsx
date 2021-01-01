@@ -1,7 +1,8 @@
 import React from "react";
 import { render, fireEvent } from "@testing-library/react";
 import { IUser } from "../../openapi-client/out";
-import { UserRowSelectors, UserRow } from "./UserRow";
+import { UserRow } from "./UserRow";
+import { UserRowSelectors } from "./UserRow.selectors";
 
 const now = new Date().toISOString();
 

@@ -1,19 +1,13 @@
 import React from "react";
 import { IUser } from "../../openapi-client/out";
 import { ActionButton } from "../common/ActionButton";
-import { componentSelectors } from "../common/utils/component-selectors";
+import { UserRowSelectors } from "./UserRow.selectors";
 
 interface IUserRowProps {
   user: IUser;
   onDeleteUser: (user: IUser) => void;
   onClickEdit: () => void;
 }
-
-export const UserRowSelectors = componentSelectors("UserRow", [
-  "TableRow",
-  "EditButton",
-  "DeleteButton",
-]);
 
 export const UserRow: React.FC<IUserRowProps> = ({
   user,

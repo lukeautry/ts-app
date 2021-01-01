@@ -6,22 +6,13 @@ import { ModalBody } from "../common/Modal/ModalBody";
 import { ModalButton } from "../common/Modal/ModalButton";
 import { ModalFooter } from "../common/Modal/ModalFooter";
 import { ModalHeader } from "../common/Modal/ModalHeader";
-import { componentSelectors } from "../common/utils/component-selectors";
+import { EditUserModalSelectors } from "./EditUserModal.selectors";
 
 interface IEditUserModal {
   user: IUser;
   onConfirm: (userId: number, request: IUpdateUserRequest) => void;
   onClose: () => void;
 }
-
-export const EditUserModalSelectors = componentSelectors("EditUserModal", [
-  "Modal",
-  "EmailInput",
-  "NameInput",
-  "AddressInput",
-  "CancelButton",
-  "SubmitButton",
-]);
 
 export const EditUserModal: React.FC<IEditUserModal> = ({
   onClose,

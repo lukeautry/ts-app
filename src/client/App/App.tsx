@@ -11,7 +11,7 @@ import { ModalBody } from "../common/Modal/ModalBody";
 import { ModalButton } from "../common/Modal/ModalButton";
 import { ModalFooter } from "../common/Modal/ModalFooter";
 import { ModalHeader } from "../common/Modal/ModalHeader";
-import { componentSelectors } from "../common/utils/component-selectors";
+import { AppSelectors } from "./App.selectors";
 import { UserGrid } from "./UserGrid";
 
 const Container = styled.div`
@@ -19,11 +19,6 @@ const Container = styled.div`
     font-family: monospace;
   }
 `;
-
-export const AppSelectors = componentSelectors("app", [
-  "CancelDeleteButton",
-  "ConfirmDeleteButton",
-]);
 
 export const App = () => {
   const [users, setUsers] = useState<IUser[] | undefined>(undefined);

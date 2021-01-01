@@ -3,18 +3,11 @@ import { ICreateUserRequest } from "../../openapi-client/out";
 import { ActionButton } from "../common/ActionButton";
 import { UserGridInput } from "../common/UserGridInput";
 import { isValidEmail } from "../../common/validation/is-valid-email";
-import { componentSelectors } from "../common/utils/component-selectors";
+import { CreateUserRowSelectors } from "./CreateUserRow.selectors";
 
 interface ICreateUserProps {
   onCreateUser: (params: ICreateUserRequest) => void;
 }
-
-export const CreateUserRowSelectors = componentSelectors("CreateUserRow", [
-  "EmailInput",
-  "NameInput",
-  "AddressInput",
-  "SaveButton",
-]);
 
 export const CreateUserRow: React.FC<ICreateUserProps> = ({ onCreateUser }) => {
   const [email, setEmail] = useState("");
