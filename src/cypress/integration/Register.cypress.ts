@@ -2,7 +2,7 @@ import { LoginSelectors } from "../../client/App/Unauthenticated/Login/Login.sel
 import { NavigationSelectors } from "../../client/App/Authenticated/Navigation/Navigation.selectors";
 import { RegisterSelectors } from "../../client/App/Unauthenticated/Register/Register.selectors";
 import { click, get, type } from "../common/utilities";
-import { getCypressTaskRoute } from "../../server/cypress-tasks";
+import { getCypressTaskRoute } from "../../server/routes/get-cypress-task-route";
 import { cypressConstants } from "../common/cypress-constants";
 
 context("Register", () => {

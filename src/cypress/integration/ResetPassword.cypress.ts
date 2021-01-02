@@ -1,10 +1,11 @@
 import { LoginSelectors } from "../../client/App/Unauthenticated/Login/Login.selectors";
 import { click, type } from "../common/utilities";
-import { getCypressTaskRoute } from "../../server/cypress-tasks";
+import { getCypressTaskRoute } from "../../server/routes/get-cypress-task-route";
 import { cypressConstants } from "../common/cypress-constants";
 import { ForgotPasswordSelectors } from "../../client/App/Unauthenticated/ForgotPassword/ForgotPassword.selectors";
 import { ResetPasswordSelectors } from "../../client/App/Unauthenticated/ResetPassword/ResetPassword.selectors";
 import { NavigationSelectors } from "../../client/App/Authenticated/Navigation/Navigation.selectors";
+import { ResetEmailSelectors } from "../../email/templates/ResetEmail.selectors";
 
 context("ResetPassword", () => {
   const { baseUrl, email, password, name } = cypressConstants;
@@ -23,11 +24,12 @@ context("ResetPassword", () => {
     click(ForgotPasswordSelectors.SubmitButton);
 
     cy.request(
-      getCypressTaskRoute(baseUrl, "getResetPasswordUrl", { email })
+      getCypressTaskRoute(baseUrl, "getResetPasswordEmailUrl", { email })
     ).then((response) => {
       const { url } = response.body;
-
       cy.visit(url);
+
+      click(ResetEmailSelectors.ResetLink);
 
       type(ResetPasswordSelectors.PasswordInput, newPassword);
       type(ResetPasswordSelectors.ConfirmPasswordInput, newPassword);

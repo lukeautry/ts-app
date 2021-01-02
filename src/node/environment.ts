@@ -50,3 +50,8 @@ export const environment = (): IEnvironment => {
     JWT_SECRET: getEnvValue("JWT_SECRET"),
   };
 };
+
+export const getBaseUrl = () => {
+  const { SERVER_PORT } = environment();
+  return `http://localhost:${SERVER_PORT}`;
+};

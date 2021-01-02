@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { EmailWrapper } from "./EmailWrapper";
+import { ResetEmailSelectors } from "./ResetEmail.selectors";
 
-interface IResetPasswordProps {
+export interface IResetPasswordProps {
   resetUrl: string;
 }
 
@@ -12,7 +13,9 @@ export const ResetPassword: React.FC<IResetPasswordProps> = ({ resetUrl }) => {
       <div>
         <div>A request has been sent to reset your password</div>
         <div>
-          <a href={resetUrl}>Reset Password</a>
+          <a data-testid={ResetEmailSelectors.ResetLink} href={resetUrl}>
+            Reset Password
+          </a>
         </div>
       </div>
     </EmailWrapper>

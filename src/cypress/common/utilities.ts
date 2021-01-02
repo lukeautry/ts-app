@@ -1,5 +1,5 @@
 import { setAccessToken } from "../../client/App/common/access-token-cache";
-import { getCypressTaskRoute } from "../../server/cypress-tasks";
+import { getCypressTaskRoute } from "../../server/routes/get-cypress-task-route";
 import { cypressConstants } from "./cypress-constants";
 
 const testId = (val: string) => `[data-testid=${val}]`;

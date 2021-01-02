@@ -1,4 +1,4 @@
-import { componentSelectors } from "../../../common/utils/component-selectors";
+import { componentSelectors } from "../../../../common/utils/component-selectors";
 
 export const ResetPasswordSelectors = componentSelectors("ResetPassword", [
   "PasswordInput",

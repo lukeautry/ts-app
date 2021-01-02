@@ -1,9 +1,11 @@
 import { Express } from "express";
-import { UserRepository } from "../node/database/repositories/user-repository";
-import { VerificationTokenRepository } from "../node/database/repositories/verification-token-repository";
-import { HttpStatusCode } from "./common/http-status-code";
-import { getEmailService } from "./services/email-service";
-import { UserService } from "./services/user-service";
+import { UserRepository } from "../../node/database/repositories/user-repository";
+import { VerificationTokenRepository } from "../../node/database/repositories/verification-token-repository";
+import { getBaseUrl } from "../../node/environment";
+import { HttpStatusCode } from "../common/http-status-code";
+import { getEmailService } from "../services/email-service";
+import { UserService } from "../services/user-service";
+import { getEmailPreviewRoute } from "./get-email-preview-route";
 
 export interface ICreateUserParams {
   email: string;
@@ -24,7 +26,7 @@ const tasks = {
     await new UserRepository().delete({ email });
     return {};
   },
-  async getResetPasswordUrl({ email }: { email: string }) {
+  async getResetPasswordEmailUrl({ email }: { email: string }) {
     const user = await new UserRepository().findOne({ where: { email } });
     if (!user) {
       throw new Error(`no user with email ${email}`);
@@ -38,7 +40,11 @@ const tasks = {
     }
 
     return {
-      url: UserService.getResetPasswordUrl(token.value),
+      url: getEmailPreviewRoute(getBaseUrl(), "reset-password", {
+        resetUrl: encodeURIComponent(
+          UserService.getResetPasswordUrl(token.value)
+        ),
+      }),
     };
   },
 };

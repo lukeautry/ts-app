@@ -1,7 +1,7 @@
 import { LoginSelectors } from "../../client/App/Unauthenticated/Login/Login.selectors";
 import { NavigationSelectors } from "../../client/App/Authenticated/Navigation/Navigation.selectors";
 import { click, get, type } from "../common/utilities";
-import { getCypressTaskRoute } from "../../server/cypress-tasks";
+import { getCypressTaskRoute } from "../../server/routes/get-cypress-task-route";
 import { cypressConstants } from "../common/cypress-constants";
 
 context("Login", () => {

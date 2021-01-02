@@ -1,8 +1,15 @@
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { Express } from "express";
-import { templates } from "../email/templates";
-import { HttpStatusCode } from "./common/http-status-code";
+import { ResetPassword } from "../../email/templates/ResetEmail";
+import { HttpStatusCode } from "../common/http-status-code";
+
+const templates = {
+  "reset-password": ResetPassword,
+};
+
+export type Templates = typeof templates;
+type TemplateType = keyof Templates;
 
 export const registerEmailPreview = (app: Express) => {
   app.get("/email-preview", async (req, res) => {
@@ -34,10 +41,10 @@ export const registerEmailPreview = (app: Express) => {
       return;
     }
 
-    const { component: Component, defaultProps } = templates[
-      template as keyof typeof templates
-    ];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const Component = templates[template as TemplateType] as any;
+    const props = req.query;
 
-    res.send(ReactDOMServer.renderToString(<Component {...defaultProps} />));
+    res.send(ReactDOMServer.renderToString(<Component {...props} />));
   });
 };

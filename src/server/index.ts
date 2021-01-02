@@ -5,8 +5,8 @@ import { environment } from "../node/environment";
 import { log } from "../node/utils/log";
 import { getAssetsJSON } from "./common/get-assets-json";
 import { registerRoutes } from "./register-routes";
-import { registerEmailPreview } from "./register-email-preview";
-import { registerCypressTasks } from "./register-cypress-tasks";
+import { registerEmailPreview } from "./routes/register-email-preview";
+import { registerCypressTasks } from "./routes/register-cypress-tasks";
 
 export const server = () => {
   const app = express()
@@ -21,7 +21,7 @@ export const server = () => {
 
   const { SERVER_PORT, NODE_ENV } = environment();
 
-  if (NODE_ENV === "dev") {
+  if (NODE_ENV === "dev" || NODE_ENV === "test") {
     registerEmailPreview(app);
   }
 

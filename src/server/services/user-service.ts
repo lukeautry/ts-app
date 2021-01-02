@@ -8,7 +8,7 @@ import { validatePasswordRequirements } from "../../common/validation/validate-p
 import { log } from "../../node/utils/log";
 import { IUser } from "../../node/database/entities/user";
 import { renderResetPassword } from "../../email/templates/ResetEmail";
-import { environment } from "../../node/environment";
+import { getBaseUrl } from "../../node/environment";
 import { getPath } from "../../common/paths";
 import { AuthenticationService, IAccessToken } from "./authentication-service";
 import { UserPasswordService } from "./user-password-service";
@@ -45,9 +45,7 @@ export class UserService {
   constructor(private readonly emailService: IEmailService) {}
 
   static getResetPasswordUrl(token: string) {
-    const { SERVER_PORT } = environment();
-
-    return `http://localhost:${SERVER_PORT}/#${getPath((p) => p.resetPassword, {
+    return `${getBaseUrl()}/#${getPath((p) => p.resetPassword, {
       token,
     })}`;
   }
