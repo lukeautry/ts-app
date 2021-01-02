@@ -120,7 +120,11 @@ export const Login: React.FC<ILoginProps> = ({
                   Not signed up? Register
                 </span>
               </Link>
-              <Link onClick={onForgotPassword}>Forgot Password?</Link>
+              <Link onClick={onForgotPassword}>
+                <span data-testid={LoginSelectors.ForgotPasswordLink}>
+                  Forgot Password?
+                </span>
+              </Link>
             </FormLinks>
             {error && <FormError>{error}</FormError>}
           </Form>

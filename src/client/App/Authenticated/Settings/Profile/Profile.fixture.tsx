@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Try } from "../../../../common/try";
-import { sleep } from "../../../../common/utils/sleep";
+import { Try } from "../../../../../common/try";
+import { sleep } from "../../../../../common/utils/sleep";
 import { Profile } from "./Profile";
 
 const Container = styled.div`

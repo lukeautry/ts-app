@@ -4,7 +4,6 @@ import { click, get, type } from "../common/utilities";
 import { getCypressTaskRoute } from "../../server/cypress-tasks";
 import { cypressConstants } from "../common/cypress-constants";
 
-
 context("Login", () => {
   const { baseUrl, email, password, name } = cypressConstants;
 

@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { UsersService } from "../../../../openapi-client/out";
-import { AppContext } from "../../AppContext";
-import { getAPIError } from "../../common/get-api-error";
-import { AuthenticatedContext } from "../AuthenticatedContext";
-import { Profile, ProfileSubmitFn } from "./Profile";
+import { UsersService } from "../../../../../openapi-client/out";
+import { AppContext } from "../../../AppContext";
+import { getAPIError } from "../../../common/get-api-error";
+import { AuthenticatedContext } from "../../AuthenticatedContext";
+import { ProfileSubmitFn, Profile } from "./Profile";
 
 const Container = styled.div`
   max-width: 400px;

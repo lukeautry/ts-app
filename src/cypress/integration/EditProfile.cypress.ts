@@ -3,7 +3,7 @@ import { SettingsSelectors } from "../../client/App/Authenticated/Settings/Setti
 import { NavigationSelectors } from "../../client/App/Authenticated/Navigation/Navigation.selectors";
 import { LoginSelectors } from "../../client/App/Unauthenticated/Login/Login.selectors";
 import { cypressConstants } from "../common/cypress-constants";
-import { ProfileSelectors } from "../../client/App/Authenticated/Settings/Profile.selectors";
+import { ProfileSelectors } from "../../client/App/Authenticated/Settings/Profile/Profile.selectors";
 
 context("EditProfile", () => {
   const newEmail = "test2@test.com";

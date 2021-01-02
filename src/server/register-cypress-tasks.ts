@@ -1,5 +1,6 @@
 import { Express } from "express";
 import { UserRepository } from "../node/database/repositories/user-repository";
+import { VerificationTokenRepository } from "../node/database/repositories/verification-token-repository";
 import { HttpStatusCode } from "./common/http-status-code";
 import { getEmailService } from "./services/email-service";
 import { UserService } from "./services/user-service";
@@ -22,6 +23,23 @@ const tasks = {
   async deleteUserByEmail({ email }: { email: string }) {
     await new UserRepository().delete({ email });
     return {};
+  },
+  async getResetPasswordUrl({ email }: { email: string }) {
+    const user = await new UserRepository().findOne({ where: { email } });
+    if (!user) {
+      throw new Error(`no user with email ${email}`);
+    }
+
+    const token = await new VerificationTokenRepository().findOne({
+      where: { user_id: user.id },
+    });
+    if (!token) {
+      throw new Error(`no token with user ID ${user.id}`);
+    }
+
+    return {
+      url: UserService.getResetPasswordUrl(token.value),
+    };
   },
 };
 

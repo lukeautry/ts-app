@@ -7,8 +7,8 @@ import { DashboardSectionContent } from "../../../common/components/DashboardSec
 import { DashboardSectionHeader } from "../../../common/components/DashboardSection/DashboardSectionHeader";
 import { SecondaryNavigation } from "../../../common/components/SecondaryNavigation/SecondaryNavigation";
 import { SecondaryNavigationLink } from "../../../common/components/SecondaryNavigation/SecondaryNavigationLink";
-import { WiredChangePassword } from "./ChangePassword.wired";
-import { WiredProfile } from "./Profile.wired";
+import { WiredChangePassword } from "./ChangePassword/ChangePassword.wired";
+import { WiredProfile } from "./Profile/Profile.wired";
 import { SettingsSelectors } from "./Settings.selectors";
 
 const SettingsContentContainer = styled.div`

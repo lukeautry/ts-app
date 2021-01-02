@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { UsersService } from "../../../../openapi-client/out";
-import { AppContext } from "../../AppContext";
-import { getAPIError } from "../../common/get-api-error";
+import { UsersService } from "../../../../../openapi-client/out";
+import { AppContext } from "../../../AppContext";
+import { getAPIError } from "../../../common/get-api-error";
 import { ChangePassword, ChangePasswordSubmitFn } from "./ChangePassword";
 
 const Container = styled.div`

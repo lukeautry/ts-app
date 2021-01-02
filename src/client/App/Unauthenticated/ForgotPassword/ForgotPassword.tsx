@@ -11,6 +11,7 @@ import { FormSubmitButton } from "../../../common/components/Form/FormSubmitButt
 import { InlineErrorMessage } from "../../../common/components/Form/InlineErrorMessage";
 import { Link } from "../../../common/components/Link/Link";
 import { FullPageContainer } from "../../common/FullPageContainer";
+import { ForgotPasswordSelectors } from "./ForgotPassword.selectors";
 
 export type OnSendResetFn = (email: string) => Promise<Try>;
 
@@ -81,9 +82,12 @@ export const ForgotPassword: React.FC<IForgotPasswordProps> = ({
                 <InlineErrorMessage>{emailError()}</InlineErrorMessage>
               }
               autoFocus={true}
+              testId={ForgotPasswordSelectors.EmailInput}
             />
             <FormSubmitButton processing={isProcessing}>
-              Send Reset Password Link
+              <span data-testid={ForgotPasswordSelectors.SubmitButton}>
+                Send Reset Password Link
+              </span>
             </FormSubmitButton>
             <FormLinks>
               <Link onClick={onBackToLogin}>Back to Login</Link>

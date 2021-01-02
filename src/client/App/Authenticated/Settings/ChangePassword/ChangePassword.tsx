@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { Try } from "../../../../common/try";
-import { Form } from "../../../common/components/Form/Form";
-import { FormError } from "../../../common/components/Form/FormError";
-import { FormInput } from "../../../common/components/Form/FormInput";
-import { FormSubmitButton } from "../../../common/components/Form/FormSubmitButton";
-import { InlineErrorMessage } from "../../../common/components/Form/InlineErrorMessage";
+import { Try } from "../../../../../common/try";
+import { Form } from "../../../../common/components/Form/Form";
+import { FormError } from "../../../../common/components/Form/FormError";
+import { FormInput } from "../../../../common/components/Form/FormInput";
+import { FormSubmitButton } from "../../../../common/components/Form/FormSubmitButton";
+import { InlineErrorMessage } from "../../../../common/components/Form/InlineErrorMessage";
 import { ChangePasswordSelectors } from "./ChangePassword.selectors";
 
 export type ChangePasswordSubmitFn = (params: {

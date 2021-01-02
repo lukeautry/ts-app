@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Try } from "../../../../common/try";
-import { isValidEmail } from "../../../../common/validation/is-valid-email";
-import { Form } from "../../../common/components/Form/Form";
-import { FormError } from "../../../common/components/Form/FormError";
-import { FormInput } from "../../../common/components/Form/FormInput";
-import { FormSubmitButton } from "../../../common/components/Form/FormSubmitButton";
-import { InlineErrorMessage } from "../../../common/components/Form/InlineErrorMessage";
+import { Try } from "../../../../../common/try";
+import { isValidEmail } from "../../../../../common/validation/is-valid-email";
+import { Form } from "../../../../common/components/Form/Form";
+import { FormError } from "../../../../common/components/Form/FormError";
+import { FormInput } from "../../../../common/components/Form/FormInput";
+import { FormSubmitButton } from "../../../../common/components/Form/FormSubmitButton";
+import { InlineErrorMessage } from "../../../../common/components/Form/InlineErrorMessage";
 import { ProfileSelectors } from "./Profile.selectors";
 
 export type ProfileSubmitFn = (params: {

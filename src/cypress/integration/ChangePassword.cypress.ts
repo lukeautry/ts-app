@@ -1,6 +1,6 @@
 import { click, get, logIntoApp, type } from "../common/utilities";
 import { SettingsSelectors } from "../../client/App/Authenticated/Settings/Settings.selectors";
-import { ChangePasswordSelectors } from "../../client/App/Authenticated/Settings/ChangePassword.selectors";
+import { ChangePasswordSelectors } from "../../client/App/Authenticated/Settings/ChangePassword/ChangePassword.selectors";
 import { NavigationSelectors } from "../../client/App/Authenticated/Navigation/Navigation.selectors";
 import { LoginSelectors } from "../../client/App/Unauthenticated/Login/Login.selectors";
 import { cypressConstants } from "../common/cypress-constants";
@@ -27,4 +27,3 @@ context("ChangePassword", () => {
     get(LoginSelectors.SubmitButton).should("exist");
   });
 });
-

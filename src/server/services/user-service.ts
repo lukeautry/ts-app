@@ -44,6 +44,14 @@ export interface IConsumeResetPasswordParams {
 export class UserService {
   constructor(private readonly emailService: IEmailService) {}
 
+  static getResetPasswordUrl(token: string) {
+    const { SERVER_PORT } = environment();
+
+    return `http://localhost:${SERVER_PORT}/#${getPath((p) => p.resetPassword, {
+      token,
+    })}`;
+  }
+
   async getById(id: number) {
     const result = await this.repository.findOne({
       where: {
@@ -168,12 +176,7 @@ export class UserService {
       type: "reset_password",
     });
 
-    const { SERVER_PORT } = environment();
-
-    const url = `http://localhost:${SERVER_PORT}/#${getPath(
-      (p) => p.resetPassword,
-      { token: token.value }
-    )}`;
+    const url = UserService.getResetPasswordUrl(token.value);
 
     await this.emailService.send({
       to: email,

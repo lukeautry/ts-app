@@ -10,6 +10,7 @@ import { FormSubmitButton } from "../../../common/components/Form/FormSubmitButt
 import { InlineErrorMessage } from "../../../common/components/Form/InlineErrorMessage";
 import { Link } from "../../../common/components/Link/Link";
 import { FullPageContainer } from "../../common/FullPageContainer";
+import { ResetPasswordSelectors } from "./ResetPassword.selectors";
 
 export type OnResetFn = (password: string) => Promise<Try>;
 
@@ -82,6 +83,7 @@ export const ResetPassword: React.FC<IResetPasswordProps> = ({
               secondaryLabel={
                 <InlineErrorMessage>{passwordError()}</InlineErrorMessage>
               }
+              testId={ResetPasswordSelectors.PasswordInput}
             />
             <FormInput
               label="Confirm Password"
@@ -95,9 +97,12 @@ export const ResetPassword: React.FC<IResetPasswordProps> = ({
                   {confirmPasswordError()}
                 </InlineErrorMessage>
               }
+              testId={ResetPasswordSelectors.ConfirmPasswordInput}
             />
             <FormSubmitButton processing={isProcessing}>
-              Set New Password
+              <span data-testid={ResetPasswordSelectors.SubmitButton}>
+                Set New Password
+              </span>
             </FormSubmitButton>
             <FormLinks>
               <Link onClick={onBackToLogin}>Back to Login</Link>
