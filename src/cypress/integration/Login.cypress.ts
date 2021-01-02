@@ -2,12 +2,11 @@ import { LoginSelectors } from "../../client/App/Unauthenticated/Login/Login.sel
 import { NavigationSelectors } from "../../client/App/Authenticated/Navigation/Navigation.selectors";
 import { click, get, type } from "../common/utilities";
 import { getCypressTaskRoute } from "../../server/cypress-tasks";
+import { cypressConstants } from "../common/cypress-constants";
+
 
 context("Login", () => {
-  const baseUrl = "http://localhost:3037";
-  const email = "test@test.com";
-  const password = "test1234";
-  const name = "Test User";
+  const { baseUrl, email, password, name } = cypressConstants;
 
   beforeEach(() => {
     cy.visit(baseUrl);

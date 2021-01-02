@@ -12,9 +12,7 @@ export interface ICreateUserParams {
 
 const tasks = {
   async createUser({ email, password, name }: ICreateUserParams) {
-    await new UserRepository().delete({
-      email,
-    });
+    await new UserRepository().delete({});
     return await new UserService(getEmailService()).register({
       email,
       password,

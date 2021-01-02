@@ -3,10 +3,10 @@ import { NavigationSelectors } from "../../client/App/Authenticated/Navigation/N
 import { RegisterSelectors } from "../../client/App/Unauthenticated/Register/Register.selectors";
 import { click, get, type } from "../common/utilities";
 import { getCypressTaskRoute } from "../../server/cypress-tasks";
+import { cypressConstants } from "../common/cypress-constants";
 
 context("Register", () => {
-  const baseUrl = "http://localhost:3037";
-  const email = "test_new@test.com";
+  const { baseUrl, email, password, name } = cypressConstants;
 
   beforeEach(() => {
     cy.visit(baseUrl);
@@ -20,9 +20,9 @@ context("Register", () => {
   it("can register for an account", () => {
     click(LoginSelectors.RegisterLink);
     type(RegisterSelectors.EmailInput, email);
-    type(RegisterSelectors.NameInput, "Test User");
-    type(RegisterSelectors.PasswordInput, "test1234");
-    type(RegisterSelectors.ConfirmPasswordInput, "test1234");
+    type(RegisterSelectors.NameInput, name);
+    type(RegisterSelectors.PasswordInput, password);
+    type(RegisterSelectors.ConfirmPasswordInput, password);
     click(RegisterSelectors.SubmitButton);
     click(NavigationSelectors.LogOutLink);
     get(LoginSelectors.SubmitButton).should("exist");

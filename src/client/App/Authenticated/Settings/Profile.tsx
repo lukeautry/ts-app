@@ -6,6 +6,7 @@ import { FormError } from "../../../common/components/Form/FormError";
 import { FormInput } from "../../../common/components/Form/FormInput";
 import { FormSubmitButton } from "../../../common/components/Form/FormSubmitButton";
 import { InlineErrorMessage } from "../../../common/components/Form/InlineErrorMessage";
+import { ProfileSelectors } from "./Profile.selectors";
 
 export type ProfileSubmitFn = (params: {
   name: string;
@@ -80,6 +81,7 @@ export const Profile: React.FC<IProfileProps> = (props) => {
         hasError={!!emailError()}
         secondaryLabel={<InlineErrorMessage>{emailError()}</InlineErrorMessage>}
         autoFocus={true}
+        testId={ProfileSelectors.EmailInput}
       />
       <FormInput
         inputType="text"
@@ -89,9 +91,10 @@ export const Profile: React.FC<IProfileProps> = (props) => {
         onChange={(val) => setName(val)}
         hasError={!!nameError()}
         secondaryLabel={<InlineErrorMessage>{nameError()}</InlineErrorMessage>}
+        testId={ProfileSelectors.NameInput}
       />
       <FormSubmitButton processing={isProcessing}>
-        Update Profile
+        <span data-testid={ProfileSelectors.SaveButton}>Update Profile</span>
       </FormSubmitButton>
       {error && <FormError>{error}</FormError>}
     </Form>
