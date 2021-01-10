@@ -8,18 +8,18 @@ import { UserService } from "../services/user-service";
 import { getEmailPreviewRoute } from "./get-email-preview-route";
 
 export interface ICreateUserParams {
+  username: string;
   email: string;
   password: string;
-  name: string;
 }
 
 const tasks = {
-  async createUser({ email, password, name }: ICreateUserParams) {
+  async createUser({ username, email, password }: ICreateUserParams) {
     await new UserRepository().delete({});
     return await new UserService(getEmailService()).register({
+      username,
       email,
       password,
-      name,
     });
   },
   async deleteUserByEmail({ email }: { email: string }) {

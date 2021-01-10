@@ -40,7 +40,7 @@ export const Settings = () => {
             isActive={changePasswordMatch?.path.includes(changePasswordPath)}
           >
             <span data-testid={SettingsSelectors.ChangePasswordLink}>
-              ChangePassword
+              Change Password
             </span>
           </SecondaryNavigationLink>
         </SecondaryNavigation>

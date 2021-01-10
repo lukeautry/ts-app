@@ -3,7 +3,7 @@
 /* eslint-disable */
 
 export type IUserRegisterParams = {
+    username: string;
     email: string;
-    name: string;
     password: string;
 }

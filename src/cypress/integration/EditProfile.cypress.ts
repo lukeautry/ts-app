@@ -7,8 +7,7 @@ import { ProfileSelectors } from "../../client/App/Authenticated/Settings/Profil
 
 context("EditProfile", () => {
   const newEmail = "test2@test.com";
-  const newName = "Test Name Changed";
-  const { password } = cypressConstants;
+  const { username, password } = cypressConstants;
 
   beforeEach(() => {
     logIntoApp();
@@ -17,18 +16,16 @@ context("EditProfile", () => {
   it("can update profile", () => {
     click(SettingsSelectors.ProfileLink);
     type(ProfileSelectors.EmailInput, newEmail);
-    type(ProfileSelectors.NameInput, newName);
     click(ProfileSelectors.SaveButton);
 
     click(NavigationSelectors.LogOutLink);
 
-    type(LoginSelectors.EmailInput, newEmail);
+    type(LoginSelectors.UsernameInput, username);
     type(LoginSelectors.PasswordInput, password);
     click(LoginSelectors.SubmitButton);
 
     click(SettingsSelectors.ProfileLink);
     get(ProfileSelectors.EmailInput).should("have.value", newEmail);
-    get(ProfileSelectors.NameInput).should("have.value", newName);
 
     click(NavigationSelectors.LogOutLink);
   });

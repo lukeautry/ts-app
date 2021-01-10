@@ -28,7 +28,7 @@ const SecondaryLinkGroup = styled.div`
 export const Navigation = () => {
   const appContext = useContext(AppContext);
   const { user } = useContext(AuthenticatedContext);
-  const { name, email } = user;
+  const { email, username } = user;
 
   const settingsPath = getPath((p) => p.dashboard.settings);
   const match = useRouteMatch(settingsPath);
@@ -44,7 +44,7 @@ export const Navigation = () => {
         <NavigationLink icon={<ArrowAltCircleUp />}>Section 3</NavigationLink>
       </PrimaryLinkGroup>
       <SecondaryLinkGroup>
-        <UserChip email={email} name={name} />
+        <UserChip email={email} username={username} />
         <NavigationLink
           href={`#${settingsPath}`}
           icon={<Cog />}

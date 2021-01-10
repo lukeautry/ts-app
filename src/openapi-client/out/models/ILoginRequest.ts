@@ -3,6 +3,6 @@
 /* eslint-disable */
 
 export type ILoginRequest = {
-    email: string;
+    username: string;
     password: string;
 }

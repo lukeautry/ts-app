@@ -6,7 +6,7 @@ import { getCypressTaskRoute } from "../../server/routes/get-cypress-task-route"
 import { cypressConstants } from "../common/cypress-constants";
 
 context("Register", () => {
-  const { baseUrl, email, password, name } = cypressConstants;
+  const { baseUrl, username, email, password } = cypressConstants;
 
   beforeEach(() => {
     cy.visit(baseUrl);
@@ -19,8 +19,8 @@ context("Register", () => {
 
   it("can register for an account", () => {
     click(LoginSelectors.RegisterLink);
+    type(RegisterSelectors.UsernameInput, username);
     type(RegisterSelectors.EmailInput, email);
-    type(RegisterSelectors.NameInput, name);
     type(RegisterSelectors.PasswordInput, password);
     type(RegisterSelectors.ConfirmPasswordInput, password);
     click(RegisterSelectors.SubmitButton);

@@ -9,7 +9,7 @@ import { HttpStatusCode } from "../common/http-status-code";
 import { OperationError } from "../common/operation-error";
 
 export interface ILoginRequest {
-  readonly email: string;
+  readonly username: string;
   readonly password: string;
 }
 
@@ -23,7 +23,7 @@ export class AuthenticationService {
   public async login(request: ILoginRequest) {
     const user = await new UserRepository().findOne({
       where: {
-        email: request.email,
+        username: request.username,
       },
     });
     if (!user) {

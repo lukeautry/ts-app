@@ -13,13 +13,12 @@ const Container = styled.div`
 export const WiredProfile = () => {
   const { user } = useContext(AuthenticatedContext);
   const { setUser, addMessage } = useContext(AppContext);
-  const { email, name } = user;
+  const { email, username } = user;
 
   const onSubmit: ProfileSubmitFn = async (params) => {
     try {
       const result = await UsersService.update({
         requestBody: {
-          name: params.name,
           email: params.email,
         },
       });
@@ -38,7 +37,7 @@ export const WiredProfile = () => {
 
   return (
     <Container>
-      <Profile onSubmit={onSubmit} email={email} name={name} />
+      <Profile onSubmit={onSubmit} email={email} username={username} />
     </Container>
   );
 };

@@ -8,33 +8,19 @@ import { FormSubmitButton } from "../../../../common/components/Form/FormSubmitB
 import { InlineErrorMessage } from "../../../../common/components/Form/InlineErrorMessage";
 import { ProfileSelectors } from "./Profile.selectors";
 
-export type ProfileSubmitFn = (params: {
-  name: string;
-  email: string;
-}) => Promise<Try>;
+export type ProfileSubmitFn = (params: { email: string }) => Promise<Try>;
 
 interface IProfileProps {
   email: string;
-  name: string;
+  username: string;
   onSubmit: ProfileSubmitFn;
 }
 
 export const Profile: React.FC<IProfileProps> = (props) => {
   const [email, setEmail] = useState(props.email);
-  const [name, setName] = useState(props.name);
   const [dirty, setDirty] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState<string | undefined>(undefined);
-
-  const nameError = () => {
-    if (dirty) {
-      return;
-    }
-
-    if (!name) {
-      return "Must provide name";
-    }
-  };
 
   const emailError = () => {
     if (dirty) {
@@ -53,14 +39,13 @@ export const Profile: React.FC<IProfileProps> = (props) => {
   const onSubmit = async () => {
     setDirty(true);
 
-    if (!name || !email || !isValidEmail(email)) {
+    if (!email || !isValidEmail(email)) {
       return;
     }
 
     setIsProcessing(true);
     setError(undefined);
     const result = await props.onSubmit({
-      name,
       email,
     });
     if (!result.success) {
@@ -74,6 +59,14 @@ export const Profile: React.FC<IProfileProps> = (props) => {
     <Form onSubmit={onSubmit}>
       <FormInput
         inputType="text"
+        label="Username"
+        placeholder="Username"
+        value={props.username}
+        onChange={() => undefined}
+        disabled={true}
+      />
+      <FormInput
+        inputType="text"
         label="Email Address"
         placeholder="Email Address"
         value={email}
@@ -82,16 +75,6 @@ export const Profile: React.FC<IProfileProps> = (props) => {
         secondaryLabel={<InlineErrorMessage>{emailError()}</InlineErrorMessage>}
         autoFocus={true}
         testId={ProfileSelectors.EmailInput}
-      />
-      <FormInput
-        inputType="text"
-        label="Name"
-        placeholder="Name"
-        value={name}
-        onChange={(val) => setName(val)}
-        hasError={!!nameError()}
-        secondaryLabel={<InlineErrorMessage>{nameError()}</InlineErrorMessage>}
-        testId={ProfileSelectors.NameInput}
       />
       <FormSubmitButton processing={isProcessing}>
         <span data-testid={ProfileSelectors.SaveButton}>Update Profile</span>

@@ -11,7 +11,7 @@ const Container = styled.div`
 const ProfileFixture = (result: Try) => (
   <Container>
     <Profile
-      name="Test User"
+      username="testuser"
       email="test@test.com"
       onSubmit={async () => {
         await sleep(1500);

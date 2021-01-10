@@ -16,6 +16,7 @@ interface IInputProps {
   hasError?: boolean;
   autoFocus?: boolean;
   testId?: string;
+  disabled?: boolean;
 }
 
 const StyledInput = styled.input<{ hasError?: boolean }>`
@@ -44,6 +45,7 @@ export const Input = ({
   hasError,
   autoFocus,
   testId,
+  disabled,
 }: IInputProps) => {
   const onInputChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     if (onChange) {
@@ -60,6 +62,7 @@ export const Input = ({
       hasError={hasError}
       autoFocus={autoFocus}
       data-testid={testId}
+      disabled={disabled}
     />
   );
 };

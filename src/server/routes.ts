@@ -13,8 +13,8 @@ const models: TsoaRoute.Models = {
     "IUser": {
         "dataType": "refObject",
         "properties": {
+            "username": {"dataType":"string","required":true},
             "email": {"dataType":"string","required":true},
-            "name": {"dataType":"string","required":true},
             "id": {"dataType":"integer","required":true},
             "date_created": {"dataType":"datetime","required":true},
             "date_updated": {"dataType":"datetime","required":true},
@@ -35,8 +35,8 @@ const models: TsoaRoute.Models = {
     "IUserRegisterParams": {
         "dataType": "refObject",
         "properties": {
+            "username": {"dataType":"string","required":true},
             "email": {"dataType":"string","required":true},
-            "name": {"dataType":"string","required":true},
             "password": {"dataType":"string","required":true},
         },
         "additionalProperties": true,
@@ -45,7 +45,7 @@ const models: TsoaRoute.Models = {
     "ILoginRequest": {
         "dataType": "refObject",
         "properties": {
-            "email": {"dataType":"string","required":true},
+            "username": {"dataType":"string","required":true},
             "password": {"dataType":"string","required":true},
         },
         "additionalProperties": true,
@@ -54,7 +54,6 @@ const models: TsoaRoute.Models = {
     "IUpdateUserParams": {
         "dataType": "refObject",
         "properties": {
-            "name": {"dataType":"string","required":true},
             "email": {"dataType":"string","required":true},
         },
         "additionalProperties": true,

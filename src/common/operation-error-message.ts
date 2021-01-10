@@ -8,4 +8,5 @@ export type OperationErrorMessage =
   | "INVALID_EMAIL_OR_PASSWORD"
   | "INVALID_PARAMETERS"
   | "EXPIRED_TOKEN"
-  | "UNAUTHORIZED";
+  | "UNAUTHORIZED"
+  | "USERNAME_IN_USE";

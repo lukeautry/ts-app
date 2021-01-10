@@ -5,7 +5,7 @@ import { gravatarSize, navBgDark } from "../../variables";
 
 interface IUserChipProps {
   email: string;
-  name: string;
+  username: string;
 }
 
 const Container = styled.div`
@@ -35,7 +35,7 @@ const InfoInnerContainer = styled.div`
   height: 100%;
 `;
 
-const NameContainer = styled.div`
+const UsernameContainer = styled.div`
   color: white;
   font-size: 14px;
   margin-bottom: 3px;
@@ -49,7 +49,7 @@ const EmailContainer = styled.div`
   color: #b9b9b9;
 `;
 
-export const UserChip: React.FC<IUserChipProps> = ({ email, name }) => {
+export const UserChip: React.FC<IUserChipProps> = ({ email, username }) => {
   return (
     <Container>
       <GravatarContainer>
@@ -61,7 +61,7 @@ export const UserChip: React.FC<IUserChipProps> = ({ email, name }) => {
       </GravatarContainer>
       <InfoContainer>
         <InfoInnerContainer>
-          <NameContainer>{name}</NameContainer>
+          <UsernameContainer>{username}</UsernameContainer>
           <EmailContainer>{email}</EmailContainer>
         </InfoInnerContainer>
       </InfoContainer>

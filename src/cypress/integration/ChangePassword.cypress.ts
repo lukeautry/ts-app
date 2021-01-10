@@ -7,7 +7,7 @@ import { cypressConstants } from "../common/cypress-constants";
 
 context("ChangePassword", () => {
   const newPassword = "test12345";
-  const { password, email } = cypressConstants;
+  const { password, username } = cypressConstants;
 
   beforeEach(() => {
     logIntoApp();
@@ -20,7 +20,7 @@ context("ChangePassword", () => {
     type(ChangePasswordSelectors.ConfirmNewPasswordInput, newPassword);
     click(ChangePasswordSelectors.SaveButton);
     click(NavigationSelectors.LogOutLink);
-    type(LoginSelectors.EmailInput, email);
+    type(LoginSelectors.UsernameInput, username);
     type(LoginSelectors.PasswordInput, newPassword);
     click(LoginSelectors.SubmitButton);
     click(NavigationSelectors.LogOutLink);

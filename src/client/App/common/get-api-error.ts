@@ -12,6 +12,7 @@ const messages: Record<OperationErrorMessage, string> = {
   NOT_FOUND: "Not found",
   UNAUTHORIZED: "Unauthorized",
   UNKNOWN_ERROR: "An unknown error occurred. Please try again.",
+  USERNAME_IN_USE: "Username is already in use",
 };
 
 const isObject = (obj: unknown): obj is {} => !!obj && typeof obj === "object";

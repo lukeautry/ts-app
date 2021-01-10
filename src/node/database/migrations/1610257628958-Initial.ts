@@ -1,11 +1,17 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class Initial1607224797761 implements MigrationInterface {
-  name = "Initial1607224797761";
+export class Initial1610257628958 implements MigrationInterface {
+  name = "Initial1610257628958";
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      `CREATE TABLE "users" ("id" SERIAL NOT NULL, "date_created" TIMESTAMP NOT NULL, "date_updated" TIMESTAMP NOT NULL, "email" text NOT NULL, "name" text NOT NULL, CONSTRAINT "UQ_97672ac88f789774dd47f7c8be3" UNIQUE ("email"), CONSTRAINT "PK_a3ffb1c0c8416b9fc6f907b7433" PRIMARY KEY ("id"))`
+      `CREATE TABLE "users" ("id" SERIAL NOT NULL, "date_created" TIMESTAMP NOT NULL, "date_updated" TIMESTAMP NOT NULL, "username" text NOT NULL, "email" text NOT NULL, CONSTRAINT "PK_a3ffb1c0c8416b9fc6f907b7433" PRIMARY KEY ("id"))`
+    );
+    await queryRunner.query(
+      `CREATE UNIQUE INDEX "user_username_key" ON "users" ("username") `
+    );
+    await queryRunner.query(
+      `CREATE UNIQUE INDEX "user_email_key" ON "users" ("email") `
     );
     await queryRunner.query(
       `CREATE TABLE "user_passwords" ("id" SERIAL NOT NULL, "date_created" TIMESTAMP NOT NULL, "date_updated" TIMESTAMP NOT NULL, "hash" text NOT NULL, "user_id" integer NOT NULL, CONSTRAINT "REL_69bf155ad044d776976470eb03" UNIQUE ("user_id"), CONSTRAINT "PK_4244bafe3ae2988e7bb7af61268" PRIMARY KEY ("id"))`
@@ -34,6 +40,8 @@ export class Initial1607224797761 implements MigrationInterface {
     await queryRunner.query(`DROP TABLE "verification_tokens"`);
     await queryRunner.query(`DROP TYPE "verification_tokens_type_enum"`);
     await queryRunner.query(`DROP TABLE "user_passwords"`);
+    await queryRunner.query(`DROP INDEX "user_email_key"`);
+    await queryRunner.query(`DROP INDEX "user_username_key"`);
     await queryRunner.query(`DROP TABLE "users"`);
   }
 }

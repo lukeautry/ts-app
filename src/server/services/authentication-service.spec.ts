@@ -1,6 +1,6 @@
 import {
+  testUsername,
   testUserEmail,
-  testUserName,
   testUserPassword,
 } from "../../node/test/create-test-user";
 import { describeIntegration } from "../../node/test/describe-integration";
@@ -19,8 +19,8 @@ describeIntegration("AuthenticationService", () => {
     };
 
     return new UserService(emailService).register({
+      username: testUsername,
       email: testUserEmail,
-      name: testUserName,
       password: testUserPassword,
     });
   };
@@ -30,7 +30,7 @@ describeIntegration("AuthenticationService", () => {
       await registerUser();
 
       const loginResult = await service.login({
-        email: testUserEmail,
+        username: testUsername,
         password: testUserPassword,
       });
 
@@ -43,7 +43,7 @@ describeIntegration("AuthenticationService", () => {
 
       const err = await expectError(() =>
         service.login({
-          email: testUserEmail,
+          username: testUsername,
           password: "badpassword123",
         })
       );
@@ -60,7 +60,7 @@ describeIntegration("AuthenticationService", () => {
       await registerUser();
 
       const loginResult = await service.login({
-        email: testUserEmail,
+        username: testUsername,
         password: testUserPassword,
       });
 

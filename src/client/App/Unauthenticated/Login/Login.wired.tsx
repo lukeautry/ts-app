@@ -12,11 +12,14 @@ export const WiredLogin = () => {
   const history = useHistory();
   const context = useContext(AppContext);
 
-  const onLogin = async ({ email, password }: IOnLoginParams): Promise<Try> => {
+  const onLogin = async ({
+    username,
+    password,
+  }: IOnLoginParams): Promise<Try> => {
     try {
       const accessToken = await UsersService.login({
         requestBody: {
-          email,
+          username,
           password,
         },
       });

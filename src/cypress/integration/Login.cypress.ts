@@ -5,17 +5,21 @@ import { getCypressTaskRoute } from "../../server/routes/get-cypress-task-route"
 import { cypressConstants } from "../common/cypress-constants";
 
 context("Login", () => {
-  const { baseUrl, email, password, name } = cypressConstants;
+  const { baseUrl, username, email, password } = cypressConstants;
 
   beforeEach(() => {
     cy.visit(baseUrl);
     cy.request(
-      getCypressTaskRoute(baseUrl, "createUser", { email, password, name })
+      getCypressTaskRoute(baseUrl, "createUser", {
+        username,
+        email,
+        password,
+      })
     );
   });
 
   it("can log into account and log out", () => {
-    type(LoginSelectors.EmailInput, email);
+    type(LoginSelectors.UsernameInput, username);
     type(LoginSelectors.PasswordInput, password);
     click(LoginSelectors.SubmitButton);
     click(NavigationSelectors.LogOutLink);

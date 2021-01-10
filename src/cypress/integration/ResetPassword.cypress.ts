@@ -8,13 +8,17 @@ import { NavigationSelectors } from "../../client/App/Authenticated/Navigation/N
 import { ResetEmailSelectors } from "../../email/templates/ResetEmail.selectors";
 
 context("ResetPassword", () => {
-  const { baseUrl, email, password, name } = cypressConstants;
+  const { baseUrl, username, email, password } = cypressConstants;
   const newPassword = "test12345";
 
   beforeEach(() => {
     cy.visit(baseUrl);
     cy.request(
-      getCypressTaskRoute(baseUrl, "createUser", { email, password, name })
+      getCypressTaskRoute(baseUrl, "createUser", {
+        username,
+        email,
+        password,
+      })
     );
   });
 
@@ -36,7 +40,7 @@ context("ResetPassword", () => {
       click(ResetPasswordSelectors.SubmitButton);
       click(NavigationSelectors.LogOutLink);
 
-      type(LoginSelectors.EmailInput, email);
+      type(LoginSelectors.UsernameInput, username);
       type(LoginSelectors.PasswordInput, newPassword);
       click(LoginSelectors.SubmitButton);
       click(NavigationSelectors.LogOutLink);

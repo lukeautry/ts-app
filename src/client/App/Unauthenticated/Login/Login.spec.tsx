@@ -4,7 +4,7 @@ import { Login } from "./Login";
 import { LoginSelectors } from "./Login.selectors";
 
 describe("Login", () => {
-  const email = "test@test.com";
+  const username = "testuser";
   const password = "test-password";
 
   it("should call back with expected params", async () => {
@@ -22,8 +22,8 @@ describe("Login", () => {
       />
     );
 
-    fireEvent.change(result.getByTestId(LoginSelectors.EmailInput), {
-      target: { value: email },
+    fireEvent.change(result.getByTestId(LoginSelectors.UsernameInput), {
+      target: { value: username },
     });
     fireEvent.change(result.getByTestId(LoginSelectors.PasswordInput), {
       target: { value: password },
@@ -32,7 +32,7 @@ describe("Login", () => {
     fireEvent.click(result.getByTestId(LoginSelectors.SubmitButton));
 
     await waitFor(() =>
-      expect(onLogin).toHaveBeenCalledWith({ email, password })
+      expect(onLogin).toHaveBeenCalledWith({ username, password })
     );
   });
 });

@@ -18,6 +18,7 @@ interface IFormInputProps {
   hasError?: boolean;
   autoFocus?: boolean;
   testId?: string;
+  disabled?: boolean;
 }
 
 const Container = styled.div`
@@ -52,6 +53,7 @@ export const FormInput: React.FC<IFormInputProps> = ({
   hasError,
   autoFocus,
   testId,
+  disabled,
 }) => {
   return (
     <Container>
@@ -67,6 +69,7 @@ export const FormInput: React.FC<IFormInputProps> = ({
         hasError={hasError}
         autoFocus={autoFocus}
         testId={testId}
+        disabled={disabled}
       />
     </Container>
   );

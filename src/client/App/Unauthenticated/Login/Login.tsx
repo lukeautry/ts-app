@@ -4,7 +4,6 @@ import { Card } from "../../../common/components/Card/Card";
 import { Form } from "../../../common/components/Form/Form";
 import { FormInput } from "../../../common/components/Form/FormInput";
 import { FormSubmitButton } from "../../../common/components/Form/FormSubmitButton";
-import { isValidEmail } from "../../../../common/validation/is-valid-email";
 import { Try } from "../../../../common/try";
 import { InlineErrorMessage } from "../../../common/components/Form/InlineErrorMessage";
 import { FormError } from "../../../common/components/Form/FormError";
@@ -14,7 +13,7 @@ import { Link } from "../../../common/components/Link/Link";
 import { LoginSelectors } from "./Login.selectors";
 
 export interface IOnLoginParams {
-  email: string;
+  username: string;
   password: string;
 }
 
@@ -33,24 +32,19 @@ export const Login: React.FC<ILoginProps> = ({
   onForgotPassword,
   onRegister,
 }) => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [error, setError] = useState<string>();
 
-  const emailError = () => {
+  const usernameError = () => {
     if (!dirty) {
       return;
     }
 
-    if (!email) {
-      return "Email is required";
-    }
-
-    const isValid = isValidEmail(email);
-    if (!isValid) {
-      return "Provide a valid email address";
+    if (!username) {
+      return "Username is required";
     }
 
     return;
@@ -65,11 +59,11 @@ export const Login: React.FC<ILoginProps> = ({
   const onSubmit = async () => {
     setDirty(true);
 
-    if (isValidEmail(email) && password) {
+    if (username && password) {
       setIsProcessing(true);
 
       const result = await onLogin({
-        email,
+        username,
         password,
       });
       if (result.success) {
@@ -88,16 +82,16 @@ export const Login: React.FC<ILoginProps> = ({
         <Container>
           <Form onSubmit={onSubmit}>
             <FormInput
-              label="Email Address"
-              placeholder="Email Address"
-              value={email}
-              onChange={(val) => setEmail(val)}
-              hasError={!!emailError()}
+              label="Username"
+              placeholder="Username"
+              value={username}
+              onChange={(val) => setUsername(val)}
+              hasError={!!usernameError()}
               secondaryLabel={
-                <InlineErrorMessage>{emailError()}</InlineErrorMessage>
+                <InlineErrorMessage>{usernameError()}</InlineErrorMessage>
               }
               autoFocus={true}
-              testId={LoginSelectors.EmailInput}
+              testId={LoginSelectors.UsernameInput}
             />
             <FormInput
               label="Password"

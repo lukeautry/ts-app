@@ -6,7 +6,11 @@ import { OperationError } from "../common/operation-error";
 import { isValidEmail } from "../../common/validation/is-valid-email";
 import { validatePasswordRequirements } from "../../common/validation/validate-password-requirements";
 import { log } from "../../node/utils/log";
-import { IUser } from "../../node/database/entities/user";
+import {
+  IUser,
+  UNIQUE_USERNAME_KEY,
+  UNIQUE_EMAIL_KEY,
+} from "../../node/database/entities/user";
 import { renderResetPassword } from "../../email/templates/ResetEmail";
 import { getBaseUrl } from "../../node/environment";
 import { getPath } from "../../common/paths";
@@ -16,18 +20,17 @@ import { VerificationTokenService } from "./verification-token-service";
 import { IEmailService } from "./email-service";
 
 interface IUserCreateParams {
+  username: string;
   email: string;
-  name: string;
 }
 
 export interface IUserRegisterParams {
+  username: string;
   email: string;
-  name: string;
   password: string;
 }
 
 export interface IUpdateUserParams {
-  name: string;
   email: string;
 }
 
@@ -63,31 +66,36 @@ export class UserService {
     return result;
   }
 
-  async create({ email, name }: IUserCreateParams) {
+  async create({ username, email }: IUserCreateParams) {
     this.validateEmail(email);
 
     try {
       return await this.repository.create({
+        username,
         email,
-        name,
       });
     } catch (err) {
-      this.checkForDuplicateEmail(err);
+      this.checkForDuplicateFields(err);
 
       throw err;
     }
   }
 
-  private checkForDuplicateEmail(err: unknown) {
+  private checkForDuplicateFields(err: unknown) {
     if (
       err instanceof PostgresError &&
       err.code === PostgresErrorCode.UNIQUE_VIOLATION
     ) {
-      throw new OperationError("EMAIL_IN_USE", HttpStatusCode.BAD_REQUEST);
+      const { constraint } = err.queryError;
+      if (constraint === UNIQUE_EMAIL_KEY) {
+        throw new OperationError("EMAIL_IN_USE", HttpStatusCode.BAD_REQUEST);
+      } else if (constraint === UNIQUE_USERNAME_KEY) {
+        throw new OperationError("USERNAME_IN_USE", HttpStatusCode.BAD_REQUEST);
+      }
     }
   }
 
-  async register({ email, password, name }: IUserRegisterParams) {
+  async register({ username, email, password }: IUserRegisterParams) {
     const passwordValidation = validatePasswordRequirements(password);
     if (!passwordValidation.success) {
       throw new OperationError(
@@ -97,27 +105,25 @@ export class UserService {
       );
     }
 
-    const user = await this.create({ email, name });
+    const user = await this.create({ username, email });
     await this.passwordService.setPassword({ userId: user.id, password });
 
     return new AuthenticationService().login({
-      email,
+      username,
       password,
     });
   }
 
-  async update(user: IUser, { name, email }: IUpdateUserParams) {
-    this.validateUpdate(name);
+  async update(user: IUser, { email }: IUpdateUserParams) {
     this.validateEmail(email);
 
     try {
       return await this.repository.update({
         ...user,
-        name,
         email,
       });
     } catch (err) {
-      this.checkForDuplicateEmail(err);
+      this.checkForDuplicateFields(err);
       log.error(err.message);
 
       throw err;
@@ -234,16 +240,6 @@ export class UserService {
         "INVALID_PARAMETERS",
         HttpStatusCode.BAD_REQUEST,
         "newPassword must have a value."
-      );
-    }
-  }
-
-  private validateUpdate(name: string) {
-    if (!name) {
-      throw new OperationError(
-        "INVALID_PARAMETERS",
-        HttpStatusCode.BAD_REQUEST,
-        "name must have a value."
       );
     }
   }

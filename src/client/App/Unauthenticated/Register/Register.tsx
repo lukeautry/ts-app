@@ -19,9 +19,9 @@ interface IRegisterProps {
 }
 
 export interface IOnRegisterParams {
+  username: string;
   email: string;
   password: string;
-  name: string;
 }
 
 const Container = styled.div`
@@ -32,7 +32,7 @@ export const Register: React.FC<IRegisterProps> = ({
   onRegister,
   onBackToLogin,
 }) => {
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -40,13 +40,13 @@ export const Register: React.FC<IRegisterProps> = ({
   const [dirty, setDirty] = useState(false);
   const [error, setError] = useState<string>();
 
-  const nameError = () => {
+  const usernameError = () => {
     if (!dirty) {
       return;
     }
 
-    if (!name) {
-      return "Name is required";
+    if (!username) {
+      return "Username is required";
     }
   };
 
@@ -94,16 +94,11 @@ export const Register: React.FC<IRegisterProps> = ({
   const onSubmit = async () => {
     setDirty(true);
 
-    if (
-      isValidEmail(email) &&
-      password &&
-      password === confirmPassword &&
-      name
-    ) {
+    if (isValidEmail(email) && password && password === confirmPassword) {
       setIsProcessing(true);
 
       const result = await onRegister({
-        name,
+        username,
         email,
         password,
       });
@@ -133,13 +128,13 @@ export const Register: React.FC<IRegisterProps> = ({
               testId={RegisterSelectors.EmailInput}
             />
             <FormInput
-              label="Name"
-              placeholder="Name"
-              value={name}
-              onChange={(val) => setName(val)}
-              hasError={!!nameError()}
-              secondaryLabel={renderErrorMessage(nameError())}
-              testId={RegisterSelectors.NameInput}
+              label="Username"
+              placeholder="Username"
+              value={username}
+              onChange={(val) => setUsername(val)}
+              hasError={!!usernameError()}
+              secondaryLabel={renderErrorMessage(usernameError())}
+              testId={RegisterSelectors.UsernameInput}
             />
             <FormInput
               label="Password"

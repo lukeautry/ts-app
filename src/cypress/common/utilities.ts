@@ -8,12 +8,16 @@ export const click = (val: string) => get(val).click();
 export const type = (val: string, input: string) =>
   get(val).clear().type(input);
 
-const { baseUrl, email, password, name } = cypressConstants;
+const { baseUrl, username, email, password } = cypressConstants;
 
 export const logIntoApp = () => {
   cy.visit(baseUrl);
   cy.request(
-    getCypressTaskRoute(baseUrl, "createUser", { email, password, name })
+    getCypressTaskRoute(baseUrl, "createUser", {
+      username,
+      email,
+      password,
+    })
   ).then((response) => {
     setAccessToken(response.body.value);
     return cy.reload();

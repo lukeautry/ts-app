@@ -1,9 +1,9 @@
 import { HttpStatusCode } from "../common/http-status-code";
 import {
   testUserEmail,
-  testUserName,
   createTestUser,
   testUserPassword,
+  testUsername,
 } from "../../node/test/create-test-user";
 import { expectError } from "../../node/test/expect-error";
 import { expectOperationError } from "../test/expect-operation-error";
@@ -49,8 +49,8 @@ describeIntegration("UserService", () => {
   describe("create", () => {
     it("should be able to create user", async () => {
       const user = await service.create({
+        username: testUsername,
         email: testUserEmail,
-        name: testUserName,
       });
 
       expect(user.email).toEqual(testUserEmail);
@@ -58,7 +58,10 @@ describeIntegration("UserService", () => {
 
     it("should reject invalid email", async () => {
       const error = await expectError(() =>
-        service.create({ email: "test1234", name: testUserName })
+        service.create({
+          username: testUsername,
+          email: "test1234",
+        })
       );
       expectOperationError(error, "INVALID_EMAIL", HttpStatusCode.BAD_REQUEST);
     });
@@ -67,9 +70,28 @@ describeIntegration("UserService", () => {
       const user = await createTestUser();
 
       const error = await expectError(() =>
-        service.create({ email: user.email, name: testUserName })
+        service.create({
+          username: "testuser2",
+          email: user.email,
+        })
       );
       expectOperationError(error, "EMAIL_IN_USE", HttpStatusCode.BAD_REQUEST);
+    });
+
+    it("should reject in use username", async () => {
+      await createTestUser();
+
+      const error = await expectError(() =>
+        service.create({
+          username: testUsername,
+          email: "test2@test.com",
+        })
+      );
+      expectOperationError(
+        error,
+        "USERNAME_IN_USE",
+        HttpStatusCode.BAD_REQUEST
+      );
     });
   });
 
@@ -77,9 +99,9 @@ describeIntegration("UserService", () => {
     it("should reject invalid email", async () => {
       const error = await expectError(() =>
         service.register({
+          username: testUsername,
           email: "blah",
           password: testUserPassword,
-          name: testUserName,
         })
       );
       expectOperationError(error, "INVALID_EMAIL", HttpStatusCode.BAD_REQUEST);
@@ -88,8 +110,8 @@ describeIntegration("UserService", () => {
     it("should reject invalid password", async () => {
       const error = await expectError(() =>
         service.register({
+          username: testUsername,
           email: testUserEmail,
-          name: testUserName,
           password: "hunter",
         })
       );
@@ -105,8 +127,8 @@ describeIntegration("UserService", () => {
 
       const error = await expectError(() =>
         service.register({
+          username: testUsername + "1",
           email: testUserEmail,
-          name: testUserName,
           password: "test1234",
         })
       );
@@ -116,8 +138,8 @@ describeIntegration("UserService", () => {
     it("should have succeeded and have set password", async () => {
       const password = "test1234";
       await service.register({
+        username: testUsername,
         email: testUserEmail,
-        name: testUserName,
         password,
       });
 
@@ -137,32 +159,13 @@ describeIntegration("UserService", () => {
   });
 
   describe("update", () => {
-    it("should reject without name", async () => {
-      const user = await createTestUser();
-
-      const err = await expectError(() =>
-        service.update(user, {
-          name: "",
-          email: testUserEmail,
-        })
-      );
-      expectOperationError(
-        err,
-        "INVALID_PARAMETERS",
-        HttpStatusCode.BAD_REQUEST
-      );
-    });
-
     it("should be able to update", async () => {
       const user = await createTestUser();
-      const name = "Name_Chaned";
       const email = "test2@test.com";
 
       const updatedUser = await service.update(user, {
-        name,
         email,
       });
-      expect(updatedUser.name).toEqual(name);
       expect(updatedUser.email).toEqual(email);
     });
 
@@ -170,7 +173,6 @@ describeIntegration("UserService", () => {
       const user = await createTestUser();
       const err = await expectError(() =>
         service.update(user, {
-          name: user.name,
           email: "invalidemail",
         })
       );
@@ -180,6 +182,7 @@ describeIntegration("UserService", () => {
     it("should reject in use email", async () => {
       const [otherUser, user] = await Promise.all([
         createTestUser({
+          username: "testuser2",
           email: "test2@test.com",
         }),
         createTestUser(),
@@ -187,7 +190,6 @@ describeIntegration("UserService", () => {
 
       const err = await expectError(() =>
         service.update(user, {
-          name: user.name,
           email: otherUser.email,
         })
       );
@@ -230,8 +232,8 @@ describeIntegration("UserService", () => {
 
     it("should reject if oldPassword is invalid", async () => {
       const { user } = await service.register({
+        username: testUsername,
         email: testUserEmail,
-        name: testUserName,
         password: testUserPassword,
       });
 
@@ -246,8 +248,8 @@ describeIntegration("UserService", () => {
 
     it("should reject if newPassword doesn't meet requirements", async () => {
       const { user } = await service.register({
+        username: testUsername,
         email: testUserEmail,
-        name: testUserName,
         password: testUserPassword,
       });
 
@@ -262,8 +264,8 @@ describeIntegration("UserService", () => {
 
     it("should be able to change password successfully", async () => {
       const { user } = await service.register({
+        username: testUsername,
         email: testUserEmail,
-        name: testUserName,
         password: testUserPassword,
       });
 
@@ -275,7 +277,7 @@ describeIntegration("UserService", () => {
 
       // should be able to login
       await new AuthenticationService().login({
-        email: testUserEmail,
+        username: testUsername,
         password: newPassword,
       });
     });
@@ -291,8 +293,8 @@ describeIntegration("UserService", () => {
 
     it("should send reset email", async () => {
       const { user } = await service.register({
+        username: testUsername,
         email: testUserEmail,
-        name: testUserName,
         password: testUserPassword,
       });
 
@@ -352,7 +354,7 @@ describeIntegration("UserService", () => {
 
       await new AuthenticationService().login({
         password: "new_password_123",
-        email: user.email,
+        username: user.username,
       });
     });
   });

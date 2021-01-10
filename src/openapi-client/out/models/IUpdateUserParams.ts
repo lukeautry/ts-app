@@ -3,6 +3,5 @@
 /* eslint-disable */
 
 export type IUpdateUserParams = {
-    name: string;
     email: string;
 }

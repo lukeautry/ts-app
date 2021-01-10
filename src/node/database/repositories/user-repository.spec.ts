@@ -6,41 +6,41 @@ import { UserRepository } from "./user-repository";
 
 describeIntegration("UserRepository", () => {
   const repo = new UserRepository();
+  const username = "testuser";
   const email = "test@test.com";
-  const name = "Test User";
 
   const createUser = () =>
     repo.create({
+      username,
       email,
-      name,
     });
 
   describe("create", () => {
     it("should create basic user", async () => {
       const user = await createUser();
+      expect(user.username).toEqual(username);
       expect(user.email).toEqual(email);
-      expect(user.name).toEqual(name);
+    });
+
+    it("should reject non-unique display_name", async () => {
+      await createUser();
+
+      const err = await expectError(() =>
+        repo.create({
+          username: username,
+          email: "test2@test.com",
+        })
+      );
+      expectPostgresError(err, PostgresErrorCode.UNIQUE_VIOLATION);
     });
 
     it("should reject non-unique email", async () => {
       await createUser();
 
-      const err = await expectError(() => repo.create({ email, name }));
+      const err = await expectError(() =>
+        repo.create({ username: "testuser2", email })
+      );
       expectPostgresError(err, PostgresErrorCode.UNIQUE_VIOLATION);
-    });
-  });
-
-  describe("update", () => {
-    it("should update name", async () => {
-      const user = await createUser();
-      const newName = "New Test User";
-
-      const updatedUser = await repo.update({
-        ...user,
-        name: newName,
-      });
-      expect(updatedUser.name).toEqual(newName);
-      expect(+updatedUser.date_updated).toBeGreaterThan(+user.date_updated);
     });
   });
 
