@@ -27,7 +27,7 @@ const start: CommandModule<
       },
       db: {
         choices: dbConnectionNames,
-        default: "saas",
+        default: "echochamber",
       },
       jwt: {
         required: true,

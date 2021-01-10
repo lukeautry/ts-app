@@ -12,7 +12,7 @@ const jest: CommandModule<{}, { path?: string }> = {
       type: "string",
     }),
   handler: async ({ path: filePath }) => {
-    process.env.DB_CONNECTION = "saas_test";
+    process.env.DB_CONNECTION = "echochamber_test";
     process.env.NODE_ENV = "test";
     process.env.SERVER_PORT = "3037";
     process.env.JWT_SECRET = "abc_123";

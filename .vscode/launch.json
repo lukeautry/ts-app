@@ -11,7 +11,7 @@
       "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
       "env": {
         "NODE_ENV": "dev",
-        "DB_CONNECTION": "saas",
+        "DB_CONNECTION": "echochamber",
         "SERVER_PORT": "3000",
         "JWT_SECRET": "abc123"
       }
@@ -45,7 +45,7 @@
       "internalConsoleOptions": "openOnSessionStart",
       "env": {
         "NODE_ENV": "test",
-        "DB_CONNECTION": "saas_test",
+        "DB_CONNECTION": "echochamber_test",
         "SERVER_PORT": "3037",
         "JWT_SECRET": "abc123"
       }

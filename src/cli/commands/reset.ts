@@ -24,7 +24,7 @@ const reset: CommandModule<
       },
       db: {
         choices: dbConnectionNames,
-        default: "saas",
+        default: "echochamber",
       },
       jwt: {
         required: true,
