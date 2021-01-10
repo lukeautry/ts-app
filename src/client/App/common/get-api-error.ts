@@ -5,7 +5,7 @@ const messages: Record<OperationErrorMessage, string> = {
   EMAIL_IN_USE: "Email address is already in use",
   EXPIRED_TOKEN: "The token is expired",
   INVALID_EMAIL: "That isn't a valid email address",
-  INVALID_EMAIL_OR_PASSWORD: "Invalid email address or password",
+  INVALID_USERNAME_OR_PASSWORD: "Invalid username or password",
   INVALID_PARAMETERS: "Invalid request",
   INVALID_PASSWORD: "Invalid password",
   INVALID_TOKEN: "Invalid token",

@@ -3,12 +3,14 @@ import styled from "styled-components";
 import { navBgDark } from "../../variables";
 
 const Container = styled.div`
-  padding: 10px;
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
   color: #b4b4b4;
   letter-spacing: 2px;
   font-weight: bold;
-  margin-bottom: 10px;
   background-color: ${navBgDark};
+  font-size: 14px;
 `;
 
 export const NavigationBrand: React.FC = ({ children }) => (

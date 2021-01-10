@@ -5,7 +5,6 @@ import { navBg } from "../../variables";
 const Container = styled.div`
   display: flex;
   background-color: ${navBg};
-  flex-direction: column;
 `;
 
 export const NavigationBar: React.FC = ({ children }) => {

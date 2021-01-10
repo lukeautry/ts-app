@@ -8,6 +8,7 @@ import { Settings } from "./Settings/Settings";
 const Container = styled.div`
   display: flex;
   height: 100vh;
+  flex-direction: column;
 `;
 
 const ContentContainer = styled.div`

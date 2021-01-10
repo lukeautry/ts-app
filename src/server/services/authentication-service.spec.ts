@@ -49,7 +49,7 @@ describeIntegration("AuthenticationService", () => {
       );
       expectOperationError(
         err,
-        "INVALID_EMAIL_OR_PASSWORD",
+        "INVALID_USERNAME_OR_PASSWORD",
         HttpStatusCode.UNAUTHORIZED
       );
     });

@@ -98,7 +98,7 @@ export class AuthenticationService {
 
   private loginError() {
     return new OperationError(
-      "INVALID_EMAIL_OR_PASSWORD",
+      "INVALID_USERNAME_OR_PASSWORD",
       HttpStatusCode.UNAUTHORIZED
     );
   }

@@ -11,19 +11,21 @@ interface INavigationLinkProps {
 
 const Container = styled.a<INavigationLinkProps>`
   display: flex;
-  padding: 10px;
-  text-transform: uppercase;
+  text-transform: lowercase;
   font-size: 12px;
   color: white;
   cursor: pointer;
   text-decoration: none;
+  align-items: center;
+  padding-right: 10px;
+  font-size: 12px;
 
   &:hover {
     background-color: grey;
   }
 
   svg {
-    width: 12px;
+    width: 10px;
   }
 
   ${(props) => {
@@ -43,7 +45,6 @@ const IconContainer = styled.div`
   display: flex;
   justify-content: center;
   width: ${gravatarSize}px;
-  margin-right: 10px;
 `;
 
 export const NavigationLink: React.FC<INavigationLinkProps> = (props) => (
