@@ -197,9 +197,7 @@ export class UserService {
   }: IConsumeResetPasswordParams): Promise<IAccessToken> {
     const confirmation = await new VerificationTokenService().consume(token);
 
-    const user = await this.repository.findOne({
-      where: { id: confirmation.user_id },
-    });
+    const user = await this.repository.findById(confirmation.user_id);
     if (!user) {
       log.error(
         `attempted to find user ${confirmation.user_id} but nothing turned up`

@@ -49,7 +49,7 @@ export class AuthenticationService {
   public async getIdentity(token: string) {
     const userId = await this.getTokenizedUserId(token);
 
-    const user = await new UserRepository().findOne({ where: { id: userId } });
+    const user = await new UserRepository().findById(userId);
     if (!user) {
       throw new OperationError("INVALID_TOKEN", HttpStatusCode.UNAUTHORIZED);
     }

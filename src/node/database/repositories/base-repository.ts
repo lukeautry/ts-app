@@ -32,6 +32,10 @@ export abstract class BaseRepository<
     return this.execute((repo) => repo.findOne(options));
   }
 
+  public findById(id: number): Promise<Props | undefined> {
+    return this.execute((repo) => repo.findOne({ where: { id } }));
+  }
+
   public find(options: FindManyOptions<Class>): Promise<Props[]> {
     return this.execute((repo) => repo.find(options));
   }

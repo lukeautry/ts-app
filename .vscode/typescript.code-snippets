@@ -1,0 +1,70 @@
+{
+	// Place your snippets for typescript here. Each snippet is defined under a snippet name and has a prefix, body and 
+	// description. The prefix is what is used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. Placeholders with the 
+	// same ids are connected.
+	// Example:
+    "Create Entity": {
+        "prefix": "cre",
+        "body": [
+            "import { Entity } from \"typeorm\";",
+            "import { BaseEntity, IBaseEntity } from \"./base\";",
+            "",
+            "export interface I$1 extends ICreate$1Props, IBaseEntity {}",
+            "",
+            "export interface ICreate$1Props {}",
+            "",
+            "@Entity(\"$2\")",
+            "export class $1 extends BaseEntity implements ICreate$1Props {}"
+        ],
+        "description": "Create database entity"
+    },
+	"Create Repo": {
+		"prefix": "crr",
+		"body": [
+			"import { $1, I$1, ICreate$1Props } from \"../entities/$1\";",
+            "import { BaseRepository } from \"./base-repository\";",
+            "",
+            "export class $1Repository extends BaseRepository<",
+                "I$1,",
+                "$1,",
+                "ICreate$1Props",
+            "> {",
+                "constructor() {",
+                "super($1);",
+                "}",
+            "}"
+                
+		],
+		"description": "Create database repository"
+	},
+    "Create Repo Spec": {
+        "prefix": "crt",
+        "body": [
+            "import { describeIntegration } from \"../../test/describe-integration\";",
+            "import { $1Repository } from \"./$2-repository\";",
+            "",
+            "describeIntegration(\"$1Repository\", () => {",
+                "const repo = new $1Repository();",
+            "",
+                "describe(\"create\", () => {",
+                "it(\"should create basic $1\", async () => {});",
+                "});",
+            "",
+                "describe(\"delete\", () => {",
+                "it(\"should be able to delete $1\", async () => {});",
+                "});",
+            "",
+                "describe(\"findOne\", () => {",
+                "it(\"should be able to find $1\", async () => {});",
+                "});",
+            "",
+                "describe(\"find\", () => {",
+                "it(\"should be able to find list of $1\", async () => {});",
+                "});",
+            "});",
+            
+        ],
+        "description": "Create database repository test suite"
+    }
+}

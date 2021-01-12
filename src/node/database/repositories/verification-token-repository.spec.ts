@@ -53,7 +53,7 @@ describeIntegration("VerificationTokenRepository", () => {
       // verify cascade behavior
       await new UserRepository().delete({ id: user.id });
 
-      const result = await repo.findOne({ where: { id: token.id } });
+      const result = await repo.findById(token.id);
       expect(result).toEqual(undefined);
     });
   });

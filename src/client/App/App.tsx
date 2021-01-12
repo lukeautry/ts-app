@@ -40,7 +40,6 @@ export const App = () => {
 
     if (message.timeout !== "none") {
       setTimeout(() => {
-        console.log(message);
         removeMessage(message);
       }, message.timeout ?? 5000);
     }

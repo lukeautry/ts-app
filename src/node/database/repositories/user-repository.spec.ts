@@ -62,7 +62,7 @@ describeIntegration("UserRepository", () => {
   describe("findOne", () => {
     it("should be able to find user", async () => {
       const user = await createUser();
-      const foundUser = await repo.findOne({ where: { id: user.id } });
+      const foundUser = await repo.findById(user.id);
       expect(foundUser).toMatchObject(user);
     });
   });
