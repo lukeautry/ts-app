@@ -10,7 +10,7 @@ export const setupDatabase = async (doMigration = true) => {
   const { DB_CONNECTION } = environment();
 
   const client = new Client({
-    port: 5432,
+    port: 54322,
     host: "localhost",
     user: "postgres",
     password: "admin",

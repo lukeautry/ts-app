@@ -25,7 +25,7 @@ const baseOptions = {
   logging: false,
   migrations,
   password: "admin",
-  port: 5432,
+  port: 54322,
   type: "postgres",
   username: "postgres",
   autoLoadEntities: true,
