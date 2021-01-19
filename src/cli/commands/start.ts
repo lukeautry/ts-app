@@ -53,8 +53,9 @@ const start: CommandModule<
       process.exit(1);
     }
 
-    const metadata = await generateExpressRoutes();
-    await startWebpack(metadata);
+    const metadata = await generateOpenAPIClient();
+    await generateExpressRoutes(metadata);
+    await startWebpack();
     await startServer();
 
     const regenerateApiRoutes = debounce(async (args) => {
@@ -63,8 +64,8 @@ const start: CommandModule<
         args.indexOf("server/controllers") !== -1;
 
       if (routesChanged) {
-        const metadata = await generateExpressRoutes();
-        await generateOpenAPIClient(metadata);
+        const metadata = await generateOpenAPIClient();
+        await generateExpressRoutes(metadata);
       } else {
         await startServer();
       }

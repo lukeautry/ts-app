@@ -20,34 +20,12 @@
       "type": "node",
       "request": "launch",
       "name": "Debug Start Script",
-      "args": ["${workspaceFolder}/dev/start.ts"],
+      "args": ["${workspaceFolder}/src/cli/index.ts", "start"],
       "cwd": "${workspaceFolder}",
       "protocol": "inspector",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register", "--transpile-only"],
       "env": {
-        "TS_NODE_PROJECT": "${workspaceFolder}/tsconfig-base.json"
-      }
-    },
-    {
-      "name": "Debug API Tests",
-      "type": "node",
-      "request": "launch",
-      "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-      "args": [
-        "--timeout",
-        "999999999",
-        "-r",
-        "ts-node/register",
-        "./**/*.spec.ts"
-      ],
-      "cwd": "${workspaceRoot}",
-      "protocol": "inspector",
-      "internalConsoleOptions": "openOnSessionStart",
-      "env": {
-        "NODE_ENV": "test",
-        "DB_CONNECTION": "saas_test",
-        "SERVER_PORT": "3037",
-        "JWT_SECRET": "abc123"
+        "TS_NODE_PROJECT": "${workspaceFolder}/tsconfig.base.json"
       }
     }
   ]

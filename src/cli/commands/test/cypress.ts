@@ -8,6 +8,7 @@ import { generateExpressRoutes } from "../../../node/dev/generate-express-routes
 import { startWebpack } from "../../common/start-webpack";
 import { startServer } from "../../common/start-server";
 import { clearDb } from "../../../node/test/clear-db";
+import { generateOpenAPIClient } from "../../common/generate-openapi-client";
 
 const cypress: CommandModule<{}, { open: boolean }> = {
   command: "cypress",
@@ -36,8 +37,9 @@ const cypress: CommandModule<{}, { open: boolean }> = {
       process.exit(1);
     }
 
-    const metadata = await generateExpressRoutes();
-    await startWebpack(metadata);
+    const metadata = await generateOpenAPIClient();
+    await generateExpressRoutes(metadata);
+    await startWebpack();
     await startServer();
 
     if (open) {

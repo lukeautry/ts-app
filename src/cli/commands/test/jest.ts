@@ -17,7 +17,7 @@ const jest: CommandModule<{}, { path?: string }> = {
     process.env.SERVER_PORT = "3037";
     process.env.JWT_SECRET = "abc_123";
 
-    if (!filePath?.includes("src/client")) {
+    if (filePath && filePath.includes("src/client")) {
       await startDocker();
       await setupDatabase(false);
     }

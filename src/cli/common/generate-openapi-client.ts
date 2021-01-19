@@ -9,8 +9,8 @@ import { generateOpenAPISpec } from "./generate-openapi-spec";
 /**
  * Generates the OpenAPI client library
  */
-export const generateOpenAPIClient = async (metadata: Tsoa.Metadata) => {
-  await generateOpenAPISpec(metadata);
+export const generateOpenAPIClient = async (cache?: Tsoa.Metadata) => {
+  const metadata = await generateOpenAPISpec(cache);
 
   const timer = new Timer();
 
@@ -23,4 +23,6 @@ export const generateOpenAPIClient = async (metadata: Tsoa.Metadata) => {
   });
 
   log.success(`Generated Client (${timer.elapsed()}ms)`);
+
+  return metadata;
 };

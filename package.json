@@ -6,7 +6,7 @@
   "author": "Luke Autry <lukeautry@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "cli": "ts-node ./src/cli/index.ts",
+    "cli": "ts-node --transpile-only ./src/cli/index.ts",
     "lint:fix": "yarn lint --fix",
     "lint": "eslint .",
     "build": "tsc --build",

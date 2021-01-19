@@ -6,9 +6,9 @@ import { Timer } from "../../node/utils/timer";
 /**
  * Generates Open API/Swagger specification file
  */
-export const generateOpenAPISpec = async (metadata?: Tsoa.Metadata) => {
+export const generateOpenAPISpec = async (cache?: Tsoa.Metadata) => {
   const timer = new Timer();
-  await generateSpec(
+  const metadata = await generateSpec(
     {
       basePath: "/api",
       entryFile: "",
@@ -19,8 +19,10 @@ export const generateOpenAPISpec = async (metadata?: Tsoa.Metadata) => {
     },
     undefined,
     undefined,
-    metadata
+    cache
   );
 
   log.success(`Generated OpenAPI spec (${timer.elapsed()}ms)`);
+
+  return metadata;
 };

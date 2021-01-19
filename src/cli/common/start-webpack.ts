@@ -1,11 +1,9 @@
-import { Tsoa } from "tsoa";
 import webpack from "webpack";
 import { devWebpackConfig } from "../webpack/webpack.config.dev";
 import { sleep } from "../../common/utils/sleep";
 import { prodWebpackConfig } from "../webpack/webpack.config.prod";
 import { environment } from "../../node/environment";
 import { log } from "../../node/utils/log";
-import { generateOpenAPIClient } from "./generate-openapi-client";
 
 const envConfigs = {
   prod: prodWebpackConfig,
@@ -18,30 +16,31 @@ const getConfig = () => {
   return envConfigs[NODE_ENV];
 };
 
-export const startWebpack = async (metadata: Tsoa.Metadata) => {
-  await generateOpenAPIClient(metadata);
-
+export const startWebpack = async () => {
   // somehow prevents compiling twice on webpack start
   await sleep(1000);
 
   const compiler = webpack(getConfig());
 
   return new Promise<void>((resolve) => {
-    compiler.watch({}, (err, stats) => {
-      if (err) {
-        log.error(err.message);
-        return;
-      }
+    compiler.watch(
+      {
+        aggregateTimeout: 1000,
+      },
+      (err, stats) => {
+        if (err) {
+          log.error(err.message);
+          return;
+        }
 
-      if (stats && !stats.hasErrors()) {
-        log.success(
-          `Webpack Compiled (${+stats.endTime! - +stats.startTime!}ms)`
-        );
-      } else {
-        log.success(stats?.toString("minimal"));
-      }
+        if (stats && !stats.hasErrors()) {
+          log.success(
+            `Webpack Compiled (${+stats.endTime! - +stats.startTime!}ms)`
+          );
+        }
 
-      resolve();
-    });
+        resolve();
+      }
+    );
   });
 };
