@@ -16,7 +16,7 @@ export const generateOpenAPIClient = async (metadata: Tsoa.Metadata) => {
 
   rimraf.sync(path.join(__dirname, "../../openapi-client/out"));
 
-  generate({
+  await generate({
     input: "./.tmp/swagger.json",
     output: "./src/openapi-client/out",
     useOptions: true,
