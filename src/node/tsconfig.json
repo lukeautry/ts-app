@@ -5,4 +5,7 @@
     "outDir": "../../dist/node",
     "module": "CommonJS"
   },
+  "references": [
+    {"path": "../common"}
+  ]
 }
