@@ -30,7 +30,7 @@ const cypress: CommandModule<{}, { open: boolean }> = {
     try {
       await Promise.all([setupDatabase(false), checkRedis()]);
       await createSeedData();
-    } catch (err) {
+    } catch (err: any) {
       log.error(err.message);
       process.exit(1);
     }

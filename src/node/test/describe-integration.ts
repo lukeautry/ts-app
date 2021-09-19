@@ -7,6 +7,10 @@ import { clearDb } from "./clear-db";
 export const describeIntegration = (name: string, suiteFn: () => void) =>
   describe(name, () => {
     beforeEach(async () => {
+      if (!global.setImmediate) {
+        global.setImmediate = global.setTimeout as any;
+      }
+
       await clearDb();
     });
 

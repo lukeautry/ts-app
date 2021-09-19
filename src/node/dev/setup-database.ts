@@ -19,7 +19,7 @@ export const setupDatabase = async (doMigration = true) => {
 
   try {
     await client.connect();
-  } catch (err) {
+  } catch (err: any) {
     log.error(`PostgreSQL Not Ready${err ? `: ${err.message}` : ""}`);
   }
 
@@ -28,7 +28,7 @@ export const setupDatabase = async (doMigration = true) => {
       return await client.query(
         `SELECT datname FROM pg_catalog.pg_database WHERE datname='${DB_CONNECTION}'`
       );
-    } catch (err) {
+    } catch (err: any) {
       log.error(
         `Couldn't query for database '${DB_CONNECTION}'${
           err ? `: ${err.message}` : ""
@@ -43,7 +43,7 @@ export const setupDatabase = async (doMigration = true) => {
     try {
       await client.query(`CREATE DATABASE ${DB_CONNECTION}`);
       log.success(`Database '${DB_CONNECTION}' created`);
-    } catch (err) {
+    } catch (err: any) {
       log.error(
         `Couldn't create database '${DB_CONNECTION}'${
           err ? `: ${err.message}` : ""

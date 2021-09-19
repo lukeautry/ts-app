@@ -63,25 +63,26 @@ function getFormData(params: Record<string, any>): FormData {
     return formData;
 }
 
-type Resolver<T> = () => Promise<T>;
+type Resolver<T> = (options: ApiRequestOptions) => Promise<T>;
 
-async function resolve<T>(resolver?: T | Resolver<T>): Promise<T | undefined> {
+async function resolve<T>(options: ApiRequestOptions, resolver?: T | Resolver<T>): Promise<T | undefined> {
     if (typeof resolver === 'function') {
-        return (resolver as Resolver<T>)();
+        return (resolver as Resolver<T>)(options);
     }
     return resolver;
 }
 
 async function getHeaders(options: ApiRequestOptions): Promise<Headers> {
+    const token = await resolve(options, OpenAPI.TOKEN);
+    const username = await resolve(options, OpenAPI.USERNAME);
+    const password = await resolve(options, OpenAPI.PASSWORD);
+    const defaultHeaders = await resolve(options, OpenAPI.HEADERS);
+
     const headers = new Headers({
         Accept: 'application/json',
-        ...OpenAPI.HEADERS,
+        ...defaultHeaders,
         ...options.headers,
     });
-
-    const token = await resolve(OpenAPI.TOKEN);
-    const username = await resolve(OpenAPI.USERNAME);
-    const password = await resolve(OpenAPI.PASSWORD);
 
     if (isStringWithValue(token)) {
         headers.append('Authorization', `Bearer ${token}`);

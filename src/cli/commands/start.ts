@@ -39,7 +39,7 @@ const start: CommandModule<{}, { db: string; port: string; env: string }> = {
 
     try {
       await Promise.all([setupDatabase(), checkRedis()]);
-    } catch (err) {
+    } catch (err: any) {
       log.error(err.message);
       process.exit(1);
     }

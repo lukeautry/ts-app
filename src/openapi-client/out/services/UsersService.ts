@@ -83,14 +83,14 @@ export class UsersService {
     }
 
     /**
-     * @returns any No content
+     * @returns void
      * @throws ApiError
      */
     public static async deleteUser({
         userId,
     }: {
         userId: number,
-    }): Promise<any> {
+    }): Promise<void> {
         const result = await __request({
             method: 'DELETE',
             path: `/users/${userId}`,
