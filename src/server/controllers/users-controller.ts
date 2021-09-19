@@ -55,7 +55,7 @@ export class UsersController {
    * @isInt user_id user_id must be a positive integer
    * @minimum user_id 1
    */
-  @Delete(`{user_id}`)
+  @Delete("{user_id}")
   @Tags("Users")
   public async DeleteUser(@Path() user_id: number) {
     return this.service.deleteUser(user_id);

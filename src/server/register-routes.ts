@@ -1,4 +1,3 @@
-import bodyParser from "body-parser";
 import express from "express";
 import methodOverride from "method-override";
 import { ValidateError } from "tsoa";
@@ -17,8 +16,8 @@ interface IError {
 
 export const registerRoutes = (app: express.Express) => {
   app
-    .use(bodyParser.urlencoded({ extended: true }))
-    .use(bodyParser.json())
+    .use(express.urlencoded({ extended: true }))
+    .use(express.json())
     .use(methodOverride())
     .use((_req, res, next) => {
       res.header("Access-Control-Allow-Origin", "*");

@@ -1,7 +1,9 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-type Resolver<T> = () => Promise<T>;
+import type { ApiRequestOptions } from './ApiRequestOptions';
+
+type Resolver<T> = (options: ApiRequestOptions) => Promise<T>;
 type Headers = Record<string, string>;
 
 type Config = {

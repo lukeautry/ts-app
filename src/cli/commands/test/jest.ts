@@ -29,6 +29,7 @@ const jest: CommandModule<{}, { path?: string }> = {
         preset: "ts-jest",
         watch: false,
         globalTeardown: path.join(__dirname, "../../common/global-teardown.ts"),
+        testEnvironment: "jsdom",
         testMatch: filePath
           ? [path.join(base, filePath)]
           : [path.join(base, "src/**/*.spec.*")],

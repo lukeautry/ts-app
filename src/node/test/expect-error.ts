@@ -4,7 +4,7 @@ export const expectError = async (
 ): Promise<Error> => {
   try {
     await fn();
-  } catch (err) {
+  } catch (err: any) {
     return err;
   }
 

@@ -65,7 +65,7 @@ export abstract class BaseRepository<
     try {
       const repo = await this.getRepository();
       return await fn(repo);
-    } catch (err) {
+    } catch (err: any) {
       throw new PostgresError(err.message, err);
     }
   }

@@ -6,6 +6,6 @@ export class PostgresError extends Error {
 
   constructor(message: string, public readonly queryError: QueryFailedError) {
     super(message);
-    this.code = ((queryError as unknown) as { code: PostgresErrorCode }).code;
+    this.code = (queryError as unknown as { code: PostgresErrorCode }).code;
   }
 }

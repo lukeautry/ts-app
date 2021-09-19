@@ -19,11 +19,11 @@ const create: CommandModule<{}, { name: string; db: string }> = {
   handler: async (args) => {
     const { name, db } = args;
 
-    await new MigrationGenerateCommand().handler(({
+    await new MigrationGenerateCommand().handler({
       _: ["migration:create"],
       name: name,
       connection: db,
-    } as unknown) as Arguments);
+    } as unknown as Arguments);
   },
 };
 
